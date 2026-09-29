@@ -63,7 +63,7 @@ export function Roadmap() {
                         Phase {idx + 1}
                       </div>
                       <CardTitle className="text-2xl hover:text-primary transition-colors">
-                        <Link to={`/learning/${activePath}/${phase.id}`}>{phase.name}</Link>
+                        <Link to={`/learning/${activePath}/${phase.id}`}>{phase.title}</Link>
                       </CardTitle>
                       <CardDescription className="text-base">
                         {phase.description}

@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, PlayCircle, FileText, GitBranch, ArrowLeft, ExternalLink, Code, CheckSquare } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { YouTubePlayer } from '@/components/resources/YouTubePlayer';
 
 export function SubtopicDetail() {
   const { pathId, phaseId, topicId, subtopicId } = useParams();
@@ -146,21 +147,25 @@ export function SubtopicDetail() {
                       {video.channel} • {video.duration}
                     </div>
                   </CardHeader>
-                  <CardContent className="flex flex-col sm:flex-row gap-3">
-                    <Button variant="default" className="w-full sm:w-auto gap-2" asChild>
-                      <a href={video.url !== 'RESOURCE_URL_PENDING' ? video.url : '#'} target="_blank" rel="noreferrer" onClick={(e) => { if(video.url === 'RESOURCE_URL_PENDING') e.preventDefault() }}>
-                        <ExternalLink className="w-4 h-4" />
-                        {video.url === 'RESOURCE_URL_PENDING' ? 'Pending URL' : 'Watch on YouTube'}
-                      </a>
-                    </Button>
-                    <Button 
-                      variant={isDone ? "outline" : "secondary"} 
-                      className="w-full sm:w-auto gap-2"
-                      onClick={() => handleAuthAction(() => markVideoComplete(video.id, !isDone))}
-                    >
-                      <CheckCircle2 className={`w-4 h-4 ${isDone ? 'text-primary' : ''}`} />
-                      {isDone ? 'Completed' : 'Mark Complete'}
-                    </Button>
+                  <CardContent className="space-y-4">
+                    {video.url !== 'RESOURCE_URL_PENDING' && (
+                      <YouTubePlayer video={video} onCompleted={() => markVideoComplete(video.id, true)} />
+                    )}
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button variant="default" className="w-full sm:w-auto gap-2" asChild disabled={video.url === 'RESOURCE_URL_PENDING'}>
+                        <a href={video.url !== 'RESOURCE_URL_PENDING' ? video.url : '#'} target="_blank" rel="noreferrer" onClick={e => { if(video.url === 'RESOURCE_URL_PENDING') e.preventDefault(); }}>
+                          <ExternalLink className="w-4 h-4" /> {video.url === 'RESOURCE_URL_PENDING' ? 'Pending URL' : 'Open on YouTube'}
+                        </a>
+                      </Button>
+                      <Button
+                        variant={isDone ? "outline" : "secondary"}
+                        className="w-full sm:w-auto gap-2"
+                        onClick={() => handleAuthAction(() => markVideoComplete(video.id, !isDone))}
+                      >
+                        <CheckCircle2 className={`w-4 h-4 ${isDone ? 'text-primary' : ''}`} />
+                        {isDone ? 'Completed' : 'Mark Complete'}
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               );

@@ -1,9 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const progressController = require('../controllers/progressController');
-const { protect } = require('../middleware/authMiddleware');
+const express=require('express');
+const router=express.Router();
+const controller=require('../controllers/progressController');
+const {protect}=require('../middleware/authMiddleware');
 
-router.get('/', protect, progressController.getProgress);
-router.post('/', protect, progressController.updateProgress);
+router.use(protect);
+router.get('/',controller.getProgress);
+router.post('/',controller.updateProgress);
+router.get('/videos/:videoId',controller.getVideoProgress);
+router.put('/videos/:videoId',controller.updateVideoProgress);
 
-module.exports = router;
+module.exports=router;
