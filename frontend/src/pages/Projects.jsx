@@ -19,17 +19,21 @@ export function Projects() {
   const validPhaseIds = PHASES.map(p => p.id); 
   const displayProjects = PROJECTS;
 
-  const handleSubmission = (e) => {
+  const handleSubmission = async (e) => {
     e.preventDefault();
     if (!githubUrl.includes('github.com')) {
       setError('Please enter a valid GitHub URL');
       return;
     }
-    submitProject(selectedProject.id, githubUrl, liveUrl);
-    setGithubUrl('');
-    setLiveUrl('');
-    setError('');
-    setSelectedProject(null);
+    try {
+      await submitProject(selectedProject.id, githubUrl, liveUrl);
+      setGithubUrl('');
+      setLiveUrl('');
+      setError('');
+      setSelectedProject(null);
+    } catch (err) {
+      setError(err.message || 'Unable to submit project.');
+    }
   };
 
   return (
