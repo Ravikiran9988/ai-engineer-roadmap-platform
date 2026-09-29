@@ -49,11 +49,22 @@ export function SubtopicDetail() {
   const subtopicAssignment = ASSIGNMENTS.find(a => a.subtopicId === subtopicId);
   const assignmentId = subtopicAssignment?.id;
   const submitted = assignmentId ? isAssignmentSubmitted(assignmentId) : false;
-  const assignmentRequired = subtopicAssignment?.requiredPaths ? subtopicAssignment.requiredPaths.includes(activePath) : true;
+  const assignmentRequired = subtopicAssignment
+    ? (!subtopicAssignment.requiredPaths || subtopicAssignment.requiredPaths.includes(activePath))
+    : false;
 
-  const requiredVideos = videos.filter(v => v.required !== false);
-  const videosDone = requiredVideos.every(v => completedVideos.includes(v.id));
-  const assignmentDone = !subtopicAssignment || !assignmentRequired || submitted;
+  useEffect(() => {
+    if (assignmentId && assignments[assignmentId]?.url) {
+      setGithubUrl(assignments[assignmentId].url);
+    }
+  }, [assignmentId, assignments]);
+
+  const requiredVideoIds = subtopicAssignment?.requiredVideoIds?.length
+    ? subtopicAssignment.requiredVideoIds
+    : videos.filter(v => v.required !== false).map(v => v.id);
+  const requiredVideos = videos.filter(v => requiredVideoIds.includes(v.id));
+  const videosDone = requiredVideoIds.every(id => completedVideos.includes(id));
+  const assignmentDone = !subtopicAssignment || !assignmentRequired || !subtopicAssignment.githubRequired || submitted;
   const hasRequirements = requiredVideos.length > 0 || (subtopicAssignment && assignmentRequired);
   
   const isManuallyCompleted = completedSubtopics.includes(subtopicId);
