@@ -10,7 +10,7 @@ const emptyProgress = {
 const progressSchema = Joi.object({
   activePath: Joi.string().valid('job_ready', 'intermediate', 'advanced').default('job_ready'),
   streak: Joi.number().integer().min(0).max(100000).default(0),
-  lastActive: Joi.string().pattern(/^\\d{4}-\\d{2}-\\d{2}$/).allow(null, ''),
+  lastActive: Joi.string().pattern(/^\d{4}-\d{2}-\d{2}$/).allow(null, ''),
   completedSubtopics: Joi.array().items(Joi.string().max(150)).default([]),
   completedTasks: Joi.array().items(Joi.string().max(150)).default([]),
   completedVideos: Joi.array().items(Joi.string().max(150)).default([]),
