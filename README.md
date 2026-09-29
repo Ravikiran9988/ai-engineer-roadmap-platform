@@ -1,14 +1,14 @@
 # AI Engineer Roadmap
 
-A full-stack monorepo for the AI Engineer Roadmap application.
+A full-stack learning platform for AI engineering, from foundations through production AI systems.
 
 ## Structure
-- `frontend/`: React + Vite + Tailwind CSS
-- `backend/`: Node.js + Express + PostgreSQL + Redis
-- `database/`: Database schemas and migrations
+- `frontend/`: React + Vite + JavaScript/JSX + Tailwind CSS
+- `backend/`: Node.js + Express + PostgreSQL
+- `database/`: Database schema and migrations
 - `docs/`: Architecture and API documentation
 
-## Local Development (Without Docker)
+## Local Development
 
 ### Frontend
 ```bash
@@ -18,20 +18,46 @@ npm run dev
 ```
 
 ### Backend
-Make sure you have PostgreSQL and Redis running locally.
+Make sure PostgreSQL is running locally.
 ```bash
 cd backend
 npm install
-cp .env.example .env # Update credentials in .env
+cp .env.example .env
+# Set DB credentials and a strong JWT_SECRET in .env
 npm run dev
 ```
 
-## Docker (Recommended)
+### Validate roadmap data
+```bash
+cd backend
+npm run validate:data
+```
+
+The validator checks topic/subtopic alignment and assignment references to videos and documentation.
+
+## Database
+
+Create the base schema from `database/schema.sql`.
+
+For an existing database created before the current platform schema, apply the idempotent migration:
+
+```text
+database/migrations/001_platform_integrity.sql
+```
+
+The migration preserves existing user data and creates/updates the submission structures required by the current backend.
+
+## Docker
 ```bash
 docker-compose up --build
 ```
-This will start:
-- Frontend on http://localhost:5173
-- Backend API on http://localhost:5000
-- PostgreSQL on port 5432
-- Redis on port 6379
+
+This starts the frontend, backend, PostgreSQL, and the existing Redis service. Redis is currently reserved for future caching/background-job use; the core progress and submission flows use PostgreSQL.
+
+## Progress and resources
+
+Learning progress is persisted through the backend and PostgreSQL. The browser stores only the authentication session cache.
+
+Individual YouTube videos are external links with manual completion. The platform does not rely on embedded YouTube playback tracking.
+
+See `docs/API.md` and `docs/architecture.md` for the current API and architecture.
