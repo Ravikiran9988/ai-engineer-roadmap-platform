@@ -217,17 +217,21 @@ export function TopicDetail() {
     });
   };
 
-  const handleSubmitAssignment = (e) => {
+  const handleSubmitAssignment = async (e) => {
     e.preventDefault();
-    handleAuthAction(() => {
+    handleAuthAction(async () => {
       if (!githubUrl.includes('github.com')) {
         setUrlError('Please enter a valid GitHub URL (e.g. https://github.com/user/repo)');
         return;
       }
-      submitAssignment(topicAssignment.id, githubUrl);
-      toast({ title: 'Assignment Submitted!', description: 'Your GitHub URL has been saved.' });
-      setGithubUrl('');
-      setUrlError('');
+      try {
+        await submitAssignment(topicAssignment.id, githubUrl);
+        toast({ title: 'Assignment Submitted!', description: 'Your GitHub URL has been saved.' });
+        setGithubUrl('');
+        setUrlError('');
+      } catch (err) {
+        setUrlError(err.message || 'Unable to submit assignment.');
+      }
     });
   };
 
