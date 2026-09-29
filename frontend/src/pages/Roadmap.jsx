@@ -34,7 +34,7 @@ export function Roadmap() {
             Currently tracking the <span className="font-semibold text-primary">{pathName}</span> path.
           </p>
         </div>
-        <Link to="/paths" className="text-sm text-primary hover:underline font-medium">
+        <Link to="/learning" className="text-sm text-primary hover:underline font-medium">
           Change Path &rarr;
         </Link>
       </div>
@@ -63,7 +63,7 @@ export function Roadmap() {
                         Phase {idx + 1}
                       </div>
                       <CardTitle className="text-2xl hover:text-primary transition-colors">
-                        <Link to={`/learning/${activePath}/${phase.id}`}>{phase.name}</Link>
+                        <Link to={`/learning/${activePath}/${phase.id}`}>{phase.title}</Link>
                       </CardTitle>
                       <CardDescription className="text-base">
                         {phase.description}
