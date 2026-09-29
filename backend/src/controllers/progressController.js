@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const db = require('../config/database');
 
 const emptyProgress = {
@@ -5,6 +6,18 @@ const emptyProgress = {
   completedSubtopics: [], completedTasks: [], completedVideos: [],
   readResources: [], assignments: {}, projects: {}
 };
+
+const progressSchema = Joi.object({
+  activePath: Joi.string().valid('job_ready', 'intermediate', 'advanced').default('job_ready'),
+  streak: Joi.number().integer().min(0).max(100000).default(0),
+  lastActive: Joi.string().pattern(/^\\d{4}-\\d{2}-\\d{2}$/).allow(null, ''),
+  completedSubtopics: Joi.array().items(Joi.string().max(150)).default([]),
+  completedTasks: Joi.array().items(Joi.string().max(150)).default([]),
+  completedVideos: Joi.array().items(Joi.string().max(150)).default([]),
+  readResources: Joi.array().items(Joi.string().max(1000)).default([]),
+  assignments: Joi.object().default({}),
+  projects: Joi.object().default({})
+}).unknown(false);
 
 exports.getProgress = async (req, res, next) => {
   try {
@@ -25,13 +38,14 @@ exports.getProgress = async (req, res, next) => {
 
 exports.updateProgress = async (req, res, next) => {
   try {
-    const b = req.body || {};
+    const { error, value } = progressSchema.validate(req.body || {}, { abortEarly: false, stripUnknown: false });
+    if (error) return res.status(400).json({ message: 'Invalid progress payload', details: error.details.map(d => d.message) });
+    const b = value;
     const values = [
-      req.user.id, b.activePath || 'job_ready', Number.isFinite(b.streak) ? b.streak : 0,
-      b.lastActive || null, JSON.stringify(b.completedSubtopics || []),
-      JSON.stringify(b.completedTasks || []), JSON.stringify(b.completedVideos || []),
-      JSON.stringify(b.readResources || []), JSON.stringify(b.assignments || {}),
-      JSON.stringify(b.projects || {})
+      req.user.id, b.activePath, b.streak, b.lastActive || null,
+      JSON.stringify(b.completedSubtopics), JSON.stringify(b.completedTasks),
+      JSON.stringify(b.completedVideos), JSON.stringify(b.readResources),
+      JSON.stringify(b.assignments), JSON.stringify(b.projects)
     ];
     const query = `
       INSERT INTO user_progress
