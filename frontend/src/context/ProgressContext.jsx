@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { TOPICS, PATHS } from '../data/roadmap';
-import { DAILY_TASKS } from '../data/learningData';
 import { VIDEOS } from '../data/videos';
 import { ASSIGNMENTS } from '../data/assignments';
 import { DOCUMENTATION } from '../data/documentation';
@@ -26,9 +25,6 @@ function getRequiredDocIds(assignment) {
   return (assignment?.requiredDocIds || []).filter(id => DOCUMENTATION.some(doc => doc.id === id));
 }
 
-function getDocReadIds(docIds) {
-  return DOCUMENTATION.filter(doc => docIds.includes(doc.id)).map(doc => doc.url);
-}
 
 export function ProgressProvider({ children }) {
   const { user } = useAuth();
