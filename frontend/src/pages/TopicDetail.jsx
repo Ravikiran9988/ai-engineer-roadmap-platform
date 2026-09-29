@@ -143,7 +143,7 @@ export function TopicDetail() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
-  const { completedTopics, completedSubtopics, assignments, submitAssignment, activePath } = useProgress();
+  const { completedTopics, completedSubtopics, completedVideos, markVideoComplete, assignments, submitAssignment, activePath } = useProgress();
   const currentPathId = pathId || activePath;
   const { toast } = useToast();
 
@@ -152,9 +152,6 @@ export function TopicDetail() {
   const [filterDifficulty, setFilterDifficulty] = useState('all');
   const [sortBy, setSortBy] = useState('recommended');
   const [showFilters, setShowFilters] = useState(false);
-  const [watchedVideos, setWatchedVideos] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('ai-watched-videos') || '[]'); } catch { return []; }
-  });
   const [showPlaylists, setShowPlaylists] = useState(false);
 
   // Assignment submission state
@@ -202,7 +199,7 @@ export function TopicDetail() {
     return vids;
   }, [allVideos, activePath, filterType, filterDifficulty, sortBy]);
 
-  const watchedCount = filteredVideos.filter(v => watchedVideos.includes(v.id)).length;
+  const watchedCount = filteredVideos.filter(v => completedVideos.includes(v.id)).length;
   const totalResources = filteredVideos.length + docs.length + (github ? 2 : 0);
   const completedResources = watchedCount + (isComplete ? 1 : 0);
   const progressPct = totalResources > 0 ? Math.round((completedResources / totalResources) * 100) : 0;
@@ -214,14 +211,9 @@ export function TopicDetail() {
     }
     action();
   };
-
   const handleToggleWatched = (videoId) => {
     handleAuthAction(() => {
-      setWatchedVideos(prev => {
-        const next = prev.includes(videoId) ? prev.filter(id => id !== videoId) : [...prev, videoId];
-        localStorage.setItem('ai-watched-videos', JSON.stringify(next));
-        return next;
-      });
+      markVideoComplete(videoId, !completedVideos.includes(videoId));
     });
   };
 
@@ -368,7 +360,7 @@ export function TopicDetail() {
                   <VideoCard
                     key={video.id}
                     video={video}
-                    isWatched={watchedVideos.includes(video.id)}
+                    isWatched={completedVideos.includes(video.id)}
                     onToggleWatched={handleToggleWatched}
                   />
                 ))}
