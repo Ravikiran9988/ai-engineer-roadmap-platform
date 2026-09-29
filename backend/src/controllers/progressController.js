@@ -62,30 +62,3 @@ exports.updateProgress = async (req, res, next) => {
   } catch (error) { next(error); }
 };
 
-exports.getVideoProgress = async (req,res,next) => {
-  try {
-    const { rows } = await db.query(
-      'SELECT video_id,progress_seconds,duration_seconds,progress_percent,completed,last_watched_at FROM video_progress WHERE user_id=$1 AND video_id=$2',
-      [req.user.id,req.params.videoId]
-    );
-    res.json(rows[0] || {videoId:req.params.videoId,progressSeconds:0,durationSeconds:0,progressPercent:0,completed:false});
-  } catch(error){next(error);}
-};
-
-exports.updateVideoProgress = async (req,res,next) => {
-  try {
-    const b=req.body||{};
-    const percent=Math.min(100,Math.max(0,Number(b.progressPercent)||0));
-    const completed=Boolean(b.completed)||percent>=90;
-    const {rows}=await db.query(`
-      INSERT INTO video_progress
-      (user_id,video_id,progress_seconds,duration_seconds,progress_percent,completed)
-      VALUES($1,$2,$3,$4,$5,$6)
-      ON CONFLICT(user_id,video_id) DO UPDATE SET
-      progress_seconds=EXCLUDED.progress_seconds,duration_seconds=EXCLUDED.duration_seconds,
-      progress_percent=EXCLUDED.progress_percent,completed=EXCLUDED.completed,last_watched_at=CURRENT_TIMESTAMP
-      RETURNING *;`,
-      [req.user.id,req.params.videoId,Number(b.progressSeconds)||0,Number(b.durationSeconds)||0,percent,completed]);
-    res.json({progress:rows[0]});
-  }catch(error){next(error);}
-};
