@@ -25,13 +25,6 @@ export function SubtopicDetail() {
   const navigate = useNavigate();
   
   const [githubUrl, setGithubUrl] = useState('');
-  
-  useEffect(() => {
-    if (assignmentId && assignments[assignmentId]?.url) {
-      setGithubUrl(assignments[assignmentId].url);
-    }
-  }, [assignmentId, assignments]);
-
   const topic = TOPIC_MAP[topicId];
   const subtopicIndex = topic?.subtopicIds ? topic.subtopicIds.indexOf(subtopicId) : topic?.subtopics.findIndex(s => s.toLowerCase().replace(/\s+/g, '-') === subtopicId);
   const subtopicName = subtopicIndex !== -1 ? topic?.subtopics[subtopicIndex] : 'Unknown Subtopic';
