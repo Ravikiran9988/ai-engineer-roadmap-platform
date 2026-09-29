@@ -22,7 +22,7 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// Placeholder Routes (To be implemented)
+// API routes
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
@@ -30,8 +30,8 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', require('./routes/authRoutes'));
 // app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/progress', require('./routes/progressRoutes'));
-// app.use('/api/assignments', require('./routes/assignmentRoutes'));
-// app.use('/api/projects', require('./routes/projectRoutes'));
+app.use('/api/assignments', require('./routes/assignmentRoutes'));
+app.use('/api/projects', require('./routes/projectRoutes'));
 // app.use('/api/resources', require('./routes/resourceRoutes'));
 
 // Global Error Handler
