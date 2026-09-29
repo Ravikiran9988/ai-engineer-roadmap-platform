@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
   username VARCHAR(50) UNIQUE NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
-  selected_path VARCHAR(50) NOT NULL DEFAULT 'job_ready',
+  selected_path VARCHAR(50) NOT NULL DEFAULT 'job_ready' CHECK (selected_path IN ('job_ready','intermediate','advanced')),
   learning_streak INTEGER NOT NULL DEFAULT 0,
   last_active DATE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -28,17 +28,6 @@ CREATE TABLE IF NOT EXISTS user_progress (
 
 CREATE INDEX IF NOT EXISTS idx_user_progress_user_id ON user_progress(user_id);
 
-CREATE TABLE IF NOT EXISTS video_progress (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  video_id VARCHAR(100) NOT NULL,
-  progress_seconds NUMERIC(12,2) NOT NULL DEFAULT 0,
-  duration_seconds NUMERIC(12,2) NOT NULL DEFAULT 0,
-  progress_percent NUMERIC(5,2) NOT NULL DEFAULT 0,
-  completed BOOLEAN NOT NULL DEFAULT FALSE,
-  last_watched_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(user_id, video_id)
-);
 
 CREATE TABLE IF NOT EXISTS assignment_submissions (
   id SERIAL PRIMARY KEY,
@@ -62,3 +51,6 @@ CREATE TABLE IF NOT EXISTS project_submissions (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE(user_id, project_id)
 );
+
+CREATE INDEX IF NOT EXISTS idx_assignment_submissions_user_id ON assignment_submissions(user_id);
+CREATE INDEX IF NOT EXISTS idx_project_submissions_user_id ON project_submissions(user_id);

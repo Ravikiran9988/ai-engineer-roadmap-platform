@@ -13,14 +13,26 @@ async function fetchAPI(endpoint, options = {}) {
 
 export const api = {
   auth: {
-    login: credentials => fetchAPI('/auth/login', { method:'POST', body:JSON.stringify(credentials) }),
-    register: data => fetchAPI('/auth/register', { method:'POST', body:JSON.stringify(data) }),
+    login: credentials => fetchAPI('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
+    register: data => fetchAPI('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
     getMe: () => fetchAPI('/auth/me'),
   },
   progress: {
     get: () => fetchAPI('/progress'),
-    update: data => fetchAPI('/progress', { method:'POST', body:JSON.stringify(data) }),
-    getVideo: videoId => fetchAPI(`/progress/videos/${encodeURIComponent(videoId)}`),
-    updateVideo: (videoId, data) => fetchAPI(`/progress/videos/${encodeURIComponent(videoId)}`, { method:'PUT', body:JSON.stringify(data) }),
+    update: data => fetchAPI('/progress', { method: 'POST', body: JSON.stringify(data) }),
+  },
+  assignments: {
+    list: () => fetchAPI('/assignments'),
+    submit: (id, githubUrl) => fetchAPI(`/assignments/${encodeURIComponent(id)}/submit`, {
+      method: 'POST',
+      body: JSON.stringify({ githubUrl }),
+    }),
+  },
+  projects: {
+    list: () => fetchAPI('/projects'),
+    submit: (id, githubUrl, liveUrl = '') => fetchAPI(`/projects/${encodeURIComponent(id)}/submit`, {
+      method: 'POST',
+      body: JSON.stringify({ githubUrl, liveUrl }),
+    }),
   },
 };

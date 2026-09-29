@@ -18,16 +18,20 @@ export function Assignments() {
   const validTopicIds = TOPICS.filter(t => t.paths.includes(activePath)).map(t => t.id);
   const pathAssignments = ASSIGNMENTS.filter(a => validTopicIds.includes(a.topicId));
 
-  const handleSubmission = (e) => {
+  const handleSubmission = async (e) => {
     e.preventDefault();
     if (!GitBranchUrl.includes('github.com')) {
       setError('Please enter a valid GitHub URL');
       return;
     }
-    submitAssignment(selectedAssignment.id, GitBranchUrl);
-    setGitBranchUrl('');
-    setError('');
-    setSelectedAssignment(null);
+    try {
+      await submitAssignment(selectedAssignment.id, GitBranchUrl);
+      setGitBranchUrl('');
+      setError('');
+      setSelectedAssignment(null);
+    } catch (err) {
+      setError(err.message || 'Unable to submit assignment.');
+    }
   };
 
   return (
@@ -157,10 +161,10 @@ export function Assignments() {
               {(!assignments[selectedAssignment.id] || GitBranchUrl) && (
                 <form onSubmit={handleSubmission} className="space-y-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium">GitBranch Repository URL</label>
+                    <label className="text-sm font-medium">GitHub Repository URL</label>
                     <input
                       type="url"
-                      placeholder="https://GitBranch.com/username/repo"
+                      placeholder="https://github.com/username/repo"
                       value={GitBranchUrl}
                       onChange={(e) => setGitBranchUrl(e.target.value)}
                       className="w-full px-3 py-2 border rounded-md bg-background focus:ring-2 focus:ring-primary focus:outline-none"

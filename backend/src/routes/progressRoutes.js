@@ -6,7 +6,5 @@ const {protect}=require('../middleware/authMiddleware');
 router.use(protect);
 router.get('/',controller.getProgress);
 router.post('/',controller.updateProgress);
-router.get('/videos/:videoId',controller.getVideoProgress);
-router.put('/videos/:videoId',controller.updateVideoProgress);
 
 module.exports=router;
