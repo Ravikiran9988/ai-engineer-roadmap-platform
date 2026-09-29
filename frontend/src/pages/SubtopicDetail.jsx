@@ -7,10 +7,9 @@ import { useProgress } from '@/context/ProgressContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, PlayCircle, FileText, GitBranch, ArrowLeft, ExternalLink, Code, CheckSquare } from 'lucide-react';
+import { CheckCircle2, PlayCircle, FileText, GitBranch, ExternalLink, Code, CheckSquare } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { YouTubePlayer } from '@/components/resources/YouTubePlayer';
 
 export function SubtopicDetail() {
   const { pathId, phaseId, topicId, subtopicId } = useParams();
@@ -148,9 +147,6 @@ export function SubtopicDetail() {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    {video.url !== 'RESOURCE_URL_PENDING' && (
-                      <YouTubePlayer video={video} onCompleted={() => markVideoComplete(video.id, true)} />
-                    )}
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Button variant="default" className="w-full sm:w-auto gap-2" asChild disabled={video.url === 'RESOURCE_URL_PENDING'}>
                         <a href={video.url !== 'RESOURCE_URL_PENDING' ? video.url : '#'} target="_blank" rel="noreferrer" onClick={e => { if(video.url === 'RESOURCE_URL_PENDING') e.preventDefault(); }}>
