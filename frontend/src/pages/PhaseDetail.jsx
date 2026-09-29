@@ -123,7 +123,7 @@ export function PhaseDetail() {
           <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border-primary/20">
             Phase Detail
           </Badge>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{phase.name}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{phase.title}</h1>
           <p className="text-lg text-muted-foreground">
             {phase.description}
           </p>
