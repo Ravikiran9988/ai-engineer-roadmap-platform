@@ -9,13 +9,11 @@ import { TOPICS, PATHS } from '@/data/roadmap';
 
 export function Home() {
   const { user } = useAuth();
-  const { activePath, completedTopics, setPath } = useProgress();
+  const { activePath, completedTopics, completedSubtopics, setPath } = useProgress();
   const navigate = useNavigate();
 
   // Determine if the user has explicitly selected a path.
-  // In a real app, this would be a boolean on the user object.
-  // Here we check if 'ai-roadmap-path' exists in localStorage.
-  const hasSelectedPath = !!localStorage.getItem('ai-roadmap-path');
+  const hasSelectedPath = !!activePath;
 
   const handleSelectPath = (pathId) => {
     if (!user) {
@@ -32,8 +30,12 @@ export function Home() {
     for (const topic of pathTopics) {
       if (!completedTopics.includes(topic.id)) {
         if (topic.subtopics && topic.subtopics.length > 0) {
-          const subId = topic.subtopicIds ? topic.subtopicIds[0] : topic.subtopics[0].toLowerCase().replace(/\s+/g, '-');
-          return { topic, subId, subName: topic.subtopics[0] };
+          for (let i = 0; i < topic.subtopics.length; i++) {
+            const subId = topic.subtopicIds ? topic.subtopicIds[i] : topic.subtopics[i].toLowerCase().replace(/\s+/g, '-');
+            if (!completedSubtopics.includes(subId)) {
+              return { topic, subId, subName: topic.subtopics[i] };
+            }
+          }
         }
       }
     }
@@ -111,7 +113,7 @@ export function Home() {
   return (
     <div className="space-y-8 pb-12 animate-in fade-in duration-500 max-w-4xl">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Welcome back, {user.name}</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Welcome back, {user.username || user.name}</h1>
         <p className="text-muted-foreground mt-2 text-lg">
           Current Path: <span className="font-semibold text-primary capitalize">{activePath.replace('_', ' ')}</span>
         </p>

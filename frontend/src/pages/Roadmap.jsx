@@ -8,7 +8,7 @@ import { CheckCircle2, Circle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Roadmap() {
-  const { activePath, completedTopics, getPhaseProgress } = useProgress();
+  const { activePath, completedTopics, completedSubtopics, getPhaseProgress } = useProgress();
 
   const pathName = activePath === PATHS.JOB_READY ? 'Job Ready' : 
                    activePath === PATHS.INTERMEDIATE ? 'Intermediate' : 'Advanced';
@@ -34,7 +34,7 @@ export function Roadmap() {
             Currently tracking the <span className="font-semibold text-primary">{pathName}</span> path.
           </p>
         </div>
-        <Link to="/paths" className="text-sm text-primary hover:underline font-medium">
+        <Link to="/learning" className="text-sm text-primary hover:underline font-medium">
           Change Path &rarr;
         </Link>
       </div>
@@ -106,19 +106,20 @@ export function Roadmap() {
                           {/* Subtopics list */}
                           {(topic.subtopics && topic.subtopics.length > 0) && (
                             <div className="ml-8 flex flex-col gap-1 mt-1">
-                              {topic.subtopics.map((subtopicName, i) => {
-                                const subId = topic.subtopicIds ? topic.subtopicIds[i] : subtopicName.toLowerCase().replace(/\s+/g, '-');
-                                return (
-                                  <Link 
-                                    key={subId}
-                                    to={`/learning/${activePath}/${phase.id}/${topic.id}/${subId}`}
-                                    className="text-xs text-muted-foreground hover:text-primary flex items-center gap-2"
-                                  >
-                                    <div className="w-1 h-1 rounded-full bg-muted-foreground/50" />
-                                    <span className="truncate">{subtopicName}</span>
-                                  </Link>
-                                );
-                              })}
+                                {topic.subtopics.map((subtopicName, i) => {
+                                  const subId = topic.subtopicIds ? topic.subtopicIds[i] : subtopicName.toLowerCase().replace(/\s+/g, '-');
+                                  const isSubComplete = completedSubtopics?.includes(subId);
+                                  return (
+                                    <Link 
+                                      key={subId}
+                                      to={`/learning/${activePath}/${phase.id}/${topic.id}/${subId}`}
+                                      className={`text-xs hover:text-primary flex items-center gap-2 ${isSubComplete ? 'text-muted-foreground/60 line-through' : 'text-muted-foreground'}`}
+                                    >
+                                      <div className={`w-1 h-1 rounded-full ${isSubComplete ? 'bg-primary/50' : 'bg-muted-foreground/50'}`} />
+                                      <span className="truncate">{subtopicName}</span>
+                                    </Link>
+                                  );
+                                })}
                             </div>
                           )}
                         </div>

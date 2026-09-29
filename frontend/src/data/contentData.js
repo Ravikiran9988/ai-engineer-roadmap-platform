@@ -17,7 +17,7 @@ export const KNOWLEDGE_BASE_FOLDERS = [
   {
     id: 'machine_learning',
     name: '02 Machine Learning',
-    topics: ['ml_fundamentals', 'supervised_learning', 'unsupervised_learning', 'regression', 'classification', 'clustering', 'feature_engineering', 'model_evaluation_ml', 'cross_validation', 'hyperparameter_tuning', 'scikit_learn'],
+    topics: ['ml_fundamentals', 'supervised_learning', 'unsupervised_learning', 'regression', 'sl-classification', 'clustering', 'feature_engineering', 'model_evaluation_ml', 'cross_validation', 'hyperparameter_tuning', 'scikit_learn'],
   },
   {
     id: 'deep_learning',
@@ -37,7 +37,7 @@ export const KNOWLEDGE_BASE_FOLDERS = [
   {
     id: 'generative_ai',
     name: '06 Generative AI',
-    topics: ['llm_fundamentals', 'transformer_architecture', 'tokenization_genai', 'context_windows', 'inference', 'prompt_engineering', 'llm_apis', 'structured_outputs', 'function_tool_calling', 'embeddings', 'vector_databases', 'rag', 'fine_tuning'],
+    topics: ['llm_fundamentals', 'trans-architecture', 'tokenization_genai', 'context_windows', 'inference', 'prompt_engineering', 'llm-apis', 'structured_outputs', 'function_tool_calling', 'embeddings', 'vector_databases', 'rag', 'fine_tuning'],
   },
   {
     id: 'agents',

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { TOPIC_MAP } from '@/data/topics';
 import { ASSIGNMENTS } from '@/data/learningData';
@@ -7,7 +7,7 @@ import { useProgress } from '@/context/ProgressContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, PlayCircle, FileText, GitBranch, ArrowLeft, ExternalLink, Code } from 'lucide-react';
+import { CheckCircle2, PlayCircle, FileText, GitBranch, ArrowLeft, ExternalLink, Code, CheckSquare } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ export function SubtopicDetail() {
   const { pathId, phaseId, topicId, subtopicId } = useParams();
   const { 
     completedVideos, markVideoComplete, 
-    isAssignmentSubmitted, submitAssignment,
+    assignments, isAssignmentSubmitted, submitAssignment,
     isResourceRead, markResourceRead,
     completedSubtopics, toggleSubtopic,
     activePath
@@ -25,6 +25,12 @@ export function SubtopicDetail() {
   const navigate = useNavigate();
   
   const [githubUrl, setGithubUrl] = useState('');
+  
+  useEffect(() => {
+    if (assignmentId && assignments[assignmentId]?.url) {
+      setGithubUrl(assignments[assignmentId].url);
+    }
+  }, [assignmentId, assignments]);
 
   const topic = TOPIC_MAP[topicId];
   const subtopicIndex = topic?.subtopicIds ? topic.subtopicIds.indexOf(subtopicId) : topic?.subtopics.findIndex(s => s.toLowerCase().replace(/\s+/g, '-') === subtopicId);
@@ -205,37 +211,37 @@ export function SubtopicDetail() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {github?.notesUrl && (
-              <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded border transition-colors ${isResourceRead(github.notesUrl) ? 'bg-secondary/20 border-primary/20' : 'hover:border-primary/50'}`}>
-                <a href={github.notesUrl !== 'RESOURCE_URL_PENDING' ? github.notesUrl : '#'} target="_blank" rel="noreferrer" onClick={(e) => { if(github.notesUrl === 'RESOURCE_URL_PENDING') e.preventDefault() }} className="flex items-center gap-3 flex-1">
+            {github?.notes && (
+              <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded border transition-colors ${isResourceRead(github.notes) ? 'bg-secondary/20 border-primary/20' : 'hover:border-primary/50'}`}>
+                <a href={github.notes !== 'RESOURCE_URL_PENDING' ? github.notes : '#'} target="_blank" rel="noreferrer" onClick={(e) => { if(github.notes === 'RESOURCE_URL_PENDING') e.preventDefault() }} className="flex items-center gap-3 flex-1">
                   <FileText className="w-5 h-5 text-muted-foreground" />
                   <div>
                     <div className="font-medium">GitHub Notes</div>
-                    <div className="text-xs text-muted-foreground">{github.notesUrl === 'RESOURCE_URL_PENDING' ? 'Pending URL' : 'Reference material'}</div>
+                    <div className="text-xs text-muted-foreground">{github.notes === 'RESOURCE_URL_PENDING' ? 'Pending URL' : 'Reference material'}</div>
                   </div>
                 </a>
                 <Button 
-                  variant={isResourceRead(github.notesUrl) ? "outline" : "ghost"} 
+                  variant={isResourceRead(github.notes) ? "outline" : "ghost"} 
                   size="sm"
-                  className={`shrink-0 gap-2 ${isResourceRead(github.notesUrl) ? 'text-primary' : ''}`}
-                  onClick={() => handleAuthAction(() => markResourceRead(github.notesUrl, !isResourceRead(github.notesUrl)))}
+                  className={`shrink-0 gap-2 ${isResourceRead(github.notes) ? 'text-primary' : ''}`}
+                  onClick={() => handleAuthAction(() => markResourceRead(github.notes, !isResourceRead(github.notes)))}
                 >
                   <CheckCircle2 className="w-4 h-4" />
-                  {isResourceRead(github.notesUrl) ? 'Read' : 'Mark as Read'}
+                  {isResourceRead(github.notes) ? 'Read' : 'Mark as Read'}
                 </Button>
               </div>
             )}
-            {github?.codeUrl && (
+            {github?.code && (
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded border hover:border-primary/50 transition-colors">
-                <a href={github.codeUrl !== 'RESOURCE_URL_PENDING' ? github.codeUrl : '#'} target="_blank" rel="noreferrer" onClick={(e) => { if(github.codeUrl === 'RESOURCE_URL_PENDING') e.preventDefault() }} className="flex items-center gap-3 flex-1">
+                <a href={github.code !== 'RESOURCE_URL_PENDING' ? github.code : '#'} target="_blank" rel="noreferrer" onClick={(e) => { if(github.code === 'RESOURCE_URL_PENDING') e.preventDefault() }} className="flex items-center gap-3 flex-1">
                   <Code className="w-5 h-5 text-muted-foreground" />
                   <div>
                     <div className="font-medium">Code Examples</div>
-                    <div className="text-xs text-muted-foreground">{github.codeUrl === 'RESOURCE_URL_PENDING' ? 'Pending URL' : 'Practical implementations'}</div>
+                    <div className="text-xs text-muted-foreground">{github.code === 'RESOURCE_URL_PENDING' ? 'Pending URL' : 'Practical implementations'}</div>
                   </div>
                 </a>
                 <Button variant="ghost" size="sm" asChild>
-                  <a href={github.codeUrl !== 'RESOURCE_URL_PENDING' ? github.codeUrl : '#'} target="_blank" rel="noreferrer" onClick={(e) => { if(github.codeUrl === 'RESOURCE_URL_PENDING') e.preventDefault() }}>
+                  <a href={github.code !== 'RESOURCE_URL_PENDING' ? github.code : '#'} target="_blank" rel="noreferrer" onClick={(e) => { if(github.code === 'RESOURCE_URL_PENDING') e.preventDefault() }}>
                     <ExternalLink className="w-4 h-4 mr-2" /> View Code
                   </a>
                 </Button>
@@ -280,16 +286,15 @@ export function SubtopicDetail() {
                   className="flex-1 bg-background border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
                   value={githubUrl}
                   onChange={e => setGithubUrl(e.target.value)}
-                  disabled={submitted}
                 />
                 <Button 
                   onClick={() => handleAuthAction(() => {
                     if(githubUrl.trim()) submitAssignment(assignmentId, githubUrl);
                   })}
-                  disabled={submitted || !githubUrl.trim()}
+                  disabled={!githubUrl.trim() || (submitted && githubUrl === assignments[assignmentId]?.url)}
                   className="w-full sm:w-auto"
                 >
-                  {submitted ? 'Submitted' : 'Submit Assignment'}
+                  {submitted ? 'Update Submission' : 'Submit Assignment'}
                 </Button>
               </div>
               {submitted && <p className="text-sm text-green-500 font-medium mt-2 flex items-center gap-1"><CheckCircle2 className="w-4 h-4"/> Assignment successfully submitted!</p>}

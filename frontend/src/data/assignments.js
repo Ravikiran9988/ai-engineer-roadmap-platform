@@ -76,7 +76,7 @@ export const ASSIGNMENTS = [
     id: 'assign_rag_1',
     phaseId: '06_GENERATIVE_AI',
     topicId: 'rag',
-    subtopicId: 'rag-implementation',
+    subtopicId: 'rag-retrieval',
     title: 'Local PDF Q&A System',
     description: 'Build a basic RAG pipeline that loads a PDF, chunks it, embeds it into a local vector store, and answers questions using an LLM.',
     requirements: [

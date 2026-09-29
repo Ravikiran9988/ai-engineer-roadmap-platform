@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { TOPICS, PATHS } from '../data/roadmap';
 import { DAILY_TASKS } from '../data/learningData';
+import { VIDEOS } from '../data/videos';
+import { ASSIGNMENTS } from '../data/assignments';
 import { api } from '../services/api';
 
 const ProgressContext = createContext();
@@ -121,13 +123,49 @@ export function ProgressProvider({ children }) {
     // syncWithBackend is called via individual handlers right now to capture fresh state
   };
 
+  // Derived completed subtopics (combines manual + automatically completed via videos/assignments)
+  const derivedCompletedSubtopics = React.useMemo(() => {
+    const manualSubs = new Set(completedSubtopics);
+    const derived = new Set();
+    
+    TOPICS.forEach(topic => {
+      if (topic.subtopicIds) {
+        topic.subtopicIds.forEach(subId => {
+          if (manualSubs.has(subId)) {
+            derived.add(subId);
+            return;
+          }
+          
+          const subVideos = VIDEOS.filter(v => v.subtopicId === subId);
+          const reqVideos = subVideos.filter(v => v.required !== false);
+          
+          const subAssign = ASSIGNMENTS.find(a => a.subtopicId === subId);
+          const assignmentRequired = subAssign?.requiredPaths ? subAssign.requiredPaths.includes(activePath) : !!subAssign;
+          
+          const hasRequirements = reqVideos.length > 0 || assignmentRequired;
+          
+          if (hasRequirements) {
+            const videosDone = reqVideos.every(v => completedVideos.includes(v.id));
+            const assignmentDone = !assignmentRequired || assignments[subAssign?.id]?.status === 'Submitted';
+            
+            if (videosDone && assignmentDone) {
+              derived.add(subId);
+            }
+          }
+        });
+      }
+    });
+    
+    return Array.from(derived);
+  }, [completedSubtopics, completedVideos, assignments, activePath]);
+
   // Derived completed topics
   const completedTopics = React.useMemo(() => {
     return TOPICS.filter(topic => {
       const ids = topic.subtopicIds || [];
-      return ids.length > 0 && ids.every(id => completedSubtopics.includes(id));
+      return ids.length > 0 && ids.every(id => derivedCompletedSubtopics.includes(id));
     }).map(t => t.id);
-  }, [completedSubtopics]);
+  }, [derivedCompletedSubtopics]);
 
   const toggleSubtopic = (subtopicId) => {
     triggerActivity();
@@ -265,7 +303,7 @@ export function ProgressProvider({ children }) {
   return (
     <ProgressContext.Provider value={{ 
       completedTopics, 
-      completedSubtopics, toggleSubtopic,
+      completedSubtopics: derivedCompletedSubtopics, toggleSubtopic,
       completedTasks, toggleTask,
       completedVideos, markVideoComplete,
       assignments, submitAssignment, isAssignmentSubmitted,

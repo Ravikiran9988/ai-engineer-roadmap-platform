@@ -20,13 +20,13 @@ export const LEARNING_PATHS = [
       // Foundations
       'python','pydantic','git_github','sql','rest_apis','http','testing','numpy','pandas',
       // ML (surface-level)
-      'ml_fundamentals','supervised_learning','regression','classification',
+      'ml_fundamentals','supervised_learning','regression','sl-classification',
       'feature_engineering','model_evaluation_ml','cross_validation','scikit_learn',
       // NLP/Transformers (practical only)
       'text_preprocessing','tokenization_nlp','nlp_embeddings','hugging_face',
       // Generative AI (core)
       'llm_fundamentals','tokenization_genai','context_windows','inference',
-      'prompt_engineering','llm_apis','structured_outputs','function_tool_calling',
+      'prompt_engineering','llm-apis','structured_outputs','function_tool_calling',
       'embeddings','vector_databases','rag','ai_agents','langchain',
       // Evaluation (core)
       'llm_evaluation','rag_evaluation','llm_as_judge','faithfulness','answer_relevance',
@@ -62,7 +62,7 @@ export const LEARNING_PATHS = [
       'unsupervised_learning','clustering','hyperparameter_tuning',
       'neural_networks','loss_functions','optimizers','regularization','pytorch',
       'text_classification','attention','transformers','gpt',
-      'transformer_architecture','multimodal_basics',
+      'trans-architecture','multimodal_basics',
       'unsupervised_learning','fine_tuning','langgraph',
       'ragas','context_precision','context_recall','regression_testing',
       'experiment_tracking','model_versioning','prompt_versioning',
@@ -70,11 +70,11 @@ export const LEARNING_PATHS = [
       'celery','message_queues','rbac','monitoring','cloud','deployment',
       // Re-include all job_ready
       'python','pydantic','git_github','sql','rest_apis','http','testing','numpy','pandas',
-      'ml_fundamentals','supervised_learning','regression','classification',
+      'ml_fundamentals','supervised_learning','regression','sl-classification',
       'feature_engineering','model_evaluation_ml','cross_validation','scikit_learn',
       'text_preprocessing','tokenization_nlp','nlp_embeddings','hugging_face',
       'llm_fundamentals','tokenization_genai','context_windows','inference',
-      'prompt_engineering','llm_apis','structured_outputs','function_tool_calling',
+      'prompt_engineering','llm-apis','structured_outputs','function_tool_calling',
       'embeddings','vector_databases','rag','ai_agents','langchain',
       'llm_evaluation','rag_evaluation','llm_as_judge','faithfulness','answer_relevance',
       'golden_datasets',

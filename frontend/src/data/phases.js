@@ -27,7 +27,7 @@ export const PHASES = [
     estimatedWeeks: 3,
     topicIds: [
       'ml_fundamentals','supervised_learning','unsupervised_learning','regression',
-      'classification','clustering','feature_engineering','model_evaluation_ml',
+      'sl-classification','clustering','feature_engineering','model_evaluation_ml',
       'cross_validation','hyperparameter_tuning','scikit_learn'
     ],
   },
@@ -76,8 +76,8 @@ export const PHASES = [
     priority: 'essential',
     estimatedWeeks: 8,
     topicIds: [
-      'llm_fundamentals','transformer_architecture','tokenization_genai','context_windows',
-      'inference','prompt_engineering','llm_apis','structured_outputs','function_tool_calling',
+      'llm_fundamentals','trans-architecture','tokenization_genai','context_windows',
+      'inference','prompt_engineering','llm-apis','structured_outputs','function_tool_calling',
       'embeddings','vector_databases','rag','fine_tuning','ai_agents',
       'langchain','langgraph','mcp','multimodal_basics'
     ],

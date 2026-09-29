@@ -24,7 +24,7 @@ export const VIDEOS = [
   {
     id: 'vid_python_001',
     topicId: 'python',
-    subtopicId: 'core_python',
+    subtopicId: 'python-core',
     title: 'Python Full Course for Beginners',
     channel: 'Programming with Mosh',
     url: 'https://www.youtube.com/watch?v=_uQrJ0TkZlc',
@@ -38,7 +38,7 @@ export const VIDEOS = [
   {
     id: 'vid_python_002',
     topicId: 'python',
-    subtopicId: 'oop',
+    subtopicId: 'python-oop',
     title: 'Object Oriented Programming in Python',
     channel: 'Corey Schafer',
     url: 'https://www.youtube.com/watch?v=ZDa-Z5JzLYM&list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc',
@@ -52,7 +52,7 @@ export const VIDEOS = [
   {
     id: 'vid_python_003',
     topicId: 'python',
-    subtopicId: 'async_python',
+    subtopicId: 'python-async',
     title: 'Python Asyncio — Complete Guide',
     channel: 'ArjanCodes',
     url: 'https://www.youtube.com/watch?v=t5Bo1Je9EmE',
@@ -66,7 +66,7 @@ export const VIDEOS = [
   {
     id: 'vid_python_004',
     topicId: 'python',
-    subtopicId: 'type_hints',
+    subtopicId: 'python-type-hints',
     title: 'Python Type Hints — Full Tutorial',
     channel: 'ArjanCodes',
     url: 'https://www.youtube.com/watch?v=QORvB-_mbZ0',
@@ -82,7 +82,7 @@ export const VIDEOS = [
   {
     id: 'vid_pydantic_001',
     topicId: 'pydantic',
-    subtopicId: 'pydantic_basics',
+    subtopicId: 'pydantic-basics',
     title: 'Pydantic V2 Crash Course',
     channel: 'ArjanCodes',
     url: 'https://www.youtube.com/watch?v=yj-wmLGFqKg',
@@ -96,7 +96,7 @@ export const VIDEOS = [
   {
     id: 'vid_pydantic_002',
     topicId: 'pydantic',
-    subtopicId: 'pydantic_advanced',
+    subtopicId: 'pydantic-advanced',
     title: 'Pydantic for AI — Structured Outputs',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -112,7 +112,7 @@ export const VIDEOS = [
   {
     id: 'vid_git_001',
     topicId: 'git_github',
-    subtopicId: 'git_basics',
+    subtopicId: 'git-basics',
     title: 'Git and GitHub for Beginners — Crash Course',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=RGOj5yH7evk',
@@ -126,7 +126,7 @@ export const VIDEOS = [
   {
     id: 'vid_git_002',
     topicId: 'git_github',
-    subtopicId: 'git_advanced',
+    subtopicId: 'git-advanced',
     title: 'Git Branching Strategies for Teams',
     channel: 'Fireship',
     url: 'https://www.youtube.com/watch?v=Uszj_k0DGsg',
@@ -142,7 +142,7 @@ export const VIDEOS = [
   {
     id: 'vid_sql_001',
     topicId: 'sql',
-    subtopicId: 'sql_basics',
+    subtopicId: 'sql-basics',
     title: 'SQL Tutorial — Full Database Course for Beginners',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=HXV3zeQKqGY',
@@ -156,7 +156,7 @@ export const VIDEOS = [
   {
     id: 'vid_sql_002',
     topicId: 'sql',
-    subtopicId: 'sql_for_ai',
+    subtopicId: 'sql-for-ai',
     title: 'PostgreSQL for AI Engineers',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -172,7 +172,7 @@ export const VIDEOS = [
   {
     id: 'vid_http_001',
     topicId: 'rest_apis',
-    subtopicId: 'rest_basics',
+    subtopicId: 'rest-basics',
     title: 'APIs for Beginners — How to Use an API',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=WXsD0ZgxjRw',
@@ -188,7 +188,7 @@ export const VIDEOS = [
   {
     id: 'vid_ml_001',
     topicId: 'ml_fundamentals',
-    subtopicId: 'ml_overview',
+    subtopicId: 'ml-overview',
     title: 'Machine Learning Crash Course',
     channel: 'Google Developers',
     url: 'https://www.youtube.com/watch?v=NWONeJKn6kc',
@@ -202,7 +202,7 @@ export const VIDEOS = [
   {
     id: 'vid_ml_002',
     topicId: 'supervised_learning',
-    subtopicId: 'linear_regression',
+    subtopicId: 'reg-linear',
     title: 'Linear Regression from Scratch in Python',
     channel: 'Sentdex',
     url: 'https://www.youtube.com/watch?v=JcI5Vnw0b2c',
@@ -216,7 +216,7 @@ export const VIDEOS = [
   {
     id: 'vid_ml_003',
     topicId: 'supervised_learning',
-    subtopicId: 'classification',
+    subtopicId: 'sl-classification',
     title: 'Logistic Regression and Classification Metrics',
     channel: 'StatQuest with Josh Starmer',
     url: 'https://www.youtube.com/watch?v=yIYKR4sgzI8',
@@ -232,7 +232,7 @@ export const VIDEOS = [
   {
     id: 'vid_dl_001',
     topicId: 'neural_networks',
-    subtopicId: 'nn_basics',
+    subtopicId: 'nn-basics',
     title: 'Neural Networks from Scratch in Python',
     channel: 'Sentdex',
     url: 'https://www.youtube.com/watch?v=Wo5dMEP_BbI',
@@ -246,7 +246,7 @@ export const VIDEOS = [
   {
     id: 'vid_dl_002',
     topicId: 'pytorch',
-    subtopicId: 'pytorch_basics',
+    subtopicId: 'pytorch-basics',
     title: 'PyTorch for Deep Learning — Full Course',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=V_xro1bcAuA',
@@ -262,7 +262,7 @@ export const VIDEOS = [
   {
     id: 'vid_transformers_001',
     topicId: 'attention',
-    subtopicId: 'attention_mechanism',
+    subtopicId: 'att-self',
     title: 'Attention is All You Need — Explained',
     channel: 'Yannic Kilcher',
     url: 'https://www.youtube.com/watch?v=iDulhoQ2pro',
@@ -276,7 +276,7 @@ export const VIDEOS = [
   {
     id: 'vid_transformers_002',
     topicId: 'transformers',
-    subtopicId: 'transformer_architecture',
+    subtopicId: 'trans-architecture',
     title: 'Illustrated Guide to Transformers',
     channel: 'The AI Epiphany',
     url: 'https://www.youtube.com/watch?v=4Bdc55j80l4',
@@ -290,7 +290,7 @@ export const VIDEOS = [
   {
     id: 'vid_hf_001',
     topicId: 'hugging_face',
-    subtopicId: 'hf_basics',
+    subtopicId: 'hf-basics',
     title: 'HuggingFace Course — NLP with Transformers',
     channel: 'HuggingFace',
     url: 'https://www.youtube.com/watch?v=00GKzGyWFEs&list=PLo2EIpI_JMQvWfQndUesu0nPBAtZ9gP1o',
@@ -306,7 +306,7 @@ export const VIDEOS = [
   {
     id: 'vid_llm_001',
     topicId: 'llm_fundamentals',
-    subtopicId: 'llm_overview',
+    subtopicId: 'llm-overview',
     title: 'Large Language Models — How They Work',
     channel: 'Andrej Karpathy',
     url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g',
@@ -320,7 +320,7 @@ export const VIDEOS = [
   {
     id: 'vid_llm_002',
     topicId: 'llm_fundamentals',
-    subtopicId: 'llm_apis',
+    subtopicId: 'llm-apis',
     title: 'OpenAI API Full Tutorial — Build AI Apps',
     channel: 'Patrick Loeber',
     url: 'https://www.youtube.com/watch?v=c-g6epk3fFE',
@@ -336,7 +336,7 @@ export const VIDEOS = [
   {
     id: 'vid_prompt_001',
     topicId: 'prompt_engineering',
-    subtopicId: 'prompt_basics',
+    subtopicId: 'pe-basics',
     title: 'ChatGPT Prompt Engineering for Developers',
     channel: 'DeepLearning.AI',
     url: 'https://www.youtube.com/watch?v=H4YK_7MAckk',
@@ -352,7 +352,7 @@ export const VIDEOS = [
   {
     id: 'vid_rag_001',
     topicId: 'rag',
-    subtopicId: 'rag_overview',
+    subtopicId: 'rag-overview',
     title: 'Retrieval Augmented Generation — Explained',
     channel: 'IBM Technology',
     url: 'https://www.youtube.com/watch?v=T-D1OfcDW1M',
@@ -366,7 +366,7 @@ export const VIDEOS = [
   {
     id: 'vid_rag_002',
     topicId: 'rag',
-    subtopicId: 'rag_implementation',
+    subtopicId: 'rag-retrieval',
     title: 'RAG from Scratch — LangChain',
     channel: 'LangChain',
     url: 'https://www.youtube.com/watch?v=sVcwVQRHIc8',
@@ -380,7 +380,7 @@ export const VIDEOS = [
   {
     id: 'vid_rag_003',
     topicId: 'rag',
-    subtopicId: 'rag_chunking',
+    subtopicId: 'rag-chunking',
     title: 'Document Chunking Strategies for RAG',
     channel: 'Pinecone',
     url: 'RESOURCE_URL_PENDING',
@@ -394,7 +394,7 @@ export const VIDEOS = [
   {
     id: 'vid_rag_004',
     topicId: 'rag',
-    subtopicId: 'advanced_rag',
+    subtopicId: 'rag-advanced',
     title: 'Advanced RAG — HyDE, Reranking, Query Expansion',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -410,7 +410,7 @@ export const VIDEOS = [
   {
     id: 'vid_vec_001',
     topicId: 'vector_databases',
-    subtopicId: 'vector_db_concepts',
+    subtopicId: 'vdb-concepts',
     title: 'Vector Databases Explained',
     channel: 'Fireship',
     url: 'https://www.youtube.com/watch?v=klTvEwg3oJ4',
@@ -424,7 +424,7 @@ export const VIDEOS = [
   {
     id: 'vid_vec_002',
     topicId: 'vector_databases',
-    subtopicId: 'chroma_basics',
+    subtopicId: 'vdb-chroma',
     title: 'ChromaDB Full Tutorial — Build Local RAG',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -440,7 +440,7 @@ export const VIDEOS = [
   {
     id: 'vid_agents_001',
     topicId: 'ai_agents',
-    subtopicId: 'agent_concepts',
+    subtopicId: 'ag-architecture',
     title: 'AI Agents — How They Actually Work',
     channel: 'IBM Technology',
     url: 'https://www.youtube.com/watch?v=F8NKVhkZZWI',
@@ -454,7 +454,7 @@ export const VIDEOS = [
   {
     id: 'vid_agents_002',
     topicId: 'langchain',
-    subtopicId: 'langchain_agents',
+    subtopicId: 'lc-agents',
     title: 'LangChain Agents from Scratch',
     channel: 'LangChain',
     url: 'RESOURCE_URL_PENDING',
@@ -468,7 +468,7 @@ export const VIDEOS = [
   {
     id: 'vid_agents_003',
     topicId: 'langgraph',
-    subtopicId: 'langgraph_basics',
+    subtopicId: 'lg-basics',
     title: 'LangGraph — Build Stateful AI Agents',
     channel: 'LangChain',
     url: 'https://www.youtube.com/watch?v=jGg_1h0qzaM',
@@ -482,7 +482,7 @@ export const VIDEOS = [
   {
     id: 'vid_agents_004',
     topicId: 'langgraph',
-    subtopicId: 'langgraph_advanced',
+    subtopicId: 'lg-multi-agent',
     title: 'LangGraph — Multi-Agent Systems',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -498,7 +498,7 @@ export const VIDEOS = [
   {
     id: 'vid_ft_001',
     topicId: 'fine_tuning',
-    subtopicId: 'ft_concepts',
+    subtopicId: 'ft-concepts',
     title: 'Fine-tuning LLMs — When and Why',
     channel: 'DeepLearning.AI',
     url: 'RESOURCE_URL_PENDING',
@@ -512,7 +512,7 @@ export const VIDEOS = [
   {
     id: 'vid_ft_002',
     topicId: 'fine_tuning',
-    subtopicId: 'lora_qlora',
+    subtopicId: 'ft-lora',
     title: 'Fine-Tune Llama 3 with QLoRA',
     channel: 'Maxime Labonne',
     url: 'RESOURCE_URL_PENDING',
@@ -528,7 +528,7 @@ export const VIDEOS = [
   {
     id: 'vid_eval_001',
     topicId: 'llm_evaluation',
-    subtopicId: 'eval_basics',
+    subtopicId: 'eval-llm-metrics',
     title: 'How to Evaluate LLM Applications',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -542,7 +542,7 @@ export const VIDEOS = [
   {
     id: 'vid_eval_002',
     topicId: 'rag_evaluation',
-    subtopicId: 'ragas_framework',
+    subtopicId: 'ragas-basics',
     title: 'RAGAS — RAG Evaluation Framework',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -558,7 +558,7 @@ export const VIDEOS = [
   {
     id: 'vid_fastapi_001',
     topicId: 'fastapi',
-    subtopicId: 'fastapi_basics',
+    subtopicId: 'fapi-basics',
     title: 'FastAPI Course for Beginners',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=tLKKmouUams',
@@ -572,7 +572,7 @@ export const VIDEOS = [
   {
     id: 'vid_fastapi_002',
     topicId: 'fastapi',
-    subtopicId: 'fastapi_ai',
+    subtopicId: 'fapi-ai',
     title: 'Build an AI API with FastAPI and LangChain',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
@@ -588,7 +588,7 @@ export const VIDEOS = [
   {
     id: 'vid_docker_001',
     topicId: 'docker',
-    subtopicId: 'docker_basics',
+    subtopicId: 'docker-basics',
     title: 'Docker Tutorial for Beginners',
     channel: 'TechWorld with Nana',
     url: 'https://www.youtube.com/watch?v=3c-iBn73dDE',

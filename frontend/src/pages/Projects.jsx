@@ -10,7 +10,7 @@ import { FolderGit2, CheckCircle2, GitBranch, AlertCircle, Link as LinkIcon, Tro
 export function Projects() {
   const { projects, submitProject, activePath } = useProgress();
   const [selectedProject, setSelectedProject] = useState(null);
-  const [GitBranchUrl, setGitBranchUrl] = useState('');
+  const [githubUrl, setGithubUrl] = useState('');
   const [liveUrl, setLiveUrl] = useState('');
   const [error, setError] = useState('');
 
@@ -21,12 +21,12 @@ export function Projects() {
 
   const handleSubmission = (e) => {
     e.preventDefault();
-    if (!GitBranchUrl.includes('github.com')) {
+    if (!githubUrl.includes('github.com')) {
       setError('Please enter a valid GitHub URL');
       return;
     }
-    submitProject(selectedProject.id, GitBranchUrl, liveUrl);
-    setGitBranchUrl('');
+    submitProject(selectedProject.id, githubUrl, liveUrl);
+    setGithubUrl('');
     setLiveUrl('');
     setError('');
     setSelectedProject(null);
@@ -141,9 +141,9 @@ export function Projects() {
                   </p>
                   <div className="grid sm:grid-cols-2 gap-4 text-sm">
                     <div className="bg-card p-3 rounded border">
-                      <span className="text-muted-foreground block mb-1">GitBranch Repo:</span>
-                      <a href={projects[selectedProject.id].GitBranchUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline font-medium break-all flex items-center gap-1">
-                        <GitBranch className="w-3 h-3" /> {projects[selectedProject.id].GitBranchUrl}
+                      <span className="text-muted-foreground block mb-1">GitHub Repo:</span>
+                      <a href={projects[selectedProject.id].githubUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline font-medium break-all flex items-center gap-1">
+                        <GitBranch className="w-3 h-3" /> {projects[selectedProject.id].githubUrl}
                       </a>
                     </div>
                     {projects[selectedProject.id].liveUrl && (
@@ -156,7 +156,7 @@ export function Projects() {
                     )}
                   </div>
                   <Button variant="outline" size="sm" onClick={() => {
-                    setGitBranchUrl(projects[selectedProject.id].GitBranchUrl);
+                    setGithubUrl(projects[selectedProject.id].githubUrl);
                     setLiveUrl(projects[selectedProject.id].liveUrl || '');
                   }}>
                     Update Submission
@@ -164,15 +164,15 @@ export function Projects() {
                 </div>
               ) : null}
 
-              {(!projects[selectedProject.id] || GitBranchUrl) && (
+              {(!projects[selectedProject.id] || githubUrl) && (
                 <form onSubmit={handleSubmission} className="space-y-4 max-w-xl bg-secondary/20 p-6 rounded-xl border">
                   <div className="flex flex-col gap-2">
-                    <label className="text-sm font-semibold">GitBranch Repository URL <span className="text-red-500">*</span></label>
+                    <label className="text-sm font-semibold">GitHub Repository URL <span className="text-red-500">*</span></label>
                     <input
                       type="url"
-                      placeholder="https://GitBranch.com/username/repo"
-                      value={GitBranchUrl}
-                      onChange={(e) => setGitBranchUrl(e.target.value)}
+                      placeholder="https://github.com/username/repo"
+                      value={githubUrl}
+                      onChange={(e) => setGithubUrl(e.target.value)}
                       className="w-full px-3 py-2 border rounded-md bg-background focus:ring-2 focus:ring-primary focus:outline-none"
                       required
                     />
@@ -191,7 +191,7 @@ export function Projects() {
                   <div className="pt-2">
                     <Button type="submit" size="lg">Submit Project</Button>
                     {projects[selectedProject.id] && (
-                      <Button type="button" variant="ghost" onClick={() => { setGitBranchUrl(''); setLiveUrl(''); }} className="ml-2">Cancel Edit</Button>
+                      <Button type="button" variant="ghost" onClick={() => { setGithubUrl(''); setLiveUrl(''); }} className="ml-2">Cancel Edit</Button>
                     )}
                   </div>
                 </form>
