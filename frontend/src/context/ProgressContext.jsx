@@ -1,289 +1,124 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { TOPICS, PATHS } from '../data/roadmap';
 import { DAILY_TASKS } from '../data/learningData';
 import { api } from '../services/api';
+import { useAuth } from './AuthContext';
 
-const ProgressContext = createContext();
+const ProgressContext = createContext(null);
 
 export function ProgressProvider({ children }) {
-  const [completedSubtopics, setCompletedSubtopics] = useState([]); // Array of subtopic IDs
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const [completedVideos, setCompletedVideos] = useState([]); // Array of video IDs
-  const [assignments, setAssignments] = useState({}); // { id: { status, url } }
-  const [projects, setProjects] = useState({}); // { id: { url, liveUrl } }
-  const [readResources, setReadResources] = useState([]); // Array of resource IDs (docs/notes)
-  const [activePath, setActivePath] = useState(PATHS.JOB_READY);
-  
-  // New metrics
-  const [lastActive, setLastActive] = useState(null);
-  const [streak, setStreak] = useState(0);
+  const { user } = useAuth();
+  const [completedSubtopics,setCompletedSubtopics]=useState([]);
+  const [completedTasks,setCompletedTasks]=useState([]);
+  const [completedVideos,setCompletedVideos]=useState([]);
+  const [assignments,setAssignments]=useState({});
+  const [projects,setProjects]=useState({});
+  const [readResources,setReadResources]=useState([]);
+  const [activePath,setActivePath]=useState(PATHS.JOB_READY);
+  const [streak,setStreak]=useState(0);
+  const [lastActive,setLastActive]=useState(null);
 
-  // Load state on mount
-  useEffect(() => {
-    let isMounted = true;
-    
-    const loadState = (key, setter) => {
-      const saved = localStorage.getItem(key);
-      if (saved) {
-        try { setter(JSON.parse(saved)); } catch (e) {}
-      }
-    };
-
-    const loadLocal = () => {
-      loadState('ai-roadmap-subtopics', setCompletedSubtopics);
-      loadState('ai-roadmap-tasks', setCompletedTasks);
-      loadState('ai-roadmap-videos', setCompletedVideos);
-      loadState('ai-roadmap-assignments', setAssignments);
-      loadState('ai-roadmap-projects', setProjects);
-      loadState('ai-roadmap-read-resources', setReadResources);
-      loadState('ai-roadmap-streak', setStreak);
-      loadState('ai-roadmap-lastActive', setLastActive);
-      const savedPath = localStorage.getItem('ai-roadmap-path');
-      if (savedPath) setActivePath(savedPath);
-      updateStreak();
-    };
-
-    const loadRemote = async () => {
-      try {
-        const token = localStorage.getItem('ai-roadmap-token');
-        if (token) {
-          const res = await api.progress.get();
-          if (isMounted) {
-            if (res.activePath) setActivePath(res.activePath);
-            setCompletedSubtopics(res.completedSubtopics || []);
-            setCompletedTasks(res.completedTasks || []);
-            setCompletedVideos(res.completedVideos || []);
-            setAssignments(res.assignments || {});
-            setProjects(res.projects || {});
-            setReadResources(res.readResources || []);
-            setStreak(res.streak || 0);
-            setLastActive(res.lastActive || null);
-            updateStreak();
-          }
-        } else {
-          loadLocal();
-        }
-      } catch (err) {
-        console.warn('Backend unavailable or failed. Falling back to localStorage.', err.message);
-        if (isMounted) loadLocal();
-      }
-    };
-
-    loadRemote();
-
-    return () => { isMounted = false; };
-  }, []);
-
-  const updateStreak = () => {
-    const today = new Date().toDateString();
-    const savedLastActive = localStorage.getItem('ai-roadmap-lastActive');
-    let currentStreak = parseInt(localStorage.getItem('ai-roadmap-streak') || '0', 10);
-
-    if (savedLastActive !== `"${today}"`) {
-      if (savedLastActive) {
-        const lastDate = new Date(JSON.parse(savedLastActive));
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        
-        if (lastDate.toDateString() === yesterday.toDateString()) {
-          currentStreak += 1;
-        } else {
-          currentStreak = 1; // reset streak if not active yesterday
-        }
-      } else {
-        currentStreak = 1;
-      }
-      setStreak(currentStreak);
-      setLastActive(today);
-      localStorage.setItem('ai-roadmap-streak', currentStreak.toString());
-      localStorage.setItem('ai-roadmap-lastActive', JSON.stringify(today));
+  useEffect(()=>{
+    let mounted=true;
+    if(!user){
+      setCompletedSubtopics([]); setCompletedTasks([]); setCompletedVideos([]);
+      setAssignments({}); setProjects({}); setReadResources([]);
+      setActivePath(PATHS.JOB_READY); setStreak(0); setLastActive(null);
+      return;
     }
-  };
+    api.progress.get().then(p=>{
+      if(!mounted)return;
+      setActivePath(p.activePath||PATHS.JOB_READY);
+      setCompletedSubtopics(p.completedSubtopics||[]);
+      setCompletedTasks(p.completedTasks||[]);
+      setCompletedVideos(p.completedVideos||[]);
+      setAssignments(p.assignments||{});
+      setProjects(p.projects||{});
+      setReadResources(p.readResources||[]);
+      setStreak(p.streak||0);
+      setLastActive(p.lastActive||null);
+    }).catch(err=>console.error('Failed to load progress:',err));
+    return ()=>{mounted=false};
+  },[user]);
 
-  const syncWithBackend = async (dataOverride = {}) => {
-    try {
-      const token = localStorage.getItem('ai-roadmap-token');
-      if (!token) return;
+  const persist=async(overrides={})=>{
+    try{
       await api.progress.update({
-        activePath, streak, lastActive,
-        completedSubtopics, completedTasks,
-        completedVideos, readResources,
-        assignments, projects,
-        ...dataOverride
+        activePath,streak,lastActive,completedSubtopics,completedTasks,
+        completedVideos,readResources,assignments,projects,...overrides
       });
-    } catch (err) {
-      console.warn('Backend sync failed. Using local storage.', err.message);
+    }catch(err){console.error('Progress sync failed:',err)}
+  };
+
+  const activity=()=>{
+    const today=new Date();
+    const todayKey=today.toISOString().slice(0,10);
+    const previous=lastActive ? new Date(lastActive) : null;
+    let nextStreak=streak;
+    if(lastActive!==todayKey){
+      const yesterday=new Date(today); yesterday.setDate(today.getDate()-1);
+      nextStreak=previous && previous.toISOString().slice(0,10)===yesterday.toISOString().slice(0,10) ? streak+1 : 1;
+      setStreak(nextStreak); setLastActive(todayKey);
     }
+    return {streak:nextStreak,lastActive:todayKey};
   };
 
-  const triggerActivity = () => {
-    updateStreak();
-    // syncWithBackend is called via individual handlers right now to capture fresh state
+  const completedTopics=useMemo(()=>TOPICS.filter(t=>(t.subtopicIds||[]).length>0 && t.subtopicIds.every(id=>completedSubtopics.includes(id))).map(t=>t.id),[completedSubtopics]);
+
+  const toggleSubtopic=(id)=>{
+    const next=completedSubtopics.includes(id)?completedSubtopics.filter(x=>x!==id):[...completedSubtopics,id];
+    setCompletedSubtopics(next); persist({completedSubtopics:next,...activity()});
   };
-
-  // Derived completed topics
-  const completedTopics = React.useMemo(() => {
-    return TOPICS.filter(topic => {
-      const ids = topic.subtopicIds || [];
-      return ids.length > 0 && ids.every(id => completedSubtopics.includes(id));
-    }).map(t => t.id);
-  }, [completedSubtopics]);
-
-  const toggleSubtopic = (subtopicId) => {
-    triggerActivity();
-    setCompletedSubtopics((prev) => {
-      const newSubs = prev.includes(subtopicId) ? prev.filter(id => id !== subtopicId) : [...prev, subtopicId];
-      localStorage.setItem('ai-roadmap-subtopics', JSON.stringify(newSubs));
-      syncWithBackend({ completedSubtopics: newSubs });
-      return newSubs;
-    });
+  const toggleTask=(id)=>{
+    const next=completedTasks.includes(id)?completedTasks.filter(x=>x!==id):[...completedTasks,id];
+    setCompletedTasks(next); persist({completedTasks:next,...activity()});
   };
-
-  const toggleTask = (taskId) => {
-    triggerActivity();
-    setCompletedTasks((prev) => {
-      const newTasks = prev.includes(taskId) ? prev.filter((id) => id !== taskId) : [...prev, taskId];
-      localStorage.setItem('ai-roadmap-tasks', JSON.stringify(newTasks));
-      syncWithBackend({ completedTasks: newTasks });
-      return newTasks;
-    });
+  const submitAssignment=(id,url)=>{
+    const next={...assignments,[id]:{status:'Submitted',url,updatedAt:new Date().toISOString()}};
+    setAssignments(next); persist({assignments:next,...activity()});
   };
-
-  const submitAssignment = (assignmentId, url) => {
-    triggerActivity();
-    setAssignments(prev => {
-      const newAssignments = { ...prev, [assignmentId]: { status: 'Submitted', url } };
-      localStorage.setItem('ai-roadmap-assignments', JSON.stringify(newAssignments));
-      syncWithBackend({ assignments: newAssignments });
-      return newAssignments;
-    });
+  const submitProject=(id,githubUrl,liveUrl)=>{
+    const next={...projects,[id]:{githubUrl,liveUrl,status:'Submitted',updatedAt:new Date().toISOString()}};
+    setProjects(next); persist({projects:next,...activity()});
   };
-
-  const submitProject = (projectId, githubUrl, liveUrl) => {
-    triggerActivity();
-    setProjects(prev => {
-      const newProjects = { ...prev, [projectId]: { githubUrl, liveUrl, status: 'Submitted' } };
-      localStorage.setItem('ai-roadmap-projects', JSON.stringify(newProjects));
-      syncWithBackend({ projects: newProjects });
-      return newProjects;
-    });
+  const markVideoComplete=(id,done)=>{
+    const next=done?(completedVideos.includes(id)?completedVideos:[...completedVideos,id]):completedVideos.filter(x=>x!==id);
+    setCompletedVideos(next); persist({completedVideos:next,...activity()});
   };
-
-  const markVideoComplete = (videoId, isDone) => {
-    triggerActivity();
-    setCompletedVideos(prev => {
-      let newVideos;
-      if (isDone) {
-        newVideos = prev.includes(videoId) ? prev : [...prev, videoId];
-      } else {
-        newVideos = prev.filter(id => id !== videoId);
-      }
-      localStorage.setItem('ai-roadmap-videos', JSON.stringify(newVideos));
-      syncWithBackend({ completedVideos: newVideos });
-      return newVideos;
-    });
+  const markResourceRead=(id,read)=>{
+    const next=read?(readResources.includes(id)?readResources:[...readResources,id]):readResources.filter(x=>x!==id);
+    setReadResources(next); persist({readResources:next,...activity()});
   };
-
-  const isAssignmentSubmitted = (assignmentId) => {
-    return assignments[assignmentId]?.status === 'Submitted';
+  const setPath=(path)=>{
+    setActivePath(path); persist({activePath:path,...activity()});
   };
-
-  const markResourceRead = (resourceId, isRead) => {
-    triggerActivity();
-    setReadResources(prev => {
-      let next;
-      if (isRead) {
-        next = prev.includes(resourceId) ? prev : [...prev, resourceId];
-      } else {
-        next = prev.filter(id => id !== resourceId);
-      }
-      localStorage.setItem('ai-roadmap-read-resources', JSON.stringify(next));
-      syncWithBackend({ readResources: next });
-      return next;
-    });
+  const getPathTopics=pathId=>TOPICS.filter(t=>t.paths.includes(pathId));
+  const getPhaseProgress=(phaseId,pathId)=>{
+    const topics=TOPICS.filter(t=>t.phaseId===phaseId&&t.paths.includes(pathId));
+    if(!topics.length)return 0;
+    return Math.round(topics.filter(t=>completedTopics.includes(t.id)).length/topics.length*100);
   };
-
-  const isResourceRead = (resourceId) => {
-    return readResources.includes(resourceId);
+  const getNextIncompleteTopic=()=>getPathTopics(activePath).find(t=>!completedTopics.includes(t.id));
+  const resetProgress=async()=>{
+    setCompletedSubtopics([]);setCompletedTasks([]);setCompletedVideos([]);setAssignments({});setProjects({});setReadResources([]);setStreak(0);setLastActive(null);
+    await persist({completedSubtopics:[],completedTasks:[],completedVideos:[],assignments:{},projects:{},readResources:[],streak:0,lastActive:null});
   };
+  const getTotalLearningTime=()=>Math.round(completedTopics.reduce((sum,id)=>{
+    const t=TOPICS.find(x=>x.id===id); const m=t?.timeEstimate?.match(/(\d+(?:\.\d+)?)/); return sum+(m?Number(m[1]):0);
+  },0));
 
-  const setPath = (path) => {
-    setActivePath(path);
-    localStorage.setItem('ai-roadmap-path', path);
-    syncWithBackend({ activePath: path });
-  };
-
-  const getPathTopics = (pathId) => TOPICS.filter(t => t.paths.includes(pathId));
-
-  const getPhaseProgress = (phaseId, pathId) => {
-    const phaseTopics = TOPICS.filter(t => t.phaseId === phaseId && t.paths.includes(pathId));
-    if (phaseTopics.length === 0) return 0;
-    const completed = phaseTopics.filter(t => completedTopics.includes(t.id)).length;
-    return Math.round((completed / phaseTopics.length) * 100);
-  };
-
-  const getNextIncompleteTopic = () => {
-    const pathTopics = getPathTopics(activePath);
-    return pathTopics.find(t => !completedTopics.includes(t.id));
-  };
-
-  const resetProgress = () => {
-    setCompletedSubtopics([]);
-    setCompletedTasks([]);
-    setCompletedVideos([]);
-    setAssignments({});
-    setProjects({});
-    setReadResources([]);
-    setStreak(0);
-    setLastActive(null);
-    localStorage.removeItem('ai-roadmap-subtopics');
-    localStorage.removeItem('ai-roadmap-tasks');
-    localStorage.removeItem('ai-roadmap-videos');
-    localStorage.removeItem('ai-roadmap-assignments');
-    localStorage.removeItem('ai-roadmap-projects');
-    localStorage.removeItem('ai-roadmap-read-resources');
-    localStorage.removeItem('ai-roadmap-streak');
-    localStorage.removeItem('ai-roadmap-lastActive');
-  };
-
-  const getTotalLearningTime = () => {
-    // Basic calculation based on completed topics
-    let totalHours = 0;
-    completedTopics.forEach(id => {
-      const topic = TOPICS.find(t => t.id === id);
-      if (topic) {
-        // Simple regex to extract numbers from "2h", "1.5h", etc.
-        const match = topic.timeEstimate.match(/(\d+(\.\d+)?)/);
-        if (match) {
-          totalHours += parseFloat(match[1]);
-        }
-      }
-    });
-    return Math.round(totalHours);
-  };
-
-  return (
-    <ProgressContext.Provider value={{ 
-      completedTopics, 
-      completedSubtopics, toggleSubtopic,
-      completedTasks, toggleTask,
-      completedVideos, markVideoComplete,
-      assignments, submitAssignment, isAssignmentSubmitted,
-      projects, submitProject,
-      readResources, markResourceRead, isResourceRead,
-      activePath, setPath,
-      streak, getTotalLearningTime,
-      getPathTopics, getPhaseProgress,
-      getNextIncompleteTopic,
-      resetProgress
-    }}>
-      {children}
-    </ProgressContext.Provider>
-  );
+  return <ProgressContext.Provider value={{
+    completedTopics,completedSubtopics,toggleSubtopic,completedTasks,toggleTask,
+    completedVideos,markVideoComplete,assignments,submitAssignment,
+    isAssignmentSubmitted:id=>assignments[id]?.status==='Submitted',
+    projects,submitProject,readResources,markResourceRead,isResourceRead:id=>readResources.includes(id),
+    activePath,setPath,streak,lastActive,getTotalLearningTime,getPathTopics,getPhaseProgress,
+    getNextIncompleteTopic,resetProgress,loading:false
+  }}>{children}</ProgressContext.Provider>;
 }
 
-export function useProgress() {
-  const context = useContext(ProgressContext);
-  if (!context) throw new Error("useProgress must be used within ProgressProvider");
+export function useProgress(){
+  const context=useContext(ProgressContext);
+  if(!context)throw new Error('useProgress must be used within ProgressProvider');
   return context;
 }

@@ -1,17 +1,14 @@
-// Mock auth middleware for demonstration
+const jwt = require('jsonwebtoken');
+const env = require('../config/env');
+
 exports.protect = (req, res, next) => {
-  const token = req.headers.authorization;
-  if (!token || !token.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Not authorized, no token' });
-  }
-  
-  // In a real app, you would verify the JWT here.
-  // For this scaffold, we just extract the user ID from the token if possible, or mock it.
+  const header = req.headers.authorization || '';
+  if (!header.startsWith('Bearer ')) return res.status(401).json({ message: 'Authentication required.' });
   try {
-    // If the token is "dummy_token" from login, we mock a user id 1
-    req.user = { id: 1, username: 'testuser' };
+    const decoded = jwt.verify(header.slice(7), env.jwt.secret);
+    req.user = { id: decoded.id, email: decoded.email };
     next();
-  } catch (error) {
-    res.status(401).json({ message: 'Not authorized, token failed' });
+  } catch {
+    return res.status(401).json({ message: 'Invalid or expired token.' });
   }
 };
