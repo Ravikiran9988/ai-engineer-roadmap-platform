@@ -47,7 +47,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['pydantic-basics','pydantic-advanced','sub-structured-outputs'],
+    subtopicIds: ['pydantic-basics','pydantic-advanced','pydantic-sub-structured-outputs'],
     subtopics: ['BaseModel & Fields', 'Validators', 'Structured Outputs'],
   },
   {
@@ -63,7 +63,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['git-basics','git-advanced','sub-github-workflow'],
+    subtopicIds: ['git-basics','git-advanced','git_github-sub-github-workflow'],
     subtopics: ['Core Git', 'Branching', 'GitHub Workflow'],
   },
   {
@@ -79,7 +79,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['linux-basics-core','sub-file-system','sub-processes','sub-ssh'],
+    subtopicIds: ['linux-basics-core','linux_basics-sub-file-system','linux_basics-sub-processes','linux_basics-sub-ssh'],
     subtopics: ['Shell Basics', 'File System', 'Processes', 'SSH'],
   },
   {
@@ -95,7 +95,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['sql-basics','sql-for-ai','sub-postgresql','sub-vector-search-with-pgvector'],
+    subtopicIds: ['sql-basics','sql-for-ai','sql-sub-postgresql','sql-sub-vector-search-with-pgvector'],
     subtopics: ['SQL Fundamentals', 'Joins & Aggregations', 'PostgreSQL', 'Vector Search with pgvector'],
   },
   {
@@ -111,7 +111,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['rest-basics','sub-status-codes','sub-auth-patterns','sub-api-consumption'],
+    subtopicIds: ['rest-basics','rest_apis-sub-status-codes','rest_apis-sub-auth-patterns','rest_apis-sub-api-consumption'],
     subtopics: ['HTTP Methods', 'Status Codes', 'Auth Patterns', 'API Consumption'],
   },
   {
@@ -127,7 +127,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['http-core','sub-headers','sub-cors','sub-caching'],
+    subtopicIds: ['http-core','http-sub-headers','http-sub-cors','http-sub-caching'],
     subtopics: ['HTTP/1.1 vs HTTP/2', 'Headers', 'CORS', 'Caching'],
   },
   {
@@ -143,7 +143,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['testing-core','sub-unit-testing','sub-mocking','sub-integration-testing'],
+    subtopicIds: ['testing-core','testing-sub-unit-testing','testing-sub-mocking','testing-sub-integration-testing'],
     subtopics: ['pytest', 'Unit Testing', 'Mocking', 'Integration Testing'],
   },
   {
@@ -159,7 +159,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['numpy-core','sub-broadcasting','sub-linear-algebra','sub-indexing'],
+    subtopicIds: ['numpy-core','numpy-sub-broadcasting','numpy-sub-linear-algebra','numpy-sub-indexing'],
     subtopics: ['Arrays', 'Broadcasting', 'Linear Algebra', 'Indexing'],
   },
   {
@@ -175,7 +175,7 @@ export const TOPICS = [
     estimatedHours: 12,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['pandas-core','sub-cleaning','sub-merging','sub-groupby','sub-time-series'],
+    subtopicIds: ['pandas-core','pandas-sub-cleaning','pandas-sub-merging','pandas-sub-groupby','pandas-sub-time-series'],
     subtopics: ['DataFrames', 'Cleaning', 'Merging', 'GroupBy', 'Time Series'],
   },
   {
@@ -191,7 +191,7 @@ export const TOPICS = [
     estimatedHours: 40,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['dsa-arrays','dsa-trees','dsa-graphs','dsa-dp','sub-trees','sub-graphs','sub-heaps','sub-recursion','sub-binary-search','sub-greedy','sub-dynamic-programming'],
+    subtopicIds: ['dsa-arrays','dsa-trees','dsa-graphs','dsa-dp','dsa-sub-trees','dsa-sub-graphs','dsa-sub-heaps','dsa-sub-recursion','dsa-sub-binary-search','dsa-sub-greedy','dsa-sub-dynamic-programming'],
     subtopics: ['Arrays/Strings', 'Hashing', 'Linked List', 'Stack/Queue', 'Trees', 'Graphs', 'Heaps', 'Recursion', 'Binary Search', 'Greedy', 'Dynamic Programming'],
   },
   {
@@ -207,7 +207,7 @@ export const TOPICS = [
     estimatedHours: 15,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['math-linear-algebra','math-probability','math-calculus','sub-calculus-basics'],
+    subtopicIds: ['math-linear-algebra','math-probability','math-calculus','math_stats-sub-calculus-basics'],
     subtopics: ['Linear Algebra', 'Probability', 'Statistics', 'Calculus Basics'],
   },
 
@@ -225,7 +225,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['math_stats', 'python'],
-    subtopicIds: ['ml-overview','sub-the-ml-pipeline','sub-bias-variance-tradeoff'],
+    subtopicIds: ['ml-overview','ml_fundamentals-sub-the-ml-pipeline','ml_fundamentals-sub-bias-variance-tradeoff'],
     subtopics: ['Types of Learning', 'The ML Pipeline', 'Bias-Variance Tradeoff'],
   },
   {
@@ -241,7 +241,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['ml_fundamentals'],
-    subtopicIds: ['sl-regression','sl-classification','sub-decision-trees','sub-ensemble-methods'],
+    subtopicIds: ['sl-regression','sl-classification','supervised_learning-sub-decision-trees','supervised_learning-sub-ensemble-methods'],
     subtopics: ['Linear Regression', 'Logistic Regression', 'Decision Trees', 'Ensemble Methods'],
   },
   {
@@ -257,7 +257,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['ml_fundamentals'],
-    subtopicIds: ['ul-clustering','ul-dim-reduction','sub-pca','sub-autoencoders'],
+    subtopicIds: ['ul-clustering','ul-dim-reduction','unsupervised_learning-sub-pca','unsupervised_learning-sub-autoencoders'],
     subtopics: ['K-Means', 'DBSCAN', 'PCA', 'Autoencoders'],
   },
   {
@@ -273,7 +273,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['supervised_learning'],
-    subtopicIds: ['reg-linear','reg-regularized','sub-ridge-lasso'],
+    subtopicIds: ['reg-linear','reg-regularized','regression-sub-ridge-lasso'],
     subtopics: ['Linear Regression', 'Polynomial Regression', 'Ridge/Lasso'],
   },
   {
@@ -289,7 +289,7 @@ export const TOPICS = [
     estimatedHours: 6,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['supervised_learning'],
-    subtopicIds: ['cls-logistic','cls-tree','cls-ensemble','sub-xgboost'],
+    subtopicIds: ['cls-logistic','cls-tree','cls-ensemble','sl-classification-sub-xgboost'],
     subtopics: ['Logistic Regression', 'Decision Trees', 'Random Forest', 'XGBoost'],
   },
   {
@@ -305,7 +305,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['unsupervised_learning'],
-    subtopicIds: ['cls-kmeans','cls-hierarchical','sub-cluster-evaluation'],
+    subtopicIds: ['cls-kmeans','cls-hierarchical','clustering-sub-cluster-evaluation'],
     subtopics: ['K-Means', 'DBSCAN', 'Cluster Evaluation'],
   },
   {
@@ -321,7 +321,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['pandas'],
-    subtopicIds: ['fe-encoding','fe-scaling','fe-selection','sub-missing-values'],
+    subtopicIds: ['fe-encoding','fe-scaling','fe-selection','feature_engineering-sub-missing-values'],
     subtopics: ['Encoding', 'Normalization', 'Feature Selection', 'Missing Values'],
   },
   {
@@ -337,7 +337,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['ml_fundamentals'],
-    subtopicIds: ['eval-metrics','eval-curves','sub-roc-auc','sub-confusion-matrix'],
+    subtopicIds: ['eval-metrics','eval-curves','model_evaluation_ml-sub-roc-auc','model_evaluation_ml-sub-confusion-matrix'],
     subtopics: ['Classification Metrics', 'Regression Metrics', 'ROC/AUC', 'Confusion Matrix'],
   },
   {
@@ -353,7 +353,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['model_evaluation_ml'],
-    subtopicIds: ['cv-kfold','sub-stratified-cv','sub-time-series-cv'],
+    subtopicIds: ['cv-kfold','cross_validation-sub-stratified-cv','cross_validation-sub-time-series-cv'],
     subtopics: ['K-Fold CV', 'Stratified CV', 'Time Series CV'],
   },
   {
@@ -369,7 +369,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['model_evaluation_ml'],
-    subtopicIds: ['hp-search','hp-bayesian','sub-bayesian-optimization'],
+    subtopicIds: ['hp-search','hp-bayesian','hyperparameter_tuning-sub-bayesian-optimization'],
     subtopics: ['Grid Search', 'Random Search', 'Bayesian Optimization'],
   },
   {
@@ -385,7 +385,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['sklearn-basics','sklearn-pipelines','sub-preprocessing','sub-model-selection'],
+    subtopicIds: ['sklearn-basics','sklearn-pipelines','scikit_learn-sub-preprocessing','scikit_learn-sub-model-selection'],
     subtopics: ['Estimators', 'Pipelines', 'Preprocessing', 'Model Selection'],
   },
 
@@ -403,7 +403,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['math_stats'],
-    subtopicIds: ['nn-basics','nn-backprop','sub-forward-pass','sub-gradient-descent'],
+    subtopicIds: ['nn-basics','nn-backprop','neural_networks-sub-forward-pass','neural_networks-sub-gradient-descent'],
     subtopics: ['Perceptrons', 'Activation Functions', 'Forward Pass', 'Gradient Descent'],
   },
   {
@@ -419,7 +419,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.ADVANCED],
     prerequisites: ['neural_networks'],
-    subtopicIds: ['bp-chain-rule','bp-from-scratch','sub-backprop-from-scratch'],
+    subtopicIds: ['bp-chain-rule','bp-from-scratch','backpropagation-sub-backprop-from-scratch'],
     subtopics: ['Chain Rule', 'Computational Graphs', 'Backprop from Scratch'],
   },
   {
@@ -435,7 +435,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['neural_networks'],
-    subtopicIds: ['loss-regression','loss-classification','sub-custom-loss-functions'],
+    subtopicIds: ['loss-regression','loss-classification','loss_functions-sub-custom-loss-functions'],
     subtopics: ['MSE/MAE', 'Cross-Entropy', 'Custom Loss Functions'],
   },
   {
@@ -451,7 +451,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['neural_networks'],
-    subtopicIds: ['opt-sgd','opt-adam','sub-learning-rate-scheduling'],
+    subtopicIds: ['opt-sgd','opt-adam','optimizers-sub-learning-rate-scheduling'],
     subtopics: ['SGD', 'Adam/AdamW', 'Learning Rate Scheduling'],
   },
   {
@@ -467,7 +467,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['neural_networks'],
-    subtopicIds: ['reg-dropout','reg-batchnorm','sub-weight-decay'],
+    subtopicIds: ['reg-dropout','reg-batchnorm','regularization-sub-weight-decay'],
     subtopics: ['Dropout', 'Batch Normalization', 'Weight Decay'],
   },
   {
@@ -483,7 +483,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.ADVANCED],
     prerequisites: ['neural_networks'],
-    subtopicIds: ['cnn-conv','cnn-architectures','sub-cnn-architectures'],
+    subtopicIds: ['cnn-conv','cnn-architectures','cnn_basics-sub-cnn-architectures'],
     subtopics: ['Convolution Operations', 'Pooling', 'CNN Architectures'],
   },
   {
@@ -499,7 +499,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.ADVANCED],
     prerequisites: ['neural_networks'],
-    subtopicIds: ['rnn-basics','rnn-lstm','sub-lstm','sub-gru'],
+    subtopicIds: ['rnn-basics','rnn-lstm','rnn_lstm_basics-sub-lstm','rnn_lstm_basics-sub-gru'],
     subtopics: ['RNNs', 'Vanishing Gradients', 'LSTM', 'GRU'],
   },
   {
@@ -515,7 +515,7 @@ export const TOPICS = [
     estimatedHours: 20,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['pytorch-basics','pytorch-training','pytorch-datasets','sub-model-saving'],
+    subtopicIds: ['pytorch-basics','pytorch-training','pytorch-datasets','pytorch-sub-model-saving'],
     subtopics: ['Tensors & Autograd', 'Custom Datasets', 'Training Loops', 'Model Saving'],
   },
 
@@ -533,7 +533,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['tp-normalization','tp-tokenization','sub-stop-words','sub-stemming'],
+    subtopicIds: ['tp-normalization','tp-tokenization','text_preprocessing-sub-stop-words','text_preprocessing-sub-stemming'],
     subtopics: ['Text Normalization', 'Basic Tokenization', 'Stop Words', 'Stemming'],
   },
   {
@@ -549,7 +549,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['text_preprocessing'],
-    subtopicIds: ['tok-bpe','tok-wordpiece','sub-sentencepiece','sub-tokenizer-comparison'],
+    subtopicIds: ['tok-bpe','tok-wordpiece','tokenization_nlp-sub-sentencepiece','tokenization_nlp-sub-tokenizer-comparison'],
     subtopics: ['BPE', 'WordPiece', 'SentencePiece', 'Tokenizer Comparison'],
   },
   {
@@ -565,7 +565,7 @@ export const TOPICS = [
     estimatedHours: 6,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['tokenization_nlp'],
-    subtopicIds: ['emb-word2vec','emb-sentence','sub-sentence-transformers','sub-similarity'],
+    subtopicIds: ['emb-word2vec','emb-sentence','nlp_embeddings-sub-sentence-transformers','nlp_embeddings-sub-similarity'],
     subtopics: ['Word2Vec', 'GloVe', 'Sentence Transformers', 'Similarity'],
   },
   {
@@ -581,7 +581,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['nlp_embeddings'],
-    subtopicIds: ['tc-sentiment','tc-topic','sub-sequence-classification'],
+    subtopicIds: ['tc-sentiment','tc-topic','text_classification-sub-sequence-classification'],
     subtopics: ['Sentiment Analysis', 'Topic Classification', 'Sequence Classification'],
   },
   {
@@ -597,7 +597,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['neural_networks'],
-    subtopicIds: ['att-self','att-multihead','sub-positional-encoding'],
+    subtopicIds: ['att-self','att-multihead','attention-sub-positional-encoding'],
     subtopics: ['Self-Attention', 'Multi-Head Attention', 'Positional Encoding'],
   },
   {
@@ -613,7 +613,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['attention'],
-    subtopicIds: ['trans-architecture','trans-encoder-decoder','sub-layer-normalization','sub-residual-connections'],
+    subtopicIds: ['trans-architecture','trans-encoder-decoder','transformers-sub-layer-normalization','transformers-sub-residual-connections'],
     subtopics: ['Encoder-Decoder', 'Feed-Forward Networks', 'Layer Normalization', 'Residual Connections'],
   },
   {
@@ -629,7 +629,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.ADVANCED],
     prerequisites: ['transformers'],
-    subtopicIds: ['bert-pretraining','bert-finetuning','sub-fine-tuning-bert'],
+    subtopicIds: ['bert-pretraining','bert-finetuning','bert-sub-fine-tuning-bert'],
     subtopics: ['BERT Pre-training', 'MLM & NSP', 'Fine-tuning BERT'],
   },
   {
@@ -645,7 +645,7 @@ export const TOPICS = [
     estimatedHours: 6,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['transformers'],
-    subtopicIds: ['gpt-architecture','gpt-scaling','sub-scaling-laws'],
+    subtopicIds: ['gpt-architecture','gpt-scaling','gpt-sub-scaling-laws'],
     subtopics: ['Causal LM', 'GPT Architecture', 'Scaling Laws'],
   },
   {
@@ -661,7 +661,7 @@ export const TOPICS = [
     estimatedHours: 15,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['hf-basics','hf-pipeline','hf-finetuning','sub-fine-tuning','sub-datasets'],
+    subtopicIds: ['hf-basics','hf-pipeline','hf-finetuning','hugging_face-sub-fine-tuning','hugging_face-sub-datasets'],
     subtopics: ['Pipeline API', 'Tokenizers', 'Hub', 'Fine-tuning', 'Datasets'],
   },
 
@@ -679,7 +679,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['img-opencv','sub-color-spaces','sub-filters','sub-edge-detection'],
+    subtopicIds: ['img-opencv','image_processing-sub-color-spaces','image_processing-sub-filters','image_processing-sub-edge-detection'],
     subtopics: ['OpenCV Basics', 'Color Spaces', 'Filters', 'Edge Detection'],
   },
   {
@@ -695,7 +695,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['ocr-tesseract','sub-document-ocr','sub-post-processing'],
+    subtopicIds: ['ocr-tesseract','ocr-sub-document-ocr','ocr-sub-post-processing'],
     subtopics: ['Tesseract', 'Document OCR', 'Post-processing'],
   },
   {
@@ -711,7 +711,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.ADVANCED],
     prerequisites: ['cnn_basics'],
-    subtopicIds: ['od-yolo','sub-r-cnn','sub-evaluation-map'],
+    subtopicIds: ['od-yolo','object_detection_basics-sub-r-cnn','object_detection_basics-sub-evaluation-map'],
     subtopics: ['YOLO', 'R-CNN', 'Evaluation (mAP)'],
   },
   {
@@ -727,7 +727,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.ADVANCED],
     prerequisites: ['transformers'],
-    subtopicIds: ['vlm-clip','vlm-llava','sub-multimodal-prompting'],
+    subtopicIds: ['vlm-clip','vlm-llava','vision_language_models-sub-multimodal-prompting'],
     subtopics: ['CLIP', 'LLaVA', 'Multimodal Prompting'],
   },
 
@@ -745,7 +745,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['llm-overview','llm-apis','sub-capabilities-and-limitations','sub-model-families'],
+    subtopicIds: ['llm-overview','llm-apis','llm_fundamentals-sub-capabilities-and-limitations','llm_fundamentals-sub-model-families'],
     subtopics: ['What are LLMs', 'Training Process', 'Capabilities & Limitations', 'Model Families'],
   },
   {
@@ -761,7 +761,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['llm_fundamentals'],
-    subtopicIds: ['ta-decoder-only','sub-positional-encoding','sub-kv-cache','sub-flash-attention'],
+    subtopicIds: ['ta-decoder-only','trans-architecture-sub-positional-encoding','trans-architecture-sub-kv-cache','trans-architecture-sub-flash-attention'],
     subtopics: ['Decoder-Only Architecture', 'Positional Encoding', 'KV Cache', 'Flash Attention'],
   },
   {
@@ -777,7 +777,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['tok-llm','sub-token-counting','sub-tiktoken'],
+    subtopicIds: ['tok-llm','tokenization_genai-sub-token-counting','tokenization_genai-sub-tiktoken'],
     subtopics: ['Tokens vs Words', 'Token Counting', 'Tiktoken'],
   },
   {
@@ -793,7 +793,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['ctx-basics','sub-long-context-models','sub-context-management'],
+    subtopicIds: ['ctx-basics','context_windows-sub-long-context-models','context_windows-sub-context-management'],
     subtopics: ['Context Length', 'Long-Context Models', 'Context Management'],
   },
   {
@@ -809,7 +809,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['inf-sampling','inf-optimization','sub-beam-search','sub-vllm'],
+    subtopicIds: ['inf-sampling','inf-optimization','inference-sub-beam-search','inference-sub-vllm'],
     subtopics: ['Temperature & Sampling', 'Greedy Decoding', 'Beam Search', 'vLLM'],
   },
   {
@@ -825,7 +825,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['pe-basics','pe-cot','pe-advanced','sub-self-consistency','sub-react-prompting'],
+    subtopicIds: ['pe-basics','pe-cot','pe-advanced','prompt_engineering-sub-self-consistency','prompt_engineering-sub-react-prompting'],
     subtopics: ['System Prompts', 'Few-Shot', 'Chain-of-Thought', 'Self-Consistency', 'ReAct Prompting'],
   },
   {
@@ -841,7 +841,7 @@ export const TOPICS = [
     estimatedHours: 6,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['api-openai','api-anthropic','sub-streaming','sub-error-handling','sub-rate-limits'],
+    subtopicIds: ['api-openai','api-anthropic','llm-apis-sub-streaming','llm-apis-sub-error-handling','llm-apis-sub-rate-limits'],
     subtopics: ['OpenAI API', 'Anthropic API', 'Streaming', 'Error Handling', 'Rate Limits'],
   },
   {
@@ -857,7 +857,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['llm-apis'],
-    subtopicIds: ['so-json-mode','so-pydantic','sub-pydantic-llm'],
+    subtopicIds: ['so-json-mode','so-pydantic','structured_outputs-sub-pydantic-llm'],
     subtopics: ['JSON Mode', 'Instructor Library', 'Pydantic + LLM'],
   },
   {
@@ -873,7 +873,7 @@ export const TOPICS = [
     estimatedHours: 6,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['llm-apis'],
-    subtopicIds: ['tc-openai','tc-parallel','sub-parallel-tool-calls','sub-error-handling'],
+    subtopicIds: ['tc-openai','tc-parallel','function_tool_calling-sub-parallel-tool-calls','function_tool_calling-sub-error-handling'],
     subtopics: ['Tool Definition', 'Tool Parsing', 'Parallel Tool Calls', 'Error Handling'],
   },
   {
@@ -889,7 +889,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['emb-openai','emb-sentence-transformers','sub-semantic-search'],
+    subtopicIds: ['emb-openai','emb-sentence-transformers','embeddings-sub-semantic-search'],
     subtopics: ['Embedding Models', 'Cosine Similarity', 'Semantic Search'],
   },
   {
@@ -905,7 +905,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['embeddings'],
-    subtopicIds: ['vdb-concepts','vdb-chroma','vdb-pgvector','vdb-qdrant','sub-pinecone'],
+    subtopicIds: ['vdb-concepts','vdb-chroma','vdb-pgvector','vdb-qdrant','vector_databases-sub-pinecone'],
     subtopics: ['Vector DB Concepts', 'ChromaDB', 'pgvector', 'Qdrant', 'Pinecone'],
   },
   {
@@ -921,7 +921,7 @@ export const TOPICS = [
     estimatedHours: 20,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['vector_databases', 'llm-apis'],
-    subtopicIds: ['rag-overview','rag-chunking','rag-retrieval','rag-hybrid','rag-reranking','rag-advanced','sub-metadata-filtering','sub-advanced-rag'],
+    subtopicIds: ['rag-overview','rag-chunking','rag-retrieval','rag-hybrid','rag-reranking','rag-advanced','rag-sub-metadata-filtering','rag-sub-advanced-rag'],
     subtopics: ['Document Loading', 'Chunking', 'Retrieval', 'Hybrid Search', 'Reranking', 'Query Rewriting', 'Metadata Filtering', 'Advanced RAG'],
   },
   {
@@ -937,7 +937,7 @@ export const TOPICS = [
     estimatedHours: 15,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['hugging_face'],
-    subtopicIds: ['ft-concepts','ft-lora','ft-qlora','sub-qlora','sub-quantization'],
+    subtopicIds: ['ft-concepts','ft-lora','ft-qlora','fine_tuning-sub-qlora','fine_tuning-sub-quantization'],
     subtopics: ['SFT', 'PEFT', 'LoRA', 'QLoRA', 'Quantization'],
   },
   {
@@ -953,7 +953,7 @@ export const TOPICS = [
     estimatedHours: 25,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['function_tool_calling'],
-    subtopicIds: ['ag-architecture','ag-react','ag-memory','ag-tools','ag-multi-agent','sub-tool-use','sub-human-in-the-loop','sub-multi-agent-patterns'],
+    subtopicIds: ['ag-architecture','ag-react','ag-memory','ag-tools','ag-multi-agent','ai_agents-sub-tool-use','ai_agents-sub-human-in-the-loop','ai_agents-sub-multi-agent-patterns'],
     subtopics: ['Agent Architecture', 'Agent Loops', 'Planning', 'ReAct', 'Agent Memory', 'Tool Use', 'Human-in-the-Loop', 'Multi-Agent Patterns'],
   },
   {
@@ -969,7 +969,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['lc-basics','lc-agents','sub-memory','sub-agents','sub-callbacks'],
+    subtopicIds: ['lc-basics','lc-agents','langchain-sub-memory','langchain-sub-agents','langchain-sub-callbacks'],
     subtopics: ['LCEL Chains', 'Tools', 'Memory', 'Agents', 'Callbacks'],
   },
   {
@@ -985,7 +985,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['langchain', 'ai_agents'],
-    subtopicIds: ['lg-basics','lg-multi-agent','sub-multi-agent','sub-human-in-the-loop'],
+    subtopicIds: ['lg-basics','lg-multi-agent','langgraph-sub-multi-agent','langgraph-sub-human-in-the-loop'],
     subtopics: ['Graph Basics', 'State & Checkpointing', 'Multi-Agent', 'Human-in-the-Loop'],
   },
   {
@@ -1001,7 +1001,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.ADVANCED],
     prerequisites: ['ai_agents'],
-    subtopicIds: ['mcp-basics','sub-mcp-servers','sub-mcp-clients'],
+    subtopicIds: ['mcp-basics','mcp-sub-mcp-servers','mcp-sub-mcp-clients'],
     subtopics: ['MCP Architecture', 'MCP Servers', 'MCP Clients'],
   },
   {
@@ -1017,7 +1017,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['mm-basics','sub-gpt-4v','sub-gemini-vision','sub-multimodal-rag'],
+    subtopicIds: ['mm-basics','multimodal_basics-sub-gpt-4v','multimodal_basics-sub-gemini-vision','multimodal_basics-sub-multimodal-rag'],
     subtopics: ['Image + Text APIs', 'GPT-4V', 'Gemini Vision', 'Multimodal RAG'],
   },
 
@@ -1035,7 +1035,7 @@ export const TOPICS = [
     estimatedHours: 6,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['eval-llm-metrics','eval-frameworks','sub-automated-evaluation'],
+    subtopicIds: ['eval-llm-metrics','eval-frameworks','llm_evaluation-sub-automated-evaluation'],
     subtopics: ['Evaluation Metrics', 'Human Evaluation', 'Automated Evaluation'],
   },
   {
@@ -1051,7 +1051,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['rag'],
-    subtopicIds: ['eval-rag-retrieval','eval-rag-generation','sub-end-to-end-metrics'],
+    subtopicIds: ['eval-rag-retrieval','eval-rag-generation','rag_evaluation-sub-end-to-end-metrics'],
     subtopics: ['Retrieval Evaluation', 'Generation Faithfulness', 'End-to-End Metrics'],
   },
   {
@@ -1067,7 +1067,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['rag_evaluation'],
-    subtopicIds: ['ragas-basics','sub-setting-up-evaluation','sub-generating-test-sets'],
+    subtopicIds: ['ragas-basics','ragas-sub-setting-up-evaluation','ragas-sub-generating-test-sets'],
     subtopics: ['RAGAS Metrics', 'Setting Up Evaluation', 'Generating Test Sets'],
   },
   {
@@ -1083,7 +1083,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['judge-basics','sub-pairwise-ranking','sub-bias-mitigation'],
+    subtopicIds: ['judge-basics','llm_as_judge-sub-pairwise-ranking','llm_as_judge-sub-bias-mitigation'],
     subtopics: ['Pointwise Evaluation', 'Pairwise Ranking', 'Bias Mitigation'],
   },
   {
@@ -1099,7 +1099,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['faith-basics','sub-hallucination-detection'],
+    subtopicIds: ['faith-basics','faithfulness-sub-hallucination-detection'],
     subtopics: ['Faithfulness Score', 'Hallucination Detection'],
   },
   {
@@ -1115,7 +1115,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['ar-basics','sub-measuring-quality'],
+    subtopicIds: ['ar-basics','answer_relevance-sub-measuring-quality'],
     subtopics: ['Answer Relevance Score', 'Measuring Quality'],
   },
   {
@@ -1131,7 +1131,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['cp-basics','sub-improving-retrieval'],
+    subtopicIds: ['cp-basics','context_precision-sub-improving-retrieval'],
     subtopics: ['Precision Calculation', 'Improving Retrieval'],
   },
   {
@@ -1147,7 +1147,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['cr-basics','sub-improving-recall'],
+    subtopicIds: ['cr-basics','context_recall-sub-improving-recall'],
     subtopics: ['Recall Calculation', 'Improving Recall'],
   },
   {
@@ -1163,7 +1163,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['gd-creation','sub-ground-truth-labels','sub-dataset-versioning'],
+    subtopicIds: ['gd-creation','golden_datasets-sub-ground-truth-labels','golden_datasets-sub-dataset-versioning'],
     subtopics: ['Dataset Creation', 'Ground Truth Labels', 'Dataset Versioning'],
   },
   {
@@ -1179,7 +1179,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['golden_datasets'],
-    subtopicIds: ['rt-basics','sub-ci-for-eval','sub-alert-on-regression'],
+    subtopicIds: ['rt-basics','regression_testing-sub-ci-for-eval','regression_testing-sub-alert-on-regression'],
     subtopics: ['Regression Test Suite', 'CI for Eval', 'Alert on Regression'],
   },
   {
@@ -1195,7 +1195,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.ADVANCED],
     prerequisites: ['ai_agents'],
-    subtopicIds: ['ae-basics','sub-tool-call-accuracy','sub-trajectory-evaluation'],
+    subtopicIds: ['ae-basics','agent_evaluation-sub-tool-call-accuracy','agent_evaluation-sub-trajectory-evaluation'],
     subtopics: ['Task Completion Rate', 'Tool Call Accuracy', 'Trajectory Evaluation'],
   },
 
@@ -1213,7 +1213,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['et-mlflow','et-wandb','sub-artifact-tracking'],
+    subtopicIds: ['et-mlflow','et-wandb','experiment_tracking-sub-artifact-tracking'],
     subtopics: ['MLflow', 'Weights & Biases', 'Artifact Tracking'],
   },
   {
@@ -1229,7 +1229,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['mv-registry','sub-versioning-strategy','sub-model-cards'],
+    subtopicIds: ['mv-registry','model_versioning-sub-versioning-strategy','model_versioning-sub-model-cards'],
     subtopics: ['Model Registry', 'Versioning Strategy', 'Model Cards'],
   },
   {
@@ -1245,7 +1245,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['dv-dvc','sub-data-pipelines','sub-reproducibility'],
+    subtopicIds: ['dv-dvc','data_versioning-sub-data-pipelines','data_versioning-sub-reproducibility'],
     subtopics: ['DVC', 'Data Pipelines', 'Reproducibility'],
   },
   {
@@ -1261,7 +1261,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['ms-vllm','ms-triton','sub-onnx','sub-batch-inference'],
+    subtopicIds: ['ms-vllm','ms-triton','model_serving-sub-onnx','model_serving-sub-batch-inference'],
     subtopics: ['vLLM', 'TorchServe', 'ONNX', 'Batch Inference'],
   },
   {
@@ -1277,7 +1277,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['lt-langsmith','sub-helicone','sub-opentelemetry-for-llms'],
+    subtopicIds: ['lt-langsmith','llm_tracing-sub-helicone','llm_tracing-sub-opentelemetry-for-llms'],
     subtopics: ['LangSmith', 'Helicone', 'OpenTelemetry for LLMs'],
   },
   {
@@ -1293,7 +1293,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['obs-basics','sub-metrics','sub-distributed-tracing'],
+    subtopicIds: ['obs-basics','observability-sub-metrics','observability-sub-distributed-tracing'],
     subtopics: ['Structured Logging', 'Metrics', 'Distributed Tracing'],
   },
   {
@@ -1309,7 +1309,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['tm-basics','sub-usage-dashboards','sub-cost-alerting'],
+    subtopicIds: ['tm-basics','token_monitoring-sub-usage-dashboards','token_monitoring-sub-cost-alerting'],
     subtopics: ['Token Counting', 'Usage Dashboards', 'Cost Alerting'],
   },
   {
@@ -1325,7 +1325,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['cm-basics','sub-caching-for-cost','sub-budget-alerts'],
+    subtopicIds: ['cm-basics','cost_monitoring-sub-caching-for-cost','cost_monitoring-sub-budget-alerts'],
     subtopics: ['Cost Calculation', 'Caching for Cost', 'Budget Alerts'],
   },
   {
@@ -1341,7 +1341,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['lm-basics','sub-streaming-for-ux','sub-caching-strategy'],
+    subtopicIds: ['lm-basics','latency_monitoring-sub-streaming-for-ux','latency_monitoring-sub-caching-strategy'],
     subtopics: ['P50/P95/P99 Latency', 'Streaming for UX', 'Caching Strategy'],
   },
   {
@@ -1357,7 +1357,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['pv-basics','sub-version-control','sub-prompt-a-b-testing'],
+    subtopicIds: ['pv-basics','prompt_versioning-sub-version-control','prompt_versioning-sub-prompt-a-b-testing'],
     subtopics: ['Prompt Registry', 'Version Control', 'Prompt A/B Testing'],
   },
   {
@@ -1373,7 +1373,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['ab-basics','sub-statistical-significance','sub-feature-flags'],
+    subtopicIds: ['ab-basics','ab_testing-sub-statistical-significance','ab_testing-sub-feature-flags'],
     subtopics: ['Experiment Design', 'Statistical Significance', 'Feature Flags'],
   },
   {
@@ -1389,7 +1389,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['git_github'],
-    subtopicIds: ['cicd-github-actions','cicd-eval','sub-deployment-pipelines','sub-eval-in-ci'],
+    subtopicIds: ['cicd-github-actions','cicd-eval','cicd-sub-deployment-pipelines','cicd-sub-eval-in-ci'],
     subtopics: ['GitHub Actions', 'Test Automation', 'Deployment Pipelines', 'Eval in CI'],
   },
 
@@ -1407,7 +1407,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['pi-direct','pi-indirect','sub-mitigation-strategies'],
+    subtopicIds: ['pi-direct','pi-indirect','prompt_injection-sub-mitigation-strategies'],
     subtopics: ['Direct Injection', 'Indirect Injection', 'Mitigation Strategies'],
   },
   {
@@ -1423,7 +1423,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['jb-basics','sub-defense-strategies'],
+    subtopicIds: ['jb-basics','jailbreaking-sub-defense-strategies'],
     subtopics: ['Jailbreak Techniques', 'Defense Strategies'],
   },
   {
@@ -1439,7 +1439,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['dl-basics','sub-detection','sub-prevention'],
+    subtopicIds: ['dl-basics','data_leakage-sub-detection','data_leakage-sub-prevention'],
     subtopics: ['Data Leakage Vectors', 'Detection', 'Prevention'],
   },
   {
@@ -1455,7 +1455,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['rp-basics','sub-detection','sub-mitigation'],
+    subtopicIds: ['rp-basics','rag_poisoning-sub-detection','rag_poisoning-sub-mitigation'],
     subtopics: ['Poisoning Vectors', 'Detection', 'Mitigation'],
   },
   {
@@ -1471,7 +1471,7 @@ export const TOPICS = [
     estimatedHours: 2,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['ta-basics','sub-confirmation-gates','sub-sandboxing'],
+    subtopicIds: ['ta-basics','tool_abuse-sub-confirmation-gates','tool_abuse-sub-sandboxing'],
     subtopics: ['Tool Permission Scoping', 'Confirmation Gates', 'Sandboxing'],
   },
   {
@@ -1487,7 +1487,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['gr-input','gr-output','sub-pii-detection','sub-content-filtering'],
+    subtopicIds: ['gr-input','gr-output','guardrails-sub-pii-detection','guardrails-sub-content-filtering'],
     subtopics: ['Input Guardrails', 'Output Guardrails', 'PII Detection', 'Content Filtering'],
   },
   {
@@ -1503,7 +1503,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['pii-detection','pii-redaction','sub-pseudonymization'],
+    subtopicIds: ['pii-detection','pii-redaction','pii_protection-sub-pseudonymization'],
     subtopics: ['PII Detection', 'Redaction', 'Pseudonymization'],
   },
   {
@@ -1519,7 +1519,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['auth-rag','sub-row-level-security','sub-role-based-access'],
+    subtopicIds: ['auth-rag','authorization_security-sub-row-level-security','authorization_security-sub-role-based-access'],
     subtopics: ['Auth in RAG', 'Row-Level Security', 'Role-Based Access'],
   },
 
@@ -1537,7 +1537,7 @@ export const TOPICS = [
     estimatedHours: 15,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['python'],
-    subtopicIds: ['fapi-basics','fapi-ai','sub-streaming','sub-auth','sub-testing'],
+    subtopicIds: ['fapi-basics','fapi-ai','fastapi-sub-streaming','fastapi-sub-auth','fastapi-sub-testing'],
     subtopics: ['Routing', 'Pydantic Models', 'Streaming', 'Auth', 'Testing'],
   },
   {
@@ -1553,7 +1553,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['sql'],
-    subtopicIds: ['pg-basics','pg-pgvector','sub-connection-pooling','sub-indexing'],
+    subtopicIds: ['pg-basics','pg-pgvector','postgresql-sub-connection-pooling','postgresql-sub-indexing'],
     subtopics: ['Schema Design', 'pgvector', 'Connection Pooling', 'Indexing'],
   },
   {
@@ -1569,7 +1569,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['redis-basics','redis-caching','sub-ttl-and-eviction','sub-redis-for-rate-limiting'],
+    subtopicIds: ['redis-basics','redis-caching','redis-sub-ttl-and-eviction','redis-sub-redis-for-rate-limiting'],
     subtopics: ['Basic Commands', 'Caching Patterns', 'TTL & Eviction', 'Redis for Rate Limiting'],
   },
   {
@@ -1585,7 +1585,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['redis'],
-    subtopicIds: ['cel-basics','sub-workers','sub-result-backends','sub-retry-logic'],
+    subtopicIds: ['cel-basics','celery-sub-workers','celery-sub-result-backends','celery-sub-retry-logic'],
     subtopics: ['Task Queues', 'Workers', 'Result Backends', 'Retry Logic'],
   },
   {
@@ -1601,7 +1601,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['mq-basics','sub-kafka-basics','sub-producer-consumer-pattern'],
+    subtopicIds: ['mq-basics','message_queues-sub-kafka-basics','message_queues-sub-producer-consumer-pattern'],
     subtopics: ['RabbitMQ', 'Kafka Basics', 'Producer-Consumer Pattern'],
   },
   {
@@ -1617,7 +1617,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['fastapi'],
-    subtopicIds: ['jwt-basics','sub-access-tokens','sub-refresh-tokens','sub-oauth2'],
+    subtopicIds: ['jwt-basics','jwt-sub-access-tokens','jwt-sub-refresh-tokens','jwt-sub-oauth2'],
     subtopics: ['JWT Structure', 'Access Tokens', 'Refresh Tokens', 'OAuth2'],
   },
   {
@@ -1633,7 +1633,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['jwt'],
-    subtopicIds: ['rbac-basics','sub-fastapi-rbac','sub-database-backed-permissions'],
+    subtopicIds: ['rbac-basics','rbac-sub-fastapi-rbac','rbac-sub-database-backed-permissions'],
     subtopics: ['Roles & Permissions', 'FastAPI RBAC', 'Database-Backed Permissions'],
   },
   {
@@ -1649,7 +1649,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['redis'],
-    subtopicIds: ['cach-http','cach-semantic','sub-cache-invalidation'],
+    subtopicIds: ['cach-http','cach-semantic','caching-sub-cache-invalidation'],
     subtopics: ['HTTP Caching', 'Semantic Caching', 'Cache Invalidation'],
   },
   {
@@ -1665,7 +1665,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['redis'],
-    subtopicIds: ['rl-basics','sub-sliding-window','sub-redis-rate-limiting'],
+    subtopicIds: ['rl-basics','rate_limiting-sub-sliding-window','rate_limiting-sub-redis-rate-limiting'],
     subtopics: ['Token Bucket', 'Sliding Window', 'Redis Rate Limiting'],
   },
   {
@@ -1681,7 +1681,7 @@ export const TOPICS = [
     estimatedHours: 4,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['log-structured','sub-log-levels','sub-centralized-logging'],
+    subtopicIds: ['log-structured','logging_prod-sub-log-levels','logging_prod-sub-centralized-logging'],
     subtopics: ['Structured Logging', 'Log Levels', 'Centralized Logging'],
   },
   {
@@ -1697,7 +1697,7 @@ export const TOPICS = [
     estimatedHours: 6,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['mon-prometheus','mon-grafana','sub-alerting','sub-slos'],
+    subtopicIds: ['mon-prometheus','mon-grafana','monitoring-sub-alerting','monitoring-sub-slos'],
     subtopics: ['Prometheus', 'Grafana', 'Alerting', 'SLOs'],
   },
   {
@@ -1713,7 +1713,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['docker-basics','docker-ai','sub-multi-stage-builds','sub-best-practices'],
+    subtopicIds: ['docker-basics','docker-ai','docker-sub-multi-stage-builds','docker-sub-best-practices'],
     subtopics: ['Images & Containers', 'Dockerfiles', 'Multi-Stage Builds', 'Best Practices'],
   },
   {
@@ -1729,7 +1729,7 @@ export const TOPICS = [
     estimatedHours: 5,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['docker'],
-    subtopicIds: ['dc-basics','sub-services','sub-networks','sub-volumes'],
+    subtopicIds: ['dc-basics','docker_compose-sub-services','docker_compose-sub-networks','docker_compose-sub-volumes'],
     subtopics: ['Compose Files', 'Services', 'Networks', 'Volumes'],
   },
   {
@@ -1745,7 +1745,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['git_github', 'docker'],
-    subtopicIds: ['gha-basics','gha-deploy','sub-matrix-builds','sub-deployment-workflows'],
+    subtopicIds: ['gha-basics','gha-deploy','github_actions-sub-matrix-builds','github_actions-sub-deployment-workflows'],
     subtopics: ['Workflow Syntax', 'Triggers', 'Matrix Builds', 'Deployment Workflows'],
   },
   {
@@ -1761,7 +1761,7 @@ export const TOPICS = [
     estimatedHours: 3,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['fastapi'],
-    subtopicIds: ['oa-basics','sub-swagger-ui','sub-redoc','sub-client-generation'],
+    subtopicIds: ['oa-basics','openapi-sub-swagger-ui','openapi-sub-redoc','openapi-sub-client-generation'],
     subtopics: ['OpenAPI Spec', 'Swagger UI', 'ReDoc', 'Client Generation'],
   },
   {
@@ -1777,7 +1777,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['fastapi'],
-    subtopicIds: ['tp-integration','tp-load','sub-load-testing','sub-ai-behavior-testing'],
+    subtopicIds: ['tp-integration','tp-load','testing_prod-sub-load-testing','testing_prod-sub-ai-behavior-testing'],
     subtopics: ['Integration Testing', 'API Testing', 'Load Testing', 'AI Behavior Testing'],
   },
   {
@@ -1793,7 +1793,7 @@ export const TOPICS = [
     estimatedHours: 20,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: [],
-    subtopicIds: ['sd-fundamentals','sd-ai','sub-ai-system-design-patterns','sub-architecture-decisions'],
+    subtopicIds: ['sd-fundamentals','sd-ai','system_design-sub-ai-system-design-patterns','system_design-sub-architecture-decisions'],
     subtopics: ['Scalability', 'Reliability', 'AI System Design Patterns', 'Architecture Decisions'],
   },
   {
@@ -1809,7 +1809,7 @@ export const TOPICS = [
     estimatedHours: 10,
     paths: [PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['docker'],
-    subtopicIds: ['cloud-aws','cloud-gcp','sub-managed-inference','sub-cost-optimization'],
+    subtopicIds: ['cloud-aws','cloud-gcp','cloud-sub-managed-inference','cloud-sub-cost-optimization'],
     subtopics: ['AWS Basics', 'GCP AI Services', 'Managed Inference', 'Cost Optimization'],
   },
   {
@@ -1825,7 +1825,7 @@ export const TOPICS = [
     estimatedHours: 8,
     paths: [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED],
     prerequisites: ['docker', 'github_actions'],
-    subtopicIds: ['dep-paas','dep-k8s','sub-health-checks','sub-rolling-deployments'],
+    subtopicIds: ['dep-paas','dep-k8s','deployment-sub-health-checks','deployment-sub-rolling-deployments'],
     subtopics: ['PaaS Platforms', 'Kubernetes Basics', 'Health Checks', 'Rolling Deployments'],
   },
 ];
