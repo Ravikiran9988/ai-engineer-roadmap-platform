@@ -1,7 +1,7 @@
 ﻿/**
  * CENTRALIZED VIDEO DATABASE
  * All individual video resources for the AI Engineer Roadmap.
- * All URLs verified via YouTube oEmbed API. RESOURCE_URL_PENDING = unverified.
+ * All published URLs are verified; unverified resources are not published.
  */
 
 export const VIDEOS = [
