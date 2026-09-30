@@ -219,8 +219,10 @@ export function TopicDetail() {
   const handleSubmitAssignment = async (e) => {
     e.preventDefault();
     handleAuthAction(async () => {
-      if (!githubUrl.includes('github.com')) {
-        setUrlError('Please enter a valid GitHub URL (e.g. https://github.com/user/repo)');
+      let parsedGithub;
+      try { parsedGithub = new URL(githubUrl); } catch { parsedGithub = null; }
+      if (!parsedGithub || parsedGithub.protocol !== 'https:' || parsedGithub.hostname.toLowerCase() !== 'github.com') {
+        setUrlError('Please enter a valid HTTPS GitHub URL (e.g. https://github.com/user/repo)');
         return;
       }
       try {
