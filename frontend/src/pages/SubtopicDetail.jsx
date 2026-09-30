@@ -2,6 +2,8 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { TOPIC_MAP } from '@/data/topics';
 import { ASSIGNMENTS } from '@/data/learningData';
+import { VIDEOS } from '@/data/videos';
+import { DOCUMENTATION } from '@/data/documentation';
 import { resourceService } from '@/services/resourceService';
 import { useProgress } from '@/context/ProgressContext';
 import { Button } from '@/components/ui/button';
@@ -54,21 +56,31 @@ export function SubtopicDetail() {
   }, [assignmentId, assignments]);
 
   const requiredVideoIds = subtopicAssignment?.requiredVideoIds?.length
-    ? subtopicAssignment.requiredVideoIds.filter(id => videos.some(v => v.id === id))
+    ? subtopicAssignment.requiredVideoIds
     : videos.filter(v => v.required !== false).map(v => v.id);
-  const requiredVideos = videos.filter(v => requiredVideoIds.includes(v.id));
-  const requiredDocIds = (subtopicAssignment?.requiredDocIds || [])
-    .filter(id => docs.some(doc => doc.id === id));
+  const requiredVideos = requiredVideoIds
+    .map(id => VIDEOS.find(v => v.id === id))
+    .filter(Boolean);
+  const additionalRequiredVideos = requiredVideos.filter(
+    video => !videos.some(currentVideo => currentVideo.id === video.id)
+  );
+  const requiredDocIds = subtopicAssignment?.requiredDocIds || [];
+  const requiredDocs = requiredDocIds
+    .map(id => DOCUMENTATION.find(doc => doc.id === id))
+    .filter(Boolean);
+  const additionalRequiredDocs = requiredDocs.filter(
+    doc => !docs.some(currentDoc => currentDoc.id === doc.id)
+  );
   const videosDone = requiredVideoIds.every(id => completedVideos.includes(id));
-  const docsDone = requiredDocIds.every(id => isResourceRead(docs.find(doc => doc.id === id)?.url));
+  const docsDone = requiredDocIds.every(id => isResourceRead(DOCUMENTATION.find(doc => doc.id === id)?.url));
   const assignmentDone = !subtopicAssignment || !assignmentRequired || !subtopicAssignment.githubRequired || submitted;
   const hasRequirements =
-    requiredVideos.length > 0 ||
+    requiredVideoIds.length > 0 ||
     requiredDocIds.length > 0 ||
     (subtopicAssignment && assignmentRequired);
   
   const isManuallyCompleted = completedSubtopics.includes(subtopicId);
-  const isSubtopicComplete = hasRequirements ? (videosDone && assignmentDone) : isManuallyCompleted;
+  const isSubtopicComplete = hasRequirements ? (videosDone && docsDone && assignmentDone) : isManuallyCompleted;
 
   const handleAuthAction = (action) => {
     if (!user) {
@@ -279,6 +291,58 @@ export function SubtopicDetail() {
           <CardContent className="space-y-6">
             <div className="space-y-2">
               <h3 className="font-semibold text-lg">{subtopicAssignment.description}</h3>
+              {(additionalRequiredVideos.length > 0 || additionalRequiredDocs.length > 0) && (
+                <div className="mt-4 rounded-lg border bg-background p-4 space-y-4">
+                  <p className="font-medium text-foreground">Required supporting resources</p>
+                  {additionalRequiredVideos.length > 0 && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold uppercase text-muted-foreground">Videos</p>
+                      {additionalRequiredVideos.map(video => {
+                        const done = completedVideos.includes(video.id);
+                        return (
+                          <div key={video.id} className="flex items-center gap-3 text-sm">
+                            <PlayCircle className="w-4 h-4 text-red-500 shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium truncate">{video.title}</p>
+                              <p className="text-xs text-muted-foreground">{video.channel} · {video.duration}</p>
+                            </div>
+                            {video.url === 'RESOURCE_URL_PENDING' ? (
+                              <Badge variant="outline" className="text-[10px] text-amber-500 border-amber-500/40">Pending</Badge>
+                            ) : (
+                              <a href={video.url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">Watch</a>
+                            )}
+                            <Button size="sm" variant={done ? 'outline' : 'secondary'} onClick={() => handleAuthAction(() => markVideoComplete(video.id, !done))}>
+                              {done ? 'Done' : 'Mark Done'}
+                            </Button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                  {additionalRequiredDocs.length > 0 && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold uppercase text-muted-foreground">Documentation</p>
+                      {additionalRequiredDocs.map(doc => {
+                        const done = isResourceRead(doc.url);
+                        return (
+                          <div key={doc.id} className="flex items-center gap-3 text-sm">
+                            <FileText className="w-4 h-4 text-amber-500 shrink-0" />
+                            <p className="flex-1 min-w-0 font-medium truncate">{doc.title}</p>
+                            {doc.url === 'RESOURCE_URL_PENDING' ? (
+                              <Badge variant="outline" className="text-[10px] text-amber-500 border-amber-500/40">Pending</Badge>
+                            ) : (
+                              <a href={doc.url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">Read</a>
+                            )}
+                            <Button size="sm" variant={done ? 'outline' : 'secondary'} onClick={() => handleAuthAction(() => markResourceRead(doc.url, !done))}>
+                              {done ? 'Read' : 'Mark Read'}
+                            </Button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="text-muted-foreground space-y-2 text-sm mt-4">
                 <p className="font-medium text-foreground">Requirements:</p>
                 <ul className="list-disc pl-5 space-y-1">
