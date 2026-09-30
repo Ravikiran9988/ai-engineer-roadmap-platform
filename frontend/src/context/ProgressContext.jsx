@@ -22,7 +22,17 @@ function getRequiredVideoIds(subtopicId, assignment) {
 }
 
 function getRequiredDocIds(assignment) {
-  return (assignment?.requiredDocIds || []).filter(id => DOCUMENTATION.some(doc => doc.id === id));
+  return (assignment?.requiredDocIds || []).filter(id =>
+    DOCUMENTATION.some(doc => doc.id === id && doc.topicId === assignment.topicId)
+  );
+}
+
+function localDateKey(date = new Date()) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, '0'),
+    String(date.getDate()).padStart(2, '0'),
+  ].join('-');
 }
 
 
@@ -89,15 +99,13 @@ export function ProgressProvider({ children }) {
   };
 
   const activity = () => {
-    const todayKey = new Date().toISOString().slice(0, 10);
-    const previous = lastActive ? new Date(lastActive) : null;
+    const todayKey = localDateKey();
     let nextStreak = streak;
     if (lastActive !== todayKey) {
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
-      nextStreak = previous && previous.toISOString().slice(0, 10) === yesterday.toISOString().slice(0, 10)
-        ? streak + 1
-        : 1;
+      const yesterdayKey = localDateKey(yesterday);
+      nextStreak = lastActive === yesterdayKey ? streak + 1 : 1;
       setStreak(nextStreak);
       setLastActive(todayKey);
     }
@@ -110,11 +118,6 @@ export function ProgressProvider({ children }) {
 
     TOPICS.forEach(topic => {
       (topic.subtopicIds || []).forEach(subId => {
-        if (manualSubs.has(subId)) {
-          derived.add(subId);
-          return;
-        }
-
         const assignment = getAssignmentForSubtopic(subId);
         const assignmentRequired = Boolean(
           assignment &&
@@ -131,8 +134,18 @@ export function ProgressProvider({ children }) {
           assignment.githubRequired === false ||
           assignments[assignment.id]?.status === 'Submitted';
 
-        const hasRequirements = requiredVideoIds.length > 0 || requiredDocIds.length > 0 || assignmentRequired;
-        if (hasRequirements && videosDone && docsDone && assignmentDone) derived.add(subId);
+        const hasRequirements =
+          requiredVideoIds.length > 0 ||
+          requiredDocIds.length > 0 ||
+          assignmentRequired;
+
+        // Manual completion is allowed only when there are no tracked
+        // requirements. Required videos/docs/assignments cannot be bypassed.
+        if (!hasRequirements) {
+          if (manualSubs.has(subId)) derived.add(subId);
+        } else if (videosDone && docsDone && assignmentDone) {
+          derived.add(subId);
+        }
       });
     });
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ASSIGNMENTS } from '@/data/learningData';
 import { TOPICS, PHASES } from '@/data/roadmap';
 import { useProgress } from '@/context/ProgressContext';
+import { useAuth } from '@/context/AuthContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -10,8 +12,11 @@ import { Link } from 'react-router-dom';
 
 export function Assignments() {
   const { assignments, submitAssignment, activePath } = useProgress();
+  const { user } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [selectedAssignment, setSelectedAssignment] = useState(null);
-  const [GitBranchUrl, setGitBranchUrl] = useState('');
+  const [githubUrl, setGithubUrl] = useState('');
   const [error, setError] = useState('');
 
   // Filter assignments based on active path topics
@@ -20,13 +25,19 @@ export function Assignments() {
 
   const handleSubmission = async (e) => {
     e.preventDefault();
-    if (!GitBranchUrl.includes('github.com')) {
+    if (!user) {
+      navigate(`/login?redirect=${encodeURIComponent(location.pathname)}`);
+      return;
+    }
+    let parsed;
+    try { parsed = new URL(githubUrl); } catch { parsed = null; }
+    if (!parsed || parsed.protocol !== 'https:' || parsed.hostname.toLowerCase() !== 'github.com') {
       setError('Please enter a valid GitHub URL');
       return;
     }
     try {
-      await submitAssignment(selectedAssignment.id, GitBranchUrl);
-      setGitBranchUrl('');
+      await submitAssignment(selectedAssignment.id, githubUrl);
+      setGithubUrl('');
       setError('');
       setSelectedAssignment(null);
     } catch (err) {
@@ -39,7 +50,7 @@ export function Assignments() {
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold tracking-tight">Assignments</h1>
         <p className="text-muted-foreground max-w-2xl">
-          Test your knowledge with practical coding challenges. Submit your GitBranch repository links to mark them as completed.
+          Test your knowledge with practical coding challenges. Submit your GitHub repository links to mark them as completed.
         </p>
       </div>
 
@@ -112,7 +123,7 @@ export function Assignments() {
             </div>
             <CardTitle className="text-3xl">{selectedAssignment.title}</CardTitle>
             <CardDescription className="text-base mt-2">
-              Related Topic: <Link to={`/topic/${selectedAssignment.topicId}`} className="text-primary hover:underline">{TOPICS.find(t => t.id === selectedAssignment.topicId)?.name}</Link>
+              Related Topic: <Link to={`/learning/${activePath}/${selectedAssignment.phaseId}/${selectedAssignment.topicId}/${selectedAssignment.subtopicId}`} className="text-primary hover:underline">{TOPICS.find(t => t.id === selectedAssignment.topicId)?.name}</Link>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6 pt-6 text-sm">
@@ -152,21 +163,21 @@ export function Assignments() {
                   <p className="text-muted-foreground text-sm">
                     Repository URL: <a href={assignments[selectedAssignment.id].url} target="_blank" rel="noreferrer" className="text-primary hover:underline">{assignments[selectedAssignment.id].url}</a>
                   </p>
-                  <Button variant="outline" size="sm" className="mt-4" onClick={() => setGitBranchUrl(assignments[selectedAssignment.id].url)}>
+                  <Button variant="outline" size="sm" className="mt-4" onClick={() => setGithubUrl(assignments[selectedAssignment.id].url)}>
                     Update Submission
                   </Button>
                 </div>
               ) : null}
 
-              {(!assignments[selectedAssignment.id] || GitBranchUrl) && (
+              {(!assignments[selectedAssignment.id] || githubUrl) && (
                 <form onSubmit={handleSubmission} className="space-y-4">
                   <div className="flex flex-col gap-2">
                     <label className="text-sm font-medium">GitHub Repository URL</label>
                     <input
                       type="url"
                       placeholder="https://github.com/username/repo"
-                      value={GitBranchUrl}
-                      onChange={(e) => setGitBranchUrl(e.target.value)}
+                      value={githubUrl}
+                      onChange={(e) => setGithubUrl(e.target.value)}
                       className="w-full px-3 py-2 border rounded-md bg-background focus:ring-2 focus:ring-primary focus:outline-none"
                       required
                     />
@@ -174,7 +185,7 @@ export function Assignments() {
                   </div>
                   <Button type="submit">Submit Solution</Button>
                   {assignments[selectedAssignment.id] && (
-                    <Button type="button" variant="ghost" onClick={() => setGitBranchUrl('')} className="ml-2">Cancel Edit</Button>
+                    <Button type="button" variant="ghost" onClick={() => setGithubUrl('')} className="ml-2">Cancel Edit</Button>
                   )}
                 </form>
               )}

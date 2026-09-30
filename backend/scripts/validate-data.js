@@ -26,9 +26,16 @@ const missing = [];
 for (const m of assignments.matchAll(/\{\s*id:\s*'([^']+)'[\s\S]*?subtopicId:\s*'([^']+)'[\s\S]*?requiredVideoIds:\s*\[([^\]]*)\][\s\S]*?requiredDocIds:\s*\[([^\]]*)\]/g)) {
   const id = m[1];
   if (!topicIds.has(m[2])) missing.push(`${id}: missing subtopic ${m[2]}`);
-  for (const v of [...m[3].matchAll(/'([^']+)'/g)].map(x => x[1])) if (!videoIds.has(v)) missing.push(`${id}: missing video ${v}`);
-  for (const d of [...m[4].matchAll(/'([^']+)'/g)].map(x => x[1])) if (!docIds.has(d)) missing.push(`${id}: missing doc ${d}`);
+  for (const v of [...m[3].matchAll(/'([^']+)'/g)].map(x => x[1])) {
+    if (!videoIds.has(v)) missing.push(`${id}: missing video ${v}`);
+  }
+  for (const d of [...m[4].matchAll(/'([^']+)'/g)].map(x => x[1])) {
+    if (!docIds.has(d)) missing.push(`${id}: missing doc ${d}`);
+  }
 }
+
+const duplicateSubtopics = [...topicIds].length !== [...topics.matchAll(/subtopicIds:\s*\[([^\]]*)\]/g)].flatMap(m => [...m[1].matchAll(/'([^']+)'/g)].map(x => x[1])).length;
+if (duplicateSubtopics) missing.push('duplicate subtopic IDs detected');
 
 if (topicMismatches.length || missing.length) {
   console.error('Data integrity check failed.');

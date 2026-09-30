@@ -2,28 +2,44 @@ import React, { useState } from 'react';
 import { PROJECTS } from '@/data/learningData';
 import { PHASES } from '@/data/roadmap';
 import { useProgress } from '@/context/ProgressContext';
+import { useAuth } from '@/context/AuthContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FolderGit2, CheckCircle2, GitBranch, AlertCircle, Link as LinkIcon, Trophy } from 'lucide-react';
 
 export function Projects() {
-  const { projects, submitProject, activePath } = useProgress();
+  const { projects, submitProject } = useProgress();
+  const { user } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState(null);
   const [githubUrl, setGithubUrl] = useState('');
   const [liveUrl, setLiveUrl] = useState('');
   const [error, setError] = useState('');
 
-  // Depending on path, some projects might not be visible. Job ready doesn't do final capstone, maybe.
-  // We'll just show all for now since capstone is Production AI phase (which is in advanced).
-  const validPhaseIds = PHASES.map(p => p.id); 
   const displayProjects = PROJECTS;
 
   const handleSubmission = async (e) => {
     e.preventDefault();
-    if (!githubUrl.includes('github.com')) {
-      setError('Please enter a valid GitHub URL');
+    if (!user) {
+      navigate(`/login?redirect=${encodeURIComponent(location.pathname)}`);
       return;
+    }
+    let parsedGithub;
+    try { parsedGithub = new URL(githubUrl); } catch { parsedGithub = null; }
+    if (!parsedGithub || parsedGithub.protocol !== 'https:' || parsedGithub.hostname.toLowerCase() !== 'github.com') {
+      setError('Please enter a valid HTTPS GitHub URL');
+      return;
+    }
+    if (liveUrl) {
+      let parsedLive;
+      try { parsedLive = new URL(liveUrl); } catch { parsedLive = null; }
+      if (!parsedLive || parsedLive.protocol !== 'https:') {
+        setError('Live Demo URL must use HTTPS.');
+        return;
+      }
     }
     try {
       await submitProject(selectedProject.id, githubUrl, liveUrl);

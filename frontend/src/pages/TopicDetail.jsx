@@ -178,7 +178,7 @@ export function TopicDetail() {
   const playlists = getPlaylistsForTopic(topicId);
   const docs = getDocsForTopic(topicId);
   const github = getGithubForTopic(topicId);
-  const practiceTasks = getPracticeForTopic(topicId, { path: activePath });
+  const practiceTasks = getPracticeForTopic(topicId, { path: currentPathId });
   const topicAssignment = ASSIGNMENTS.find(a => a.topicId === topicId);
   const submission = topicAssignment ? assignments[topicAssignment.id] : null;
 
@@ -197,12 +197,11 @@ export function TopicDetail() {
     } else vids = [...vids].sort((a, b) => a.order - b.order);
 
     return vids;
-  }, [allVideos, activePath, filterType, filterDifficulty, sortBy]);
+  }, [allVideos, currentPathId, filterType, filterDifficulty, sortBy]);
 
   const watchedCount = filteredVideos.filter(v => completedVideos.includes(v.id)).length;
-  const totalResources = filteredVideos.length + docs.length + (github ? 2 : 0);
-  const completedResources = watchedCount + (isComplete ? 1 : 0);
-  const progressPct = totalResources > 0 ? Math.round((completedResources / totalResources) * 100) : 0;
+  const totalVideos = filteredVideos.length;
+  const progressPct = totalVideos > 0 ? Math.round((watchedCount / totalVideos) * 100) : 0;
 
   const handleAuthAction = (action) => {
     if (!user) {
@@ -220,8 +219,10 @@ export function TopicDetail() {
   const handleSubmitAssignment = async (e) => {
     e.preventDefault();
     handleAuthAction(async () => {
-      if (!githubUrl.includes('github.com')) {
-        setUrlError('Please enter a valid GitHub URL (e.g. https://github.com/user/repo)');
+      let parsedGithub;
+      try { parsedGithub = new URL(githubUrl); } catch { parsedGithub = null; }
+      if (!parsedGithub || parsedGithub.protocol !== 'https:' || parsedGithub.hostname.toLowerCase() !== 'github.com') {
+        setUrlError('Please enter a valid HTTPS GitHub URL (e.g. https://github.com/user/repo)');
         return;
       }
       try {
@@ -275,7 +276,7 @@ export function TopicDetail() {
       <div className="bg-card border rounded-xl p-4 space-y-2">
         <div className="flex justify-between text-sm font-medium">
           <span>Topic Resources Completed</span>
-          <span className="text-primary">{completedResources} / {totalResources}</span>
+          <span className="text-primary">{watchedCount} / {totalVideos}</span>
         </div>
         <Progress value={progressPct} className="h-2" />
         <p className="text-xs text-muted-foreground">{watchedCount} videos watched • {docs.length} docs available</p>
@@ -544,7 +545,7 @@ export function TopicDetail() {
                     </div>
                   </div>
 
-                  {submission ? (
+                  {submission && (
                     <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-2">
                       <p className="font-medium text-sm flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-primary" /> Submitted
@@ -552,32 +553,29 @@ export function TopicDetail() {
                       <a href={submission.url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1">
                         <GitBranch className="w-3 h-3" /> {submission.url}
                       </a>
-                      <Button variant="outline" size="sm" onClick={() => setGithubUrl(submission.url)}>
-                        Update Submission
-                      </Button>
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmitAssignment} className="space-y-3">
-                      <label className="text-sm font-semibold flex items-center gap-2">
-                        <GitBranch className="w-4 h-4" /> Submit GitHub Repository URL
-                      </label>
-                      <div className="flex gap-2">
-                        <input
-                          type="url"
-                          placeholder="https://github.com/username/repo"
-                          value={githubUrl}
-                          onChange={e => { setGithubUrl(e.target.value); setUrlError(''); }}
-                          className="flex-1 px-3 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                        />
-                        <Button type="submit" size="sm">Submit</Button>
-                      </div>
-                      {urlError && (
-                        <p className="text-xs text-destructive flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" /> {urlError}
-                        </p>
-                      )}
-                    </form>
                   )}
+
+                  <form onSubmit={handleSubmitAssignment} className="space-y-3">
+                    <label className="text-sm font-semibold flex items-center gap-2">
+                      <GitBranch className="w-4 h-4" /> {submission ? 'Update GitHub Repository URL' : 'Submit GitHub Repository URL'}
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="url"
+                        placeholder="https://github.com/username/repo"
+                        value={githubUrl || submission?.url || ''}
+                        onChange={e => { setGithubUrl(e.target.value); setUrlError(''); }}
+                        className="flex-1 px-3 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                      />
+                      <Button type="submit" size="sm">{submission ? 'Update' : 'Submit'}</Button>
+                    </div>
+                    {urlError && (
+                      <p className="text-xs text-destructive flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" /> {urlError}
+                      </p>
+                    )}
+                  </form>
                 </div>
               </div>
             </section>

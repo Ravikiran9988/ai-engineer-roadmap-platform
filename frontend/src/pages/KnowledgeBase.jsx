@@ -7,11 +7,13 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Folder, FolderOpen, FileText, ChevronRight, ChevronDown, GitBranch, Search, BookOpen, Code, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useProgress } from '@/context/ProgressContext';
 
 export function KnowledgeBase() {
   const [openFolders, setOpenFolders] = useState(['foundations']);
   const [expandedTopic, setExpandedTopic] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const { activePath } = useProgress();
 
   const toggleFolder = (folderId) => {
     setOpenFolders(prev =>
@@ -151,7 +153,7 @@ export function KnowledgeBase() {
                                 ))}
 
                                 <Link
-                                  to={`/topic/${topicId}`}
+                                  to={`/learning/${activePath}/${t.phaseId}/${topicId}`}
                                   className="flex items-center gap-1.5 text-xs text-primary hover:underline px-2 py-1 font-medium"
                                 >
                                   View full topic →
