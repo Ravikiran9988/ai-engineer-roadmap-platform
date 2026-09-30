@@ -17,7 +17,7 @@ function getAssignmentForSubtopic(subtopicId) {
 function getRequiredVideoIds(subtopicId, assignment) {
   const subVideos = VIDEOS.filter(v => v.subtopicId === subtopicId && v.required !== false);
   if (!assignment?.requiredVideoIds?.length) return subVideos.map(v => v.id);
-  const known = assignment.requiredVideoIds.filter(id => VIDEOS.some(v => v.id === id && v.subtopicId === subtopicId));
+  const known = assignment.requiredVideoIds.filter(id => VIDEOS.some(v => v.id === id));
   return known.length ? known : subVideos.map(v => v.id);
 }
 
