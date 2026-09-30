@@ -25,6 +25,7 @@ export function SubtopicDetail() {
   const navigate = useNavigate();
   
   const [githubUrl, setGithubUrl] = useState('');
+  const currentPathId = pathId || activePath;
   const topic = TOPIC_MAP[topicId];
   const subtopicIndex = topic?.subtopicIds ? topic.subtopicIds.indexOf(subtopicId) : topic?.subtopics.findIndex(s => s.toLowerCase().replace(/\s+/g, '-') === subtopicId);
   const subtopicName = subtopicIndex !== -1 ? topic?.subtopics[subtopicIndex] : 'Unknown Subtopic';
@@ -43,7 +44,7 @@ export function SubtopicDetail() {
   const assignmentId = subtopicAssignment?.id;
   const submitted = assignmentId ? isAssignmentSubmitted(assignmentId) : false;
   const assignmentRequired = subtopicAssignment
-    ? (!subtopicAssignment.requiredPaths || subtopicAssignment.requiredPaths.includes(activePath))
+    ? (!subtopicAssignment.requiredPaths || subtopicAssignment.requiredPaths.includes(currentPathId))
     : false;
 
   useEffect(() => {
@@ -53,12 +54,18 @@ export function SubtopicDetail() {
   }, [assignmentId, assignments]);
 
   const requiredVideoIds = subtopicAssignment?.requiredVideoIds?.length
-    ? subtopicAssignment.requiredVideoIds
+    ? subtopicAssignment.requiredVideoIds.filter(id => videos.some(v => v.id === id))
     : videos.filter(v => v.required !== false).map(v => v.id);
   const requiredVideos = videos.filter(v => requiredVideoIds.includes(v.id));
+  const requiredDocIds = (subtopicAssignment?.requiredDocIds || [])
+    .filter(id => docs.some(doc => doc.id === id));
   const videosDone = requiredVideoIds.every(id => completedVideos.includes(id));
+  const docsDone = requiredDocIds.every(id => isResourceRead(docs.find(doc => doc.id === id)?.url));
   const assignmentDone = !subtopicAssignment || !assignmentRequired || !subtopicAssignment.githubRequired || submitted;
-  const hasRequirements = requiredVideos.length > 0 || (subtopicAssignment && assignmentRequired);
+  const hasRequirements =
+    requiredVideos.length > 0 ||
+    requiredDocIds.length > 0 ||
+    (subtopicAssignment && assignmentRequired);
   
   const isManuallyCompleted = completedSubtopics.includes(subtopicId);
   const isSubtopicComplete = hasRequirements ? (videosDone && assignmentDone) : isManuallyCompleted;
