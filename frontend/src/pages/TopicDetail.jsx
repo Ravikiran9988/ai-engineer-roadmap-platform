@@ -242,7 +242,7 @@ export function TopicDetail() {
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <button onClick={() => navigate('/roadmap')} className="hover:text-foreground transition-colors">Roadmap</button>
         <span>/</span>
-        <button onClick={() => navigate(`/learning/${currentPathId}/${phase?.id}`)} className="hover:text-foreground transition-colors">{phase?.name}</button>
+        <button onClick={() => navigate(`/learning/${currentPathId}/${phase?.id}`)} className="hover:text-foreground transition-colors">{phase?.title}</button>
         <span>/</span>
         <span className="text-foreground font-medium">{topic.name}</span>
       </div>
@@ -251,7 +251,7 @@ export function TopicDetail() {
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
         <div className="space-y-3 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline" className="bg-secondary/50">{phase?.name}</Badge>
+            <Badge variant="outline" className="bg-secondary/50">{phase?.title}</Badge>
             <Badge variant="outline" className={`capitalize ${DIFFICULTY_COLORS[topic.difficulty]}`}>{topic.difficulty}</Badge>
             <Badge variant="outline" className={`capitalize ${
               topic.priority === 'essential' ? 'border-red-500/50 text-red-500 bg-red-500/5' :
