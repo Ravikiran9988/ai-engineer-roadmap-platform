@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Search, PlayCircle, BookOpen, ExternalLink, Code, FileText, Filter, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useProgress } from '@/context/ProgressContext';
 
 const TYPE_CONFIG = {
   video: { icon: <PlayCircle className="w-4 h-4" />, color: 'text-red-500', bg: 'bg-red-500/10', label: 'Video' },
@@ -22,6 +23,7 @@ export function Resources() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const location = useLocation();
+  const { activePath } = useProgress();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -195,7 +197,7 @@ export function Resources() {
 
                 <div className="pt-3 border-t border-border/50 space-y-2">
                   {res.topic && (
-                    <Link to={`/topic/${res.topic.id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                    <Link to={`/learning/${activePath}/${res.topic.phaseId}/${res.topic.id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
                       {res.phase?.name} / {res.topic.name} →
                     </Link>
                   )}
