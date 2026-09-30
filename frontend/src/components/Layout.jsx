@@ -16,10 +16,12 @@ import {
   Moon
 } from 'lucide-react';
 import { Button } from './ui/button';
+import { useAuth } from '../context/AuthContext';
 
 export function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const { user, logout } = useAuth();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -40,6 +42,7 @@ export function Layout() {
     { name: 'Learning', path: '/learning', icon: <Map className="w-5 h-5" /> },
     { name: 'Roadmap', path: '/roadmap', icon: <BrainCircuit className="w-5 h-5" /> },
     { name: 'Playlists', path: '/playlists', icon: <Library className="w-5 h-5" /> },
+    { name: 'Assignments', path: '/assignments', icon: <CheckSquare className="w-5 h-5" /> },
     { name: 'Projects', path: '/projects', icon: <FolderGit2 className="w-5 h-5" /> },
     { name: 'Progress', path: '/progress', icon: <BarChart className="w-5 h-5" /> }
   ];
@@ -113,8 +116,19 @@ export function Layout() {
             <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </Button>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm shadow-sm">
-              JS
+            <div className="flex items-center gap-2">
+              {user ? (
+                <button
+                  type="button"
+                  onClick={logout}
+                  title="Sign out"
+                  className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm shadow-sm"
+                >
+                  {(user.username || user.email || 'U').slice(0, 2).toUpperCase()}
+                </button>
+              ) : (
+                <NavLink to="/login" className="text-sm text-primary hover:underline">Sign in</NavLink>
+              )}
             </div>
           </div>
         </header>
