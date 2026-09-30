@@ -71,7 +71,7 @@ export function Assignments() {
                 <Card key={assign.id} className={`flex flex-col ${submission ? 'border-primary/30 bg-primary/5' : 'hover:border-primary/50'} transition-all`}>
                   <CardHeader>
                     <div className="flex items-start justify-between mb-2">
-                      <Badge variant="outline" className="bg-secondary/50">{phase?.name.split(' ')[0]}</Badge>
+                      <Badge variant="outline" className="bg-secondary/50">{phase?.title.split(' ')[0]}</Badge>
                       <Badge variant={
                         status === 'Submitted' ? 'default' : 
                         status === 'Reviewed' ? 'default' : 'secondary'
