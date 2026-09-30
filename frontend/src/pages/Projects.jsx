@@ -73,7 +73,7 @@ export function Projects() {
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <Badge variant={proj.isCapstone ? 'default' : 'outline'} className={proj.isCapstone ? 'bg-purple-600 hover:bg-purple-700' : 'bg-secondary/50'}>
-                      {proj.isCapstone ? <><Trophy className="w-3 h-3 mr-1" /> Capstone</> : phase?.name}
+                      {proj.isCapstone ? <><Trophy className="w-3 h-3 mr-1" /> Capstone</> : phase?.title}
                     </Badge>
                     <Badge variant={status === 'Submitted' ? 'default' : 'secondary'}>{status}</Badge>
                   </div>
