@@ -6,6 +6,21 @@ ALTER TABLE users
   ADD COLUMN IF NOT EXISTS learning_streak INTEGER NOT NULL DEFAULT 0,
   ADD COLUMN IF NOT EXISTS last_active DATE;
 
+CREATE TABLE IF NOT EXISTS user_progress (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+  active_path VARCHAR(50) NOT NULL DEFAULT 'job_ready',
+  streak INTEGER NOT NULL DEFAULT 0,
+  last_active DATE,
+  completed_subtopics JSONB NOT NULL DEFAULT '[]'::jsonb,
+  completed_tasks JSONB NOT NULL DEFAULT '[]'::jsonb,
+  completed_videos JSONB NOT NULL DEFAULT '[]'::jsonb,
+  read_resources JSONB NOT NULL DEFAULT '[]'::jsonb,
+  assignments JSONB NOT NULL DEFAULT '{}'::jsonb,
+  projects JSONB NOT NULL DEFAULT '{}'::jsonb,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 ALTER TABLE user_progress
   ADD COLUMN IF NOT EXISTS active_path VARCHAR(50) NOT NULL DEFAULT 'job_ready',
   ADD COLUMN IF NOT EXISTS streak INTEGER NOT NULL DEFAULT 0,
