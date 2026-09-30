@@ -9,8 +9,12 @@ async function startServer() {
     await db.query('SELECT 1');
     console.log('Connected to PostgreSQL');
 
-    // Connect to Redis
-    await connectRedis();
+    // Redis is optional until caching/background jobs are enabled.
+    try {
+      await connectRedis();
+    } catch (redisError) {
+      console.warn('Redis unavailable; continuing without Redis:', redisError.message);
+    }
 
     app.listen(env.port, () => {
       console.log(`Server running in ${env.nodeEnv} mode on port ${env.port}`);
