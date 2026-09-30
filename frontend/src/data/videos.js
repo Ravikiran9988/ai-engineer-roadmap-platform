@@ -1,26 +1,12 @@
-/**
+﻿/**
  * CENTRALIZED VIDEO DATABASE
- * ============================================================
  * All individual video resources for the AI Engineer Roadmap.
- *
- * VIDEO TYPE:
- *   'concept'        — Explains theory / what something is
- *   'implementation' — Hands-on coding walkthrough
- *   'deep-dive'      — In-depth exploration
- *   'project'        — Full project build
- *
- * LEARNING PATH:
- *   'job_ready' | 'intermediate' | 'advanced'
- *
- * URL CONVENTION:
- *   Set url to RESOURCE_URL_PENDING until a real, verified URL is added.
- *   Never use invented/random YouTube URLs.
- * ============================================================
+ * All URLs verified via YouTube oEmbed API. RESOURCE_URL_PENDING = unverified.
  */
 
 export const VIDEOS = [
 
-  // ─── PYTHON ────────────────────────────────────────────────
+  // --- PYTHON ---
   {
     id: 'vid_python_001',
     topicId: 'python',
@@ -31,9 +17,10 @@ export const VIDEOS = [
     duration: '6h',
     type: 'concept',
     difficulty: 'beginner',
-    description: 'Complete Python fundamentals — data types, functions, OOP, and more.',
+    description: 'Complete Python fundamentals including data types, functions, OOP.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_python_002',
@@ -41,7 +28,7 @@ export const VIDEOS = [
     subtopicId: 'python-oop',
     title: 'Object Oriented Programming in Python',
     channel: 'Corey Schafer',
-    url: 'https://www.youtube.com/watch?v=ZDa-Z5JzLYM&list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc',
+    url: 'https://www.youtube.com/watch?v=ZDa-Z5JzLYM',
     duration: '2h',
     type: 'concept',
     difficulty: 'beginner',
@@ -53,7 +40,7 @@ export const VIDEOS = [
     id: 'vid_python_003',
     topicId: 'python',
     subtopicId: 'python-async',
-    title: 'Python Asyncio — Complete Guide',
+    title: 'Python Asyncio Complete Guide',
     channel: 'ArjanCodes',
     url: 'https://www.youtube.com/watch?v=t5Bo1Je9EmE',
     duration: '45m',
@@ -67,7 +54,7 @@ export const VIDEOS = [
     id: 'vid_python_004',
     topicId: 'python',
     subtopicId: 'python-type-hints',
-    title: 'Python Type Hints — Full Tutorial',
+    title: 'Python Type Hints Full Tutorial',
     channel: 'ArjanCodes',
     url: 'https://www.youtube.com/watch?v=QORvB-_mbZ0',
     duration: '30m',
@@ -78,7 +65,7 @@ export const VIDEOS = [
     order: 4,
   },
 
-  // ─── PYDANTIC ──────────────────────────────────────────────
+  // --- PYDANTIC ---
   {
     id: 'vid_pydantic_001',
     topicId: 'pydantic',
@@ -89,15 +76,16 @@ export const VIDEOS = [
     duration: '35m',
     type: 'concept',
     difficulty: 'beginner',
-    description: 'BaseModel, validators, Field, model_config — the essentials for AI apps.',
+    description: 'BaseModel, validators, Field, model_config for AI apps.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_pydantic_002',
     topicId: 'pydantic',
     subtopicId: 'pydantic-advanced',
-    title: 'Pydantic for AI — Structured Outputs',
+    title: 'Pydantic for AI Structured Outputs',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
     duration: '25m',
@@ -107,13 +95,27 @@ export const VIDEOS = [
     learningPaths: ['intermediate', 'advanced'],
     order: 2,
   },
+  {
+    id: 'vid_pydantic_003',
+    topicId: 'pydantic',
+    subtopicId: 'pydantic-sub-structured-outputs',
+    title: 'LangChain Runnables and LCEL Structured Outputs with Pydantic',
+    channel: 'SCALER',
+    url: 'https://www.youtube.com/watch?v=h7pwxFSD_Rc',
+    duration: '1h',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Using LangChain LCEL and Pydantic to enforce structured outputs from LLMs.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 3,
+  },
 
-  // ─── GIT / GITHUB ─────────────────────────────────────────
+  // --- GIT / GITHUB ---
   {
     id: 'vid_git_001',
     topicId: 'git_github',
     subtopicId: 'git-basics',
-    title: 'Git and GitHub for Beginners — Crash Course',
+    title: 'Git and GitHub for Beginners Crash Course',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=RGOj5yH7evk',
     duration: '1h',
@@ -122,6 +124,7 @@ export const VIDEOS = [
     description: 'All core Git commands, branching, merging, and GitHub workflow.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_git_002',
@@ -138,12 +141,12 @@ export const VIDEOS = [
     order: 2,
   },
 
-  // ─── SQL ──────────────────────────────────────────────────
+  // --- SQL ---
   {
     id: 'vid_sql_001',
     topicId: 'sql',
     subtopicId: 'sql-basics',
-    title: 'SQL Tutorial — Full Database Course for Beginners',
+    title: 'SQL Tutorial Full Database Course for Beginners',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=HXV3zeQKqGY',
     duration: '4h',
@@ -152,12 +155,13 @@ export const VIDEOS = [
     description: 'SELECT, JOIN, GROUP BY, indexes, and database design fundamentals.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_sql_002',
     topicId: 'sql',
     subtopicId: 'sql-for-ai',
-    title: 'PostgreSQL for AI Engineers',
+    title: 'PostgreSQL for AI Engineers pgvector and Vector Search',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
     duration: '45m',
@@ -168,12 +172,12 @@ export const VIDEOS = [
     order: 2,
   },
 
-  // ─── REST APIs / HTTP ────────────────────────────────────
+  // --- REST APIs ---
   {
     id: 'vid_http_001',
     topicId: 'rest_apis',
     subtopicId: 'rest-basics',
-    title: 'APIs for Beginners — How to Use an API',
+    title: 'APIs for Beginners How to Use an API',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=WXsD0ZgxjRw',
     duration: '2h',
@@ -182,9 +186,10 @@ export const VIDEOS = [
     description: 'HTTP verbs, status codes, JSON, authentication patterns.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
 
-  // ─── MACHINE LEARNING ─────────────────────────────────────
+  // --- MACHINE LEARNING ---
   {
     id: 'vid_ml_001',
     topicId: 'ml_fundamentals',
@@ -202,14 +207,14 @@ export const VIDEOS = [
   {
     id: 'vid_ml_002',
     topicId: 'supervised_learning',
-    subtopicId: 'reg-linear',
+    subtopicId: 'sl-regression',
     title: 'Linear Regression from Scratch in Python',
     channel: 'Sentdex',
     url: 'https://www.youtube.com/watch?v=JcI5Vnw0b2c',
     duration: '30m',
     type: 'implementation',
     difficulty: 'beginner',
-    description: 'Build linear regression using NumPy — no sklearn shortcuts.',
+    description: 'Build linear regression using NumPy without sklearn shortcuts.',
     learningPaths: ['intermediate', 'advanced'],
     order: 1,
   },
@@ -223,12 +228,41 @@ export const VIDEOS = [
     duration: '16m',
     type: 'concept',
     difficulty: 'beginner',
-    description: 'Precision, recall, F1 — intuition without heavy math.',
+    description: 'Precision, recall, F1 intuition without heavy math.',
     learningPaths: ['intermediate', 'advanced'],
     order: 2,
   },
+  {
+    id: 'vid_ml_004',
+    topicId: 'scikit_learn',
+    subtopicId: 'sklearn-basics',
+    title: 'Scikit-learn Crash Course Machine Learning in Python',
+    channel: 'freeCodeCamp',
+    url: 'https://www.youtube.com/watch?v=0B5eIE_1vpU',
+    duration: '3h',
+    type: 'concept',
+    difficulty: 'intermediate',
+    description: 'Estimators, pipelines, preprocessing, and model selection with scikit-learn.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+  {
+    id: 'vid_ml_005',
+    topicId: 'model_evaluation_ml',
+    subtopicId: 'eval-metrics',
+    title: 'Machine Learning Metrics Precision Recall F1 ROC-AUC',
+    channel: 'StatQuest with Josh Starmer',
+    url: 'https://www.youtube.com/watch?v=vP06aMoz4v8',
+    duration: '25m',
+    type: 'concept',
+    difficulty: 'beginner',
+    description: 'Visual intuition for confusion matrices, precision-recall curves, and ROC-AUC.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 1,
+  },
 
-  // ─── DEEP LEARNING / PYTORCH ──────────────────────────────
+  // --- DEEP LEARNING / PYTORCH ---
   {
     id: 'vid_dl_001',
     topicId: 'neural_networks',
@@ -239,7 +273,7 @@ export const VIDEOS = [
     duration: '30m',
     type: 'deep-dive',
     difficulty: 'intermediate',
-    description: 'Forward pass, backprop, and gradient descent — no frameworks.',
+    description: 'Forward pass, backprop, and gradient descent without frameworks.',
     learningPaths: ['intermediate', 'advanced'],
     order: 1,
   },
@@ -247,7 +281,7 @@ export const VIDEOS = [
     id: 'vid_dl_002',
     topicId: 'pytorch',
     subtopicId: 'pytorch-basics',
-    title: 'PyTorch for Deep Learning — Full Course',
+    title: 'PyTorch for Deep Learning Full Course',
     channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=V_xro1bcAuA',
     duration: '25h',
@@ -256,14 +290,29 @@ export const VIDEOS = [
     description: 'Tensors, autograd, custom datasets, training loops, CNNs, RNNs.',
     learningPaths: ['advanced'],
     order: 1,
+    required: true,
+  },
+  {
+    id: 'vid_dl_003',
+    topicId: 'neural_networks',
+    subtopicId: 'nn-backprop',
+    title: 'Backpropagation Calculus 3Blue1Brown',
+    channel: '3Blue1Brown',
+    url: 'https://www.youtube.com/watch?v=tIeHLnjs5U8',
+    duration: '13m',
+    type: 'concept',
+    difficulty: 'intermediate',
+    description: 'Visual intuition for the chain rule and backpropagation in neural networks.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 2,
   },
 
-  // ─── TRANSFORMERS ─────────────────────────────────────────
+  // --- TRANSFORMERS ---
   {
     id: 'vid_transformers_001',
     topicId: 'attention',
     subtopicId: 'att-self',
-    title: 'Attention is All You Need — Explained',
+    title: 'Attention is All You Need Explained',
     channel: 'Yannic Kilcher',
     url: 'https://www.youtube.com/watch?v=iDulhoQ2pro',
     duration: '1h',
@@ -291,23 +340,24 @@ export const VIDEOS = [
     id: 'vid_hf_001',
     topicId: 'hugging_face',
     subtopicId: 'hf-basics',
-    title: 'HuggingFace Course — NLP with Transformers',
+    title: 'HuggingFace NLP Course Pipeline API and Tokenizers',
     channel: 'HuggingFace',
-    url: 'https://www.youtube.com/watch?v=00GKzGyWFEs&list=PLo2EIpI_JMQvWfQndUesu0nPBAtZ9gP1o',
+    url: 'https://www.youtube.com/watch?v=00GKzGyWFEs',
     duration: '3h',
     type: 'concept',
     difficulty: 'intermediate',
     description: 'Tokenizers, pipeline API, fine-tuning, and the Hub.',
     learningPaths: ['intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
 
-  // ─── LLM FUNDAMENTALS ─────────────────────────────────────
+  // --- LLM FUNDAMENTALS ---
   {
     id: 'vid_llm_001',
     topicId: 'llm_fundamentals',
     subtopicId: 'llm-overview',
-    title: 'Large Language Models — How They Work',
+    title: 'Intro to Large Language Models',
     channel: 'Andrej Karpathy',
     url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g',
     duration: '1h',
@@ -316,12 +366,13 @@ export const VIDEOS = [
     description: 'What LLMs are, how they are trained, and how to use them.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_llm_002',
     topicId: 'llm_fundamentals',
     subtopicId: 'llm-apis',
-    title: 'OpenAI API Full Tutorial — Build AI Apps',
+    title: 'OpenAI API Full Tutorial Build AI Apps',
     channel: 'Patrick Loeber',
     url: 'https://www.youtube.com/watch?v=c-g6epk3fFE',
     duration: '2h',
@@ -330,9 +381,24 @@ export const VIDEOS = [
     description: 'Chat completions, embeddings, function calling with the OpenAI API.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 2,
+    required: true,
+  },
+  {
+    id: 'vid_llm_003',
+    topicId: 'llm_fundamentals',
+    subtopicId: 'llm_fundamentals-sub-capabilities-and-limitations',
+    title: 'How Large Language Models Work',
+    channel: 'IBM Technology',
+    url: 'https://www.youtube.com/watch?v=5sLYAQS9sWQ',
+    duration: '10m',
+    type: 'concept',
+    difficulty: 'beginner',
+    description: 'Clear explanation of LLM capabilities, limitations, and hallucinations.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 3,
   },
 
-  // ─── PROMPT ENGINEERING ───────────────────────────────────
+  // --- PROMPT ENGINEERING ---
   {
     id: 'vid_prompt_001',
     topicId: 'prompt_engineering',
@@ -346,14 +412,29 @@ export const VIDEOS = [
     description: 'Chain-of-thought, few-shot, system prompts, and iterative refinement.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
+  },
+  {
+    id: 'vid_prompt_002',
+    topicId: 'prompt_engineering',
+    subtopicId: 'pe-cot',
+    title: 'Chain-of-Thought Prompting Reasoning with LLMs',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '20m',
+    type: 'concept',
+    difficulty: 'intermediate',
+    description: 'How chain-of-thought prompting improves LLM reasoning step by step.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 2,
   },
 
-  // ─── RAG ──────────────────────────────────────────────────
+  // --- RAG ---
   {
     id: 'vid_rag_001',
     topicId: 'rag',
     subtopicId: 'rag-overview',
-    title: 'Retrieval Augmented Generation — Explained',
+    title: 'What is Retrieval-Augmented Generation RAG',
     channel: 'IBM Technology',
     url: 'https://www.youtube.com/watch?v=T-D1OfcDW1M',
     duration: '10m',
@@ -362,32 +443,34 @@ export const VIDEOS = [
     description: 'What RAG is, why it matters, and how the pipeline works.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_rag_002',
     topicId: 'rag',
     subtopicId: 'rag-retrieval',
-    title: 'RAG from Scratch — LangChain',
-    channel: 'LangChain',
+    title: 'Learn RAG From Scratch Python AI Tutorial',
+    channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=sVcwVQRHIc8',
-    duration: '45m',
+    duration: '2h',
     type: 'implementation',
     difficulty: 'intermediate',
     description: 'Build a complete RAG pipeline: load, split, embed, retrieve, generate.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 2,
+    required: true,
   },
   {
     id: 'vid_rag_003',
     topicId: 'rag',
     subtopicId: 'rag-chunking',
-    title: 'Document Chunking Strategies for RAG',
-    channel: 'Pinecone',
+    title: 'The 5 Levels of Text Splitting for RAG',
+    channel: 'Greg Kamradt',
     url: 'RESOURCE_URL_PENDING',
     duration: '20m',
     type: 'implementation',
     difficulty: 'intermediate',
-    description: 'Fixed-size, recursive, semantic, and context-aware chunking.',
+    description: 'Fixed-size, recursive, semantic, and agentic chunking strategies.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 3,
   },
@@ -395,7 +478,7 @@ export const VIDEOS = [
     id: 'vid_rag_004',
     topicId: 'rag',
     subtopicId: 'rag-advanced',
-    title: 'Advanced RAG — HyDE, Reranking, Query Expansion',
+    title: 'Advanced RAG HyDE Reranking Query Expansion',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
     duration: '40m',
@@ -405,8 +488,22 @@ export const VIDEOS = [
     learningPaths: ['advanced'],
     order: 4,
   },
+  {
+    id: 'vid_rag_005',
+    topicId: 'rag',
+    subtopicId: 'rag-reranking',
+    title: 'RAG Reranking Improving Retrieval Quality',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '20m',
+    type: 'implementation',
+    difficulty: 'advanced',
+    description: 'Using cross-encoders and rerankers to improve RAG retrieval accuracy.',
+    learningPaths: ['advanced'],
+    order: 5,
+  },
 
-  // ─── VECTOR DATABASES ────────────────────────────────────
+  // --- VECTOR DATABASES ---
   {
     id: 'vid_vec_001',
     topicId: 'vector_databases',
@@ -420,12 +517,13 @@ export const VIDEOS = [
     description: 'Embeddings, cosine similarity, and why vector DBs exist.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_vec_002',
     topicId: 'vector_databases',
     subtopicId: 'vdb-chroma',
-    title: 'ChromaDB Full Tutorial — Build Local RAG',
+    title: 'ChromaDB Full Tutorial Build Local RAG',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
     duration: '30m',
@@ -435,13 +533,27 @@ export const VIDEOS = [
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 2,
   },
+  {
+    id: 'vid_vec_003',
+    topicId: 'vector_databases',
+    subtopicId: 'vdb-pgvector',
+    title: 'pgvector Vector Search with PostgreSQL',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '30m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Install pgvector, store embeddings, and run similarity searches in PostgreSQL.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 3,
+  },
 
-  // ─── AI AGENTS ────────────────────────────────────────────
+  // --- AI AGENTS ---
   {
     id: 'vid_agents_001',
     topicId: 'ai_agents',
     subtopicId: 'ag-architecture',
-    title: 'AI Agents — How They Actually Work',
+    title: 'What are AI Agents',
     channel: 'IBM Technology',
     url: 'https://www.youtube.com/watch?v=F8NKVhkZZWI',
     duration: '12m',
@@ -450,9 +562,25 @@ export const VIDEOS = [
     description: 'ReAct, tool use, memory, and agent planning explained clearly.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_agents_002',
+    topicId: 'langchain',
+    subtopicId: 'lc-basics',
+    title: 'LangChain Runnables and LCEL Full Guide',
+    channel: 'SCALER',
+    url: 'https://www.youtube.com/watch?v=h7pwxFSD_Rc',
+    duration: '1h',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'LCEL chains, pipe operator, runnables, and agentic workflow patterns.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+  {
+    id: 'vid_agents_003',
     topicId: 'langchain',
     subtopicId: 'lc-agents',
     title: 'LangChain Agents from Scratch',
@@ -463,27 +591,28 @@ export const VIDEOS = [
     difficulty: 'intermediate',
     description: 'Build tool-calling agents using LCEL, tools, and memory.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
-    order: 1,
+    order: 2,
   },
   {
-    id: 'vid_agents_003',
+    id: 'vid_agents_004',
     topicId: 'langgraph',
     subtopicId: 'lg-basics',
-    title: 'LangGraph — Build Stateful AI Agents',
-    channel: 'LangChain',
+    title: 'LangGraph Complete Course Complex AI Agents with Python',
+    channel: 'freeCodeCamp',
     url: 'https://www.youtube.com/watch?v=jGg_1h0qzaM',
-    duration: '45m',
+    duration: '3h',
     type: 'implementation',
     difficulty: 'intermediate',
     description: 'Graphs, nodes, edges, state, and cycles for agentic workflows.',
     learningPaths: ['intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
-    id: 'vid_agents_004',
+    id: 'vid_agents_005',
     topicId: 'langgraph',
     subtopicId: 'lg-multi-agent',
-    title: 'LangGraph — Multi-Agent Systems',
+    title: 'LangGraph Multi-Agent Systems',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
     duration: '1h',
@@ -494,20 +623,54 @@ export const VIDEOS = [
     order: 2,
   },
 
-  // ─── FINE-TUNING ──────────────────────────────────────────
+  // --- EMBEDDINGS ---
+  {
+    id: 'vid_emb_001',
+    topicId: 'embeddings',
+    subtopicId: 'emb-openai',
+    title: 'Text Embeddings Explained Semantic Search with OpenAI',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '20m',
+    type: 'concept',
+    difficulty: 'beginner',
+    description: 'How text embeddings work, cosine similarity, and semantic search.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+  },
+
+  // --- FUNCTION / TOOL CALLING ---
+  {
+    id: 'vid_tools_001',
+    topicId: 'function_tool_calling',
+    subtopicId: 'tc-openai',
+    title: 'OpenAI Function Calling Complete Tutorial',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '30m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Define tools, parse tool calls, and implement the full tool loop.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+
+  // --- FINE-TUNING ---
   {
     id: 'vid_ft_001',
     topicId: 'fine_tuning',
     subtopicId: 'ft-concepts',
-    title: 'Fine-tuning LLMs — When and Why',
-    channel: 'DeepLearning.AI',
-    url: 'RESOURCE_URL_PENDING',
-    duration: '20m',
+    title: 'Fine Tuning LLM Models Generative AI Course',
+    channel: 'freeCodeCamp',
+    url: 'https://www.youtube.com/watch?v=iOdFUJiB0Zc',
+    duration: '5h',
     type: 'concept',
     difficulty: 'intermediate',
-    description: 'Prompt engineering vs RAG vs fine-tuning — choosing the right approach.',
+    description: 'Quantization intuition, LoRA and QLoRA in-depth, fine-tuning Llama 2 and Gemma.',
     learningPaths: ['intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_ft_002',
@@ -524,7 +687,7 @@ export const VIDEOS = [
     order: 2,
   },
 
-  // ─── EVALUATION ───────────────────────────────────────────
+  // --- EVALUATION ---
   {
     id: 'vid_eval_001',
     topicId: 'llm_evaluation',
@@ -535,15 +698,16 @@ export const VIDEOS = [
     duration: '30m',
     type: 'concept',
     difficulty: 'intermediate',
-    description: 'Faithfulness, relevance, groundedness — metrics that matter.',
+    description: 'Faithfulness, relevance, groundedness metrics that matter.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_eval_002',
     topicId: 'rag_evaluation',
     subtopicId: 'ragas-basics',
-    title: 'RAGAS — RAG Evaluation Framework',
+    title: 'RAGAS RAG Evaluation Framework',
     channel: 'RESOURCE_URL_PENDING',
     url: 'RESOURCE_URL_PENDING',
     duration: '25m',
@@ -552,9 +716,87 @@ export const VIDEOS = [
     description: 'Use RAGAS to evaluate retrieval quality and answer faithfulness.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
 
-  // ─── FASTAPI ──────────────────────────────────────────────
+  // --- MLOPS / LLMOPS ---
+  {
+    id: 'vid_mlops_001',
+    topicId: 'experiment_tracking',
+    subtopicId: 'et-mlflow',
+    title: 'MLflow Python Tutorial ML Model Experiment Tracking',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '30m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Log metrics, parameters, and models; compare experiments in MLflow UI.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 1,
+  },
+  {
+    id: 'vid_mlops_002',
+    topicId: 'llm_tracing',
+    subtopicId: 'lt-langsmith',
+    title: 'LangSmith Crash Course Tracing Observability and Evaluation',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '45m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Trace LLM calls, create datasets, run evaluators, and monitor production.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+  {
+    id: 'vid_mlops_003',
+    topicId: 'cicd',
+    subtopicId: 'cicd-github-actions',
+    title: 'GitHub Actions Tutorial CI/CD Pipeline with Docker',
+    channel: 'TechWorld with Nana',
+    url: 'https://www.youtube.com/watch?v=R8_veQiYBjI',
+    duration: '1.5h',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'GitHub Actions concepts, Docker integration, and full CI/CD workflows.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+
+  // --- AI SECURITY ---
+  {
+    id: 'vid_security_001',
+    topicId: 'prompt_injection',
+    subtopicId: 'pi-direct',
+    title: 'Prompt Injection Attacks and Defenses LLM Security',
+    channel: 'IBM Technology',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '15m',
+    type: 'concept',
+    difficulty: 'intermediate',
+    description: 'Direct and indirect prompt injection, OWASP LLM01, mitigation strategies.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+  {
+    id: 'vid_security_002',
+    topicId: 'guardrails',
+    subtopicId: 'gr-input',
+    title: 'AI Guardrails Input and Output Safety Filters',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '25m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Using Guardrails AI and NeMo Guardrails for AI safety.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+  },
+
+  // --- FASTAPI ---
   {
     id: 'vid_fastapi_001',
     topicId: 'fastapi',
@@ -568,6 +810,7 @@ export const VIDEOS = [
     description: 'Path params, request bodies, Pydantic, Depends, OAuth2.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
   {
     id: 'vid_fastapi_002',
@@ -584,12 +827,12 @@ export const VIDEOS = [
     order: 2,
   },
 
-  // ─── DOCKER ───────────────────────────────────────────────
+  // --- DOCKER ---
   {
     id: 'vid_docker_001',
     topicId: 'docker',
     subtopicId: 'docker-basics',
-    title: 'Docker Tutorial for Beginners',
+    title: 'Docker Tutorial for Beginners Full Course in 3 Hours',
     channel: 'TechWorld with Nana',
     url: 'https://www.youtube.com/watch?v=3c-iBn73dDE',
     duration: '3h',
@@ -598,7 +841,205 @@ export const VIDEOS = [
     description: 'Containers, images, volumes, networks, and docker-compose.',
     learningPaths: ['job_ready', 'intermediate', 'advanced'],
     order: 1,
+    required: true,
   },
+
+  // --- POSTGRESQL ---
+  {
+    id: 'vid_pg_001',
+    topicId: 'postgresql',
+    subtopicId: 'pg-pgvector',
+    title: 'pgvector Vector Search with PostgreSQL',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '30m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Set up pgvector, store embeddings in PostgreSQL, and run similarity search.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+
+  // --- REDIS ---
+  {
+    id: 'vid_redis_001',
+    topicId: 'redis',
+    subtopicId: 'redis-basics',
+    title: 'Redis Crash Course',
+    channel: 'Traversy Media',
+    url: 'https://www.youtube.com/watch?v=jgpVdJB2sKQ',
+    duration: '40m',
+    type: 'concept',
+    difficulty: 'beginner',
+    description: 'Redis data structures, commands, caching patterns, and expiry.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+
+  // --- SYSTEM DESIGN ---
+  {
+    id: 'vid_sd_001',
+    topicId: 'system_design',
+    subtopicId: 'sd-fundamentals',
+    title: 'System Design for Beginners Full Course',
+    channel: 'freeCodeCamp',
+    url: 'https://www.youtube.com/watch?v=m8Icp_Cid5o',
+    duration: '3h',
+    type: 'concept',
+    difficulty: 'intermediate',
+    description: 'Scalability, availability, CAP theorem, load balancing, and caching.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+  {
+    id: 'vid_sd_002',
+    topicId: 'system_design',
+    subtopicId: 'sd-ai',
+    title: 'Designing AI Systems at Scale',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '45m',
+    type: 'deep-dive',
+    difficulty: 'advanced',
+    description: 'AI-specific system design patterns for RAG at scale, streaming, and observability.',
+    learningPaths: ['advanced'],
+    order: 2,
+  },
+
+  // --- MONITORING ---
+  {
+    id: 'vid_mon_001',
+    topicId: 'monitoring',
+    subtopicId: 'mon-prometheus',
+    title: 'Prometheus and Grafana Full Monitoring Tutorial',
+    channel: 'TechWorld with Nana',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '1h',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Instrument Python apps, scrape metrics, and build dashboards.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 1,
+  },
+
+  // --- DEPLOYMENT ---
+  {
+    id: 'vid_dep_001',
+    topicId: 'deployment',
+    subtopicId: 'dep-paas',
+    title: 'Deploy a Python App to Railway Full Tutorial',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '30m',
+    type: 'implementation',
+    difficulty: 'beginner',
+    description: 'Deploy FastAPI apps to Railway with environment variables and scaling.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+  },
+
+  // --- MCP ---
+  {
+    id: 'vid_mcp_001',
+    topicId: 'mcp',
+    subtopicId: 'mcp-basics',
+    title: 'Model Context Protocol MCP What It Is and Why It Matters',
+    channel: 'Anthropic',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '20m',
+    type: 'concept',
+    difficulty: 'advanced',
+    description: 'The open protocol for connecting AI models to tools, data, and services.',
+    learningPaths: ['advanced'],
+    order: 1,
+  },
+
+  // --- STRUCTURED OUTPUTS ---
+  {
+    id: 'vid_so_001',
+    topicId: 'structured_outputs',
+    subtopicId: 'so-json-mode',
+    title: 'Structured Outputs with OpenAI JSON Mode and Function Calling',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '25m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Use JSON mode and function calling to get structured data from LLMs.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+
+  // --- CLOUD ---
+  {
+    id: 'vid_cloud_001',
+    topicId: 'cloud',
+    subtopicId: 'cloud-aws',
+    title: 'AWS Cloud for Beginners Full Course',
+    channel: 'freeCodeCamp',
+    url: 'https://www.youtube.com/watch?v=3hLmDS179YE',
+    duration: '5h',
+    type: 'concept',
+    difficulty: 'beginner',
+    description: 'AWS core services: EC2, S3, Lambda, RDS, and IAM.',
+    learningPaths: ['intermediate', 'advanced'],
+    order: 1,
+  },
+
+  // --- JWT / AUTH ---
+  {
+    id: 'vid_jwt_001',
+    topicId: 'jwt',
+    subtopicId: 'jwt-basics',
+    title: 'JWT Authentication FastAPI Full Tutorial',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '30m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Implement JWT access and refresh tokens in FastAPI with OAuth2.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+
+  // --- CACHING ---
+  {
+    id: 'vid_cache_001',
+    topicId: 'caching',
+    subtopicId: 'cach-semantic',
+    title: 'Semantic Caching for LLMs Reduce Costs and Latency',
+    channel: 'RESOURCE_URL_PENDING',
+    url: 'RESOURCE_URL_PENDING',
+    duration: '20m',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'Cache LLM responses semantically to cut API costs and improve response times.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+  },
+
+  // --- GITHUB ACTIONS (Production alias) ---
+  {
+    id: 'vid_gha_001',
+    topicId: 'github_actions',
+    subtopicId: 'gha-basics',
+    title: 'GitHub Actions Tutorial CI/CD Pipeline with Docker',
+    channel: 'TechWorld with Nana',
+    url: 'https://www.youtube.com/watch?v=R8_veQiYBjI',
+    duration: '1.5h',
+    type: 'implementation',
+    difficulty: 'intermediate',
+    description: 'GitHub Actions fundamentals, workflow syntax, CI/CD with Docker.',
+    learningPaths: ['job_ready', 'intermediate', 'advanced'],
+    order: 1,
+    required: true,
+  },
+
 ];
 
 /**
