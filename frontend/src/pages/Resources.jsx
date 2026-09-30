@@ -104,7 +104,7 @@ export function Resources() {
       const matchesSearch = !q ||
         res.title.toLowerCase().includes(q) ||
         res.topic?.name.toLowerCase().includes(q) ||
-        res.phase?.name.toLowerCase().includes(q) ||
+        res.phase?.title.toLowerCase().includes(q) ||
         (res.channel || '').toLowerCase().includes(q);
       const matchesType = filterType === 'all' || res.type === filterType;
       return matchesSearch && matchesType;
@@ -198,7 +198,7 @@ export function Resources() {
                 <div className="pt-3 border-t border-border/50 space-y-2">
                   {res.topic && (
                     <Link to={`/learning/${activePath}/${res.topic.phaseId}/${res.topic.id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                      {res.phase?.name} / {res.topic.name} →
+                      {res.phase?.title} / {res.topic.name} →
                     </Link>
                   )}
                   {!res.isPending && (
