@@ -4,11 +4,11 @@ const db = require('../config/database');
 const env = require('../config/env');
 
 function signToken(user) {
-  return jwt.sign({ id: user.id, email: user.email }, env.jwt.secret, { expiresIn: env.jwt.expiresIn });
+  return jwt.sign({ id: user.id, email: user.email, role: user.role }, env.jwt.secret, { expiresIn: env.jwt.expiresIn });
 }
 
 function publicUser(user) {
-  return { id: user.id, username: user.username, email: user.email, selectedPath: user.selected_path };
+  return { id: user.id, username: user.username, email: user.email, selectedPath: user.selected_path, role: user.role };
 }
 
 exports.register = async (req, res, next) => {
@@ -23,7 +23,7 @@ exports.register = async (req, res, next) => {
 
     const passwordHash = await bcrypt.hash(password, 12);
     const { rows } = await db.query(
-      'INSERT INTO users (username, email, password_hash) VALUES ($1,$2,$3) RETURNING id,username,email,selected_path',
+      'INSERT INTO users (username, email, password_hash) VALUES ($1,$2,$3) RETURNING id,username,email,selected_path,role',
       [username.trim(), normalizedEmail, passwordHash]
     );
     const user = rows[0];
@@ -45,7 +45,7 @@ exports.login = async (req, res, next) => {
 
 exports.getMe = async (req, res, next) => {
   try {
-    const { rows } = await db.query('SELECT id,username,email,selected_path FROM users WHERE id = $1', [req.user.id]);
+    const { rows } = await db.query('SELECT id,username,email,selected_path,role FROM users WHERE id = $1', [req.user.id]);
     if (!rows[0]) return res.status(404).json({ message: 'User not found.' });
     res.json({ user: publicUser(rows[0]) });
   } catch (error) { next(error); }

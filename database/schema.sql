@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
   username VARCHAR(50) UNIQUE NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
+  role VARCHAR(20) NOT NULL DEFAULT 'user',
   selected_path VARCHAR(50) NOT NULL DEFAULT 'job_ready' CHECK (selected_path IN ('job_ready','intermediate','advanced')),
   learning_streak INTEGER NOT NULL DEFAULT 0,
   last_active DATE,

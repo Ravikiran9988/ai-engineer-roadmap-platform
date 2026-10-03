@@ -32,6 +32,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/progress', require('./routes/progressRoutes'));
 app.use('/api/assignments', require('./routes/assignmentRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
+app.use('/api/admin', require('./routes/adminRoutes'));
 // app.use('/api/resources', require('./routes/resourceRoutes'));
 
 // Global Error Handler
