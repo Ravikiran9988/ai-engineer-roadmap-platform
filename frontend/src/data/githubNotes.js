@@ -197,6 +197,11 @@ export const GITHUB_NOTES = [
   { topicId: 'system_design', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'cloud', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'deployment', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
+
+  // ─── MISSING ENTRIES ──────────────────────────────────────
+  { topicId: 'sl-classification', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
+  { topicId: 'experiment_tracking', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
+  { topicId: 'llm_tracing', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
 ];
 
 /**

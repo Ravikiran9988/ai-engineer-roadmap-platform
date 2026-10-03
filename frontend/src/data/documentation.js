@@ -165,6 +165,93 @@ export const DOCUMENTATION = [
   { id: 'doc_cloud_002', topicId: 'cloud', title: 'Google Cloud Documentation', url: 'https://cloud.google.com/docs', description: 'Official Google Cloud documentation.', isPrimary: false },
   { id: 'doc_dep_001', topicId: 'deployment', title: 'Railway Documentation', url: 'https://docs.railway.app/', description: 'Official Railway platform documentation for deployments.', isPrimary: true },
   { id: 'doc_k8s_001', topicId: 'deployment', title: 'Kubernetes Documentation', url: 'https://kubernetes.io/docs/home/', description: 'Official Kubernetes documentation.', isPrimary: false },
+
+  // ─── DSA ──────────────────────────────────────────────────
+  { id: 'doc_dsa_001', topicId: 'dsa', title: 'LeetCode — Data Structures & Algorithms', url: 'https://leetcode.com/explore/learn/', description: 'Interactive DSA learning paths covering arrays, trees, graphs, and more.', isPrimary: true },
+  { id: 'doc_dsa_002', topicId: 'dsa', title: 'NeetCode — DSA Roadmap', url: 'https://neetcode.io/roadmap', description: 'Structured DSA roadmap with curated problem sets.', isPrimary: false },
+
+  // ─── UNSUPERVISED LEARNING ────────────────────────────────
+  { id: 'doc_ul_001', topicId: 'unsupervised_learning', title: 'Scikit-learn Unsupervised Learning Guide', url: 'https://scikit-learn.org/stable/unsupervised_learning.html', description: 'Official reference for clustering, dimensionality reduction, and density estimation.', isPrimary: true },
+
+  // ─── REGRESSION ───────────────────────────────────────────
+  { id: 'doc_regression_001', topicId: 'regression', title: 'Scikit-learn Regression Guide', url: 'https://scikit-learn.org/stable/supervised_learning.html#generalized-linear-models', description: 'Generalized linear models — Ridge, Lasso, ElasticNet, and more.', isPrimary: true },
+
+  // ─── SL CLASSIFICATION ────────────────────────────────────
+  { id: 'doc_slcls_001', topicId: 'sl-classification', title: 'Scikit-learn Classification Guide', url: 'https://scikit-learn.org/stable/supervised_learning.html', description: 'Official guide to classification algorithms — SVM, trees, ensemble methods.', isPrimary: true },
+  { id: 'doc_slcls_002', topicId: 'sl-classification', title: 'XGBoost Documentation', url: 'https://xgboost.readthedocs.io/en/stable/', description: 'Official XGBoost docs — installation, tutorials, and API reference.', isPrimary: false },
+
+  // ─── CLUSTERING ───────────────────────────────────────────
+  { id: 'doc_cluster_001', topicId: 'clustering', title: 'Scikit-learn Clustering Guide', url: 'https://scikit-learn.org/stable/modules/clustering.html', description: 'Official guide to K-Means, hierarchical, DBSCAN, and other clustering algorithms.', isPrimary: true },
+
+  // ─── FEATURE ENGINEERING ──────────────────────────────────
+  { id: 'doc_fe_001', topicId: 'feature_engineering', title: 'Scikit-learn Preprocessing Guide', url: 'https://scikit-learn.org/stable/modules/preprocessing.html', description: 'Scaling, encoding, imputation, and feature extraction in scikit-learn.', isPrimary: true },
+  { id: 'doc_fe_002', topicId: 'feature_engineering', title: 'Feature Engineering for Machine Learning (Book)', url: 'https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/', description: "O'Reilly book on practical feature engineering techniques.", isPrimary: false },
+
+  // ─── CROSS VALIDATION ─────────────────────────────────────
+  { id: 'doc_cv_001', topicId: 'cross_validation', title: 'Scikit-learn Cross-Validation Guide', url: 'https://scikit-learn.org/stable/modules/cross_validation.html', description: 'Official guide to cross-validation strategies including stratified and time-series CV.', isPrimary: true },
+
+  // ─── HYPERPARAMETER TUNING ────────────────────────────────
+  { id: 'doc_hp_001', topicId: 'hyperparameter_tuning', title: 'Scikit-learn Hyperparameter Tuning', url: 'https://scikit-learn.org/stable/modules/grid_search.html', description: 'GridSearchCV, RandomizedSearchCV, and Bayesian optimization in scikit-learn.', isPrimary: true },
+  { id: 'doc_hp_002', topicId: 'hyperparameter_tuning', title: 'Optuna Documentation', url: 'https://optuna.readthedocs.io/en/stable/', description: 'Official Optuna docs for Bayesian hyperparameter optimization.', isPrimary: false },
+
+  // ─── CNN BASICS ───────────────────────────────────────────
+  { id: 'doc_cnn_001', topicId: 'cnn_basics', title: 'CS231n — Convolutional Neural Networks', url: 'https://cs231n.github.io/', description: 'Stanford CS231n course notes on CNNs for visual recognition.', isPrimary: true },
+  { id: 'doc_cnn_002', topicId: 'cnn_basics', title: 'PyTorch CNN Tutorial', url: 'https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html', description: 'Official PyTorch tutorial for building and training a CNN.', isPrimary: false },
+
+  // ─── RNN / LSTM BASICS ────────────────────────────────────
+  { id: 'doc_rnn_001', topicId: 'rnn_lstm_basics', title: 'Understanding LSTM Networks — Colah\'s Blog', url: 'https://colah.github.io/posts/2015-08-Understanding-LSTMs/', description: 'The definitive visual guide to understanding LSTM networks.', isPrimary: true },
+  { id: 'doc_rnn_002', topicId: 'rnn_lstm_basics', title: 'PyTorch RNN Tutorial', url: 'https://pytorch.org/tutorials/intermediate/char_rnn_classification_tutorial.html', description: 'Official PyTorch tutorial for character-level RNN classification.', isPrimary: false },
+
+  // ─── TEXT CLASSIFICATION ──────────────────────────────────
+  { id: 'doc_tc_nlp_001', topicId: 'text_classification', title: 'HuggingFace Text Classification Guide', url: 'https://huggingface.co/docs/transformers/tasks/sequence_classification', description: 'Official HuggingFace guide for fine-tuning models for text classification.', isPrimary: true },
+
+  // ─── IMAGE PROCESSING ────────────────────────────────────
+  { id: 'doc_imgproc_001', topicId: 'image_processing', title: 'OpenCV Documentation', url: 'https://docs.opencv.org/4.x/', description: 'Official OpenCV documentation for image processing operations.', isPrimary: true },
+  { id: 'doc_imgproc_002', topicId: 'image_processing', title: 'Pillow (PIL) Documentation', url: 'https://pillow.readthedocs.io/en/stable/', description: 'Official Pillow docs for image manipulation in Python.', isPrimary: false },
+
+  // ─── OCR ──────────────────────────────────────────────────
+  { id: 'doc_ocr_001', topicId: 'ocr', title: 'Tesseract OCR Documentation', url: 'https://tesseract-ocr.github.io/tessdoc/', description: 'Official Tesseract OCR documentation.', isPrimary: true },
+  { id: 'doc_ocr_002', topicId: 'ocr', title: 'EasyOCR GitHub', url: 'https://github.com/JaidedAI/EasyOCR', description: 'EasyOCR — ready-to-use OCR with 80+ language support.', isPrimary: false },
+
+  // ─── OBJECT DETECTION ────────────────────────────────────
+  { id: 'doc_od_001', topicId: 'object_detection_basics', title: 'YOLOv8 Documentation', url: 'https://docs.ultralytics.com/', description: 'Official Ultralytics YOLOv8 documentation for object detection.', isPrimary: true },
+  { id: 'doc_od_002', topicId: 'object_detection_basics', title: 'TorchVision Object Detection Tutorial', url: 'https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html', description: 'Official PyTorch tutorial on fine-tuning object detection models.', isPrimary: false },
+
+  // ─── VISION LANGUAGE MODELS ──────────────────────────────
+  { id: 'doc_vlm_001', topicId: 'vision_language_models', title: 'HuggingFace Vision-Language Models', url: 'https://huggingface.co/docs/transformers/index#multimodal-models', description: 'Official HuggingFace docs for multimodal and vision-language models.', isPrimary: true },
+  { id: 'doc_vlm_002', topicId: 'vision_language_models', title: 'OpenAI Vision Guide', url: 'https://platform.openai.com/docs/guides/vision', description: 'Official OpenAI guide for using GPT-4o with image inputs.', isPrimary: false },
+
+  // ─── MULTIMODAL BASICS ───────────────────────────────────
+  { id: 'doc_mm_001', topicId: 'multimodal_basics', title: 'OpenAI Multimodal Guide', url: 'https://platform.openai.com/docs/guides/vision', description: 'Official OpenAI guide for multimodal inputs with GPT-4o.', isPrimary: true },
+
+  // ─── RAG EVALUATION METRICS ──────────────────────────────
+  { id: 'doc_rageval_001', topicId: 'rag_evaluation', title: 'RAGAS Documentation', url: 'https://docs.ragas.io/en/latest/', description: 'Official RAGAS docs — faithfulness, answer relevance, context precision, recall.', isPrimary: true },
+  { id: 'doc_faith_001', topicId: 'faithfulness', title: 'RAGAS Faithfulness Metric', url: 'https://docs.ragas.io/en/latest/concepts/metrics/faithfulness.html', description: 'Official RAGAS docs explaining the faithfulness metric.', isPrimary: true },
+  { id: 'doc_ar_001', topicId: 'answer_relevance', title: 'RAGAS Answer Relevance Metric', url: 'https://docs.ragas.io/en/latest/concepts/metrics/answer_relevance.html', description: 'Official RAGAS docs explaining the answer relevance metric.', isPrimary: true },
+  { id: 'doc_cp_001', topicId: 'context_precision', title: 'RAGAS Context Precision Metric', url: 'https://docs.ragas.io/en/latest/concepts/metrics/context_precision.html', description: 'Official RAGAS docs explaining the context precision metric.', isPrimary: true },
+  { id: 'doc_cr_001', topicId: 'context_recall', title: 'RAGAS Context Recall Metric', url: 'https://docs.ragas.io/en/latest/concepts/metrics/context_recall.html', description: 'Official RAGAS docs explaining the context recall metric.', isPrimary: true },
+  { id: 'doc_gd_001', topicId: 'golden_datasets', title: 'RAGAS Test Set Generation', url: 'https://docs.ragas.io/en/latest/getstarted/testset_generation.html', description: 'Official RAGAS guide to generating golden datasets for evaluation.', isPrimary: true },
+  { id: 'doc_rt_001', topicId: 'regression_testing', title: 'DeepEval Regression Testing', url: 'https://docs.confident-ai.com/docs/evaluation-regression-testing', description: 'Official DeepEval guide to regression testing for LLM applications.', isPrimary: true },
+  { id: 'doc_ae_001', topicId: 'agent_evaluation', title: 'DeepEval Agent Evaluation', url: 'https://docs.confident-ai.com/docs/evaluation-introduction', description: 'Official DeepEval guide to evaluating AI agents.', isPrimary: true },
+
+  // ─── MLOPS / LLMOPS ──────────────────────────────────────
+  { id: 'doc_mv_001', topicId: 'model_versioning', title: 'MLflow Model Registry', url: 'https://mlflow.org/docs/latest/model-registry.html', description: 'Official MLflow docs for model versioning and registry.', isPrimary: true },
+  { id: 'doc_dv_001', topicId: 'data_versioning', title: 'DVC Documentation', url: 'https://dvc.org/doc', description: 'Official DVC docs for data and model version control.', isPrimary: true },
+  { id: 'doc_ms_001', topicId: 'model_serving', title: 'BentoML Documentation', url: 'https://docs.bentoml.com/', description: 'Official BentoML docs for model serving and deployment.', isPrimary: true },
+  { id: 'doc_ms_002', topicId: 'model_serving', title: 'TorchServe Documentation', url: 'https://pytorch.org/serve/', description: 'Official TorchServe docs for serving PyTorch models in production.', isPrimary: false },
+  { id: 'doc_obs_001', topicId: 'observability', title: 'LangSmith Observability', url: 'https://docs.smith.langchain.com/observability', description: 'Official LangSmith docs for LLM application observability and tracing.', isPrimary: true },
+  { id: 'doc_tm_001', topicId: 'token_monitoring', title: 'OpenAI Usage Dashboard', url: 'https://platform.openai.com/usage', description: 'OpenAI platform dashboard for monitoring token usage and costs.', isPrimary: true },
+  { id: 'doc_cm_001', topicId: 'cost_monitoring', title: 'OpenAI Cost Tracking Guide', url: 'https://platform.openai.com/docs/guides/production-best-practices', description: 'OpenAI production best practices including cost monitoring.', isPrimary: true },
+  { id: 'doc_lm_001', topicId: 'latency_monitoring', title: 'Prometheus Documentation', url: 'https://prometheus.io/docs/introduction/overview/', description: 'Official Prometheus docs for latency and performance monitoring.', isPrimary: true },
+  { id: 'doc_pv_001', topicId: 'prompt_versioning', title: 'LangSmith Prompt Hub', url: 'https://docs.smith.langchain.com/prompt-hub', description: 'Official LangSmith Prompt Hub docs for versioning and managing prompts.', isPrimary: true },
+  { id: 'doc_ab_001', topicId: 'ab_testing', title: 'LangSmith A/B Testing', url: 'https://docs.smith.langchain.com/evaluation/tutorials/optimization', description: 'Official LangSmith guide to running A/B tests on LLM prompts.', isPrimary: true },
+
+  // ─── AI SECURITY ──────────────────────────────────────────
+  { id: 'doc_jb_001', topicId: 'jailbreaking', title: 'OWASP LLM Top 10 — Jailbreaking', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', description: 'OWASP guide covering jailbreaking and prompt injection risks.', isPrimary: true },
+  { id: 'doc_dl_001', topicId: 'data_leakage', title: 'OWASP LLM — Sensitive Information Disclosure', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', description: 'OWASP coverage of data leakage and sensitive info disclosure in LLMs.', isPrimary: true },
+  { id: 'doc_rp_001', topicId: 'rag_poisoning', title: 'OWASP LLM — RAG Poisoning', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', description: 'OWASP guide on vector/embedding and RAG poisoning attacks.', isPrimary: true },
+  { id: 'doc_ta_001', topicId: 'tool_abuse', title: 'OWASP LLM — Excessive Agency', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', description: 'OWASP coverage of excessive agency and tool abuse risks in LLM agents.', isPrimary: true },
+  { id: 'doc_as_001', topicId: 'authorization_security', title: 'OWASP LLM — Insecure Output Handling', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', description: 'OWASP guide on authorization and insecure output handling in LLM apps.', isPrimary: true },
 ];
 
 /**
