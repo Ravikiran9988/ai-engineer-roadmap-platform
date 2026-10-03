@@ -35,4 +35,17 @@ export const api = {
       body: JSON.stringify({ githubUrl, liveUrl }),
     }),
   },
+  admin: {
+    // Users
+    getUsers:   ()              => fetchAPI('/admin/users'),
+    getUser:    (id)            => fetchAPI(`/admin/users/${id}`),
+    updateRole: (id, role)      => fetchAPI(`/admin/users/${id}/role`,   { method: 'PATCH', body: JSON.stringify({ role }) }),
+    deleteUser: (id)            => fetchAPI(`/admin/users/${id}`,        { method: 'DELETE' }),
+    // Stats
+    getStats:   ()              => fetchAPI('/admin/stats'),
+    // Submissions
+    getSubmissions: ()          => fetchAPI('/admin/submissions'),
+    reviewSubmission: (id, status) => fetchAPI(`/admin/submissions/${id}/review`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  },
 };
+

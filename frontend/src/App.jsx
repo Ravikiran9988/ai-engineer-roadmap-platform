@@ -4,8 +4,6 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { LearningPaths } from './pages/LearningPaths';
 import { Roadmap } from './pages/Roadmap';
-
-
 import { ProgressProvider } from './context/ProgressContext';
 import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './components/ui/use-toast';
@@ -19,6 +17,8 @@ import { Playlists } from './pages/Playlists';
 import { ProgressDashboard } from './pages/ProgressDashboard';
 import { SubtopicDetail } from './pages/SubtopicDetail';
 import { Login } from './pages/Login';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -28,21 +28,30 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="learning" element={<LearningPaths />} />
-              <Route path="learning/:pathId" element={<LearningPaths />} />
-              <Route path="learning/:pathId/:phaseId" element={<PhaseDetail />} />
-              <Route path="learning/:pathId/:phaseId/:topicId" element={<TopicDetail />} />
-              <Route path="learning/:pathId/:phaseId/:topicId/:subtopicId" element={<SubtopicDetail />} />
-              <Route path="roadmap" element={<Roadmap />} />
-              <Route path="playlists" element={<Playlists />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="assignments" element={<Assignments />} />
-              <Route path="knowledge-base" element={<KnowledgeBase />} />
-              <Route path="progress" element={<ProgressDashboard />} />
-              <Route path="resources" element={<Resources />} />
-              <Route path="login" element={<Login />} />
-            </Route>
+                <Route index element={<Home />} />
+                <Route path="learning" element={<LearningPaths />} />
+                <Route path="learning/:pathId" element={<LearningPaths />} />
+                <Route path="learning/:pathId/:phaseId" element={<PhaseDetail />} />
+                <Route path="learning/:pathId/:phaseId/:topicId" element={<TopicDetail />} />
+                <Route path="learning/:pathId/:phaseId/:topicId/:subtopicId" element={<SubtopicDetail />} />
+                <Route path="roadmap" element={<Roadmap />} />
+                <Route path="playlists" element={<Playlists />} />
+                <Route path="projects" element={<Projects />} />
+                <Route path="assignments" element={<Assignments />} />
+                <Route path="knowledge-base" element={<KnowledgeBase />} />
+                <Route path="progress" element={<ProgressDashboard />} />
+                <Route path="resources" element={<Resources />} />
+                <Route path="login" element={<Login />} />
+                {/* Admin-only route */}
+                <Route
+                  path="admin"
+                  element={
+                    <ProtectedRoute requireAuth requireAdmin>
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
             </Routes>
           </Router>
         </ProgressProvider>

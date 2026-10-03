@@ -13,7 +13,8 @@ import {
   X,
   Search,
   Sun,
-  Moon
+  Moon,
+  Shield
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth } from '../context/AuthContext';
@@ -21,7 +22,7 @@ import { useAuth } from '../context/AuthContext';
 export function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -38,13 +39,14 @@ export function Layout() {
   }, []);
 
   const navItems = [
-    { name: 'Home', path: '/', icon: <BarChart className="w-5 h-5" /> },
-    { name: 'Learning', path: '/learning', icon: <Map className="w-5 h-5" /> },
-    { name: 'Roadmap', path: '/roadmap', icon: <BrainCircuit className="w-5 h-5" /> },
-    { name: 'Playlists', path: '/playlists', icon: <Library className="w-5 h-5" /> },
-    { name: 'Assignments', path: '/assignments', icon: <CheckSquare className="w-5 h-5" /> },
-    { name: 'Projects', path: '/projects', icon: <FolderGit2 className="w-5 h-5" /> },
-    { name: 'Progress', path: '/progress', icon: <BarChart className="w-5 h-5" /> }
+    { name: 'Home',        path: '/',            icon: <BarChart     className="w-5 h-5" /> },
+    { name: 'Learning',    path: '/learning',    icon: <Map          className="w-5 h-5" /> },
+    { name: 'Roadmap',     path: '/roadmap',     icon: <BrainCircuit className="w-5 h-5" /> },
+    { name: 'Playlists',   path: '/playlists',   icon: <Library      className="w-5 h-5" /> },
+    { name: 'Assignments', path: '/assignments', icon: <CheckSquare  className="w-5 h-5" /> },
+    { name: 'Projects',    path: '/projects',    icon: <FolderGit2   className="w-5 h-5" /> },
+    { name: 'Progress',    path: '/progress',    icon: <BarChart     className="w-5 h-5" /> },
+    ...(isAdmin && isAdmin() ? [{ name: 'Admin', path: '/admin', icon: <Shield className="w-5 h-5" />, admin: true }] : []),
   ];
 
   return (
@@ -66,13 +68,18 @@ export function Layout() {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
                   isActive 
-                    ? 'bg-primary text-primary-foreground shadow-md font-medium' 
-                    : 'text-muted-foreground hover:bg-secondary hover:text-secondary-foreground'
+                    ? item.admin
+                      ? 'bg-primary/20 text-primary shadow-md font-medium border border-primary/30'
+                      : 'bg-primary text-primary-foreground shadow-md font-medium' 
+                    : item.admin
+                      ? 'text-primary/70 hover:bg-primary/10 hover:text-primary'
+                      : 'text-muted-foreground hover:bg-secondary hover:text-secondary-foreground'
                 }`
               }
             >
               {item.icon}
               {item.name}
+              {item.admin && <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-primary/20 text-primary font-semibold">ADMIN</span>}
             </NavLink>
           ))}
         </nav>
@@ -118,14 +125,21 @@ export function Layout() {
             </Button>
             <div className="flex items-center gap-2">
               {user ? (
-                <button
-                  type="button"
-                  onClick={logout}
-                  title="Sign out"
-                  className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm shadow-sm"
-                >
-                  {(user.username || user.email || 'U').slice(0, 2).toUpperCase()}
-                </button>
+                <div className="flex items-center gap-2">
+                  {isAdmin && isAdmin() && (
+                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold rounded-full bg-primary/20 text-primary border border-primary/30">
+                      <Shield className="w-2.5 h-2.5" /> ADMIN
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={logout}
+                    title="Sign out"
+                    className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm shadow-sm"
+                  >
+                    {(user.username || user.email || 'U').slice(0, 2).toUpperCase()}
+                  </button>
+                </div>
               ) : (
                 <NavLink to="/login" className="text-sm text-primary hover:underline">Sign in</NavLink>
               )}

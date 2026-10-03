@@ -3,6 +3,12 @@ import { api } from '../services/api';
 
 const AuthContext = createContext(null);
 
+// ─── Role constants ─────────────────────────────────────────
+export const ROLES = {
+  ADMIN: 'admin',
+  USER: 'user',
+};
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,11 +49,32 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
-  return <AuthContext.Provider value={{ user, login, register, logout, loading }}>{!loading && children}</AuthContext.Provider>;
+  // ─── RBAC helpers ────────────────────────────────────────
+  const isAdmin = () => user?.role === ROLES.ADMIN;
+  const isUser  = () => !!user;
+  const hasRole = (role) => user?.role === role;
+
+  const value = {
+    user,
+    login,
+    register,
+    logout,
+    loading,
+    isAdmin,
+    isUser,
+    hasRole,
+    role: user?.role ?? null,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
-}
+}
