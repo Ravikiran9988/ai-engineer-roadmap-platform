@@ -94,11 +94,8 @@ export const GITHUB_NOTES = [
 
   // ─── HTTP ─────────────────────────────────────────────────
   { topicId: 'http', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
-  { topicId: 'rest_apis', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
 
   // ─── NUMPY / PANDAS / MATH ────────────────────────────────
-  { topicId: 'numpy', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
-  { topicId: 'pandas', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'math_stats', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'dsa', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
 
@@ -125,7 +122,6 @@ export const GITHUB_NOTES = [
   { topicId: 'tokenization_nlp', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'nlp_embeddings', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'text_classification', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
-  { topicId: 'attention', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'bert', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'gpt', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
 
@@ -144,7 +140,6 @@ export const GITHUB_NOTES = [
   { topicId: 'structured_outputs', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'function_tool_calling', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'embeddings', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
-  { topicId: 'vector_databases', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'ai_agents', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
   { topicId: 'multimodal_basics', notes: 'RESOURCE_URL_PENDING', code: 'RESOURCE_URL_PENDING', examples: 'RESOURCE_URL_PENDING' },
 
