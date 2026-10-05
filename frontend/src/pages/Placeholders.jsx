@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { BrainCircuit, Pickaxe } from 'lucide-react';
 
 function PlaceholderPage({ title, description }) {
