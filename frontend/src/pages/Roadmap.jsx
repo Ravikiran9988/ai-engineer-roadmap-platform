@@ -2,9 +2,8 @@ import React, { useMemo } from 'react';
 import { useProgress } from '@/context/ProgressContext';
 import { PHASES, TOPICS, PATHS } from '@/data/roadmap';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { CheckCircle2, Circle, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Circle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Roadmap() {
