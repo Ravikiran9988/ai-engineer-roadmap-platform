@@ -5,7 +5,6 @@ import { VIDEOS } from '@/data/videos';
 import { PLAYLISTS } from '@/data/playlists';
 import { DOCUMENTATION } from '@/data/documentation';
 import { GITHUB_NOTES } from '@/data/githubNotes';
-import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Search, PlayCircle, BookOpen, ExternalLink, Code, FileText, Filter, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
