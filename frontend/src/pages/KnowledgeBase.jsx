@@ -5,7 +5,7 @@ import { getGithubForTopic } from '@/data/githubNotes';
 import { getDocsForTopic } from '@/data/documentation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Folder, FolderOpen, FileText, ChevronRight, ChevronDown, GitBranch, Search, BookOpen, Code, ExternalLink } from 'lucide-react';
+import { Folder, FolderOpen, FileText, ChevronRight, ChevronDown, Search, BookOpen, Code, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useProgress } from '@/context/ProgressContext';
 
