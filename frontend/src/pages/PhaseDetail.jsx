@@ -50,7 +50,7 @@ export function PhaseDetail() {
   const recommended = phaseTopics.filter(t => t.priority === 'recommended');
   const optional = phaseTopics.filter(t => t.priority === 'optional');
 
-  const renderTopicGroup = (title, topics, priorityColor) => {
+  const renderTopicGroup = (title, topics) => {
     if (topics.length === 0) return null;
     
     return (
@@ -169,9 +169,9 @@ export function PhaseDetail() {
           </Card>
         ) : (
           <div className="space-y-8">
-            {renderTopicGroup("Essential Topics", essential, "text-red-500")}
-            {renderTopicGroup("Recommended Topics", recommended, "text-amber-500")}
-            {renderTopicGroup("Optional Topics", optional, "text-blue-500")}
+            {renderTopicGroup("Essential Topics", essential)}
+            {renderTopicGroup("Recommended Topics", recommended)}
+            {renderTopicGroup("Optional Topics", optional)}
           </div>
         )
       )}
