@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { TOPICS, PHASES } from '@/data/roadmap';
 import { getVideosForTopic } from '@/data/videos';
@@ -183,21 +183,17 @@ export function TopicDetail() {
   const submission = topicAssignment ? assignments[topicAssignment.id] : null;
 
   // Filter/sort videos
-  const filteredVideos = useMemo(() => {
-    let vids = allVideos
-      .filter(v => v.learningPaths.includes(currentPathId))
-      .filter(v => filterType === 'all' || v.type === filterType)
-      .filter(v => filterDifficulty === 'all' || v.difficulty === filterDifficulty);
+  let filteredVideos = allVideos
+    .filter(v => v.learningPaths.includes(currentPathId))
+    .filter(v => filterType === 'all' || v.type === filterType)
+    .filter(v => filterDifficulty === 'all' || v.difficulty === filterDifficulty);
 
-    if (sortBy === 'shortest') vids = [...vids].sort((a, b) => parseFloat(a.duration) - parseFloat(b.duration));
-    else if (sortBy === 'longest') vids = [...vids].sort((a, b) => parseFloat(b.duration) - parseFloat(a.duration));
-    else if (sortBy === 'beginner') {
-      const order = { beginner: 0, intermediate: 1, advanced: 2 };
-      vids = [...vids].sort((a, b) => order[a.difficulty] - order[b.difficulty]);
-    } else vids = [...vids].sort((a, b) => a.order - b.order);
-
-    return vids;
-  }, [allVideos, currentPathId, filterType, filterDifficulty, sortBy]);
+  if (sortBy === 'shortest') filteredVideos = [...filteredVideos].sort((a, b) => parseFloat(a.duration) - parseFloat(b.duration));
+  else if (sortBy === 'longest') filteredVideos = [...filteredVideos].sort((a, b) => parseFloat(b.duration) - parseFloat(a.duration));
+  else if (sortBy === 'beginner') {
+    const order = { beginner: 0, intermediate: 1, advanced: 2 };
+    filteredVideos = [...filteredVideos].sort((a, b) => order[a.difficulty] - order[b.difficulty]);
+  } else filteredVideos = [...filteredVideos].sort((a, b) => a.order - b.order);
 
   const watchedCount = filteredVideos.filter(v => completedVideos.includes(v.id)).length;
   const totalVideos = filteredVideos.length;
