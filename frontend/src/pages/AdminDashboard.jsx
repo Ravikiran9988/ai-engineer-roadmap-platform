@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Users, Shield, ShieldCheck, Trash2, RefreshCw,
   BarChart3, BookOpen, CheckSquare, FolderGit2,
-  Search, ChevronDown, Crown, UserCheck, AlertTriangle,
+  Search, Crown, UserCheck, AlertTriangle,
   Eye, ThumbsUp, ThumbsDown, Clock
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
