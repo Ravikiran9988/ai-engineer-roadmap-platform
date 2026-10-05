@@ -7,6 +7,9 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
+import { TOPICS } from '../data/roadmap';
+import { VIDEOS } from '../data/videos';
+import { PROJECTS } from '../data/learningData';
 
 // ─── Stat Card ──────────────────────────────────────────────
 function StatCard({ icon, label, value, color = 'primary' }) {
@@ -136,7 +139,9 @@ export function AdminDashboard() {
   const handleReview = async (subId, status) => {
     setActionState('rev_' + subId, true);
     try {
-      await api.admin.reviewSubmission(subId, status);
+      const submission = submissions.find(s => (s._id || s.id) === subId);
+      if (!submission?.type) throw new Error('Submission type is missing.');
+      await api.admin.reviewSubmission(subId, submission.type, status);
       setSubmissions(prev => prev.map(s => s._id === subId || s.id === subId ? { ...s, status } : s));
     } catch (err) {
       alert(err.message);
@@ -234,9 +239,9 @@ export function AdminDashboard() {
                 </h2>
                 <div className="grid md:grid-cols-3 gap-4 text-sm">
                   {[
-                    { label: 'Total Topics', value: '112', icon: <BookOpen className="w-4 h-4" /> },
-                    { label: 'Total Videos', value: '461', icon: <Eye className="w-4 h-4" /> },
-                    { label: 'Total Projects', value: stats?.totalProjects ?? '—', icon: <FolderGit2 className="w-4 h-4" /> },
+                    { label: 'Total Topics', value: TOPICS.length, icon: <BookOpen className="w-4 h-4" /> },
+                    { label: 'Total Videos', value: VIDEOS.length, icon: <Eye className="w-4 h-4" /> },
+                    { label: 'Total Projects', value: PROJECTS.length, icon: <FolderGit2 className="w-4 h-4" /> },
                   ].map(item => (
                     <div key={item.label} className="flex items-center gap-3 p-4 rounded-lg bg-secondary/40">
                       <span className="text-primary">{item.icon}</span>
