@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { useProgress } from '@/context/ProgressContext';
 import { PATHS, TOPICS } from '@/data/roadmap';
 import { Rocket, Zap, Brain, CheckCircle2, ArrowRight } from 'lucide-react';
