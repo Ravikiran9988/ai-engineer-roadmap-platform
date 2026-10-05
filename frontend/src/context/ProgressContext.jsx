@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { TOPICS, PATHS } from '../data/roadmap';
 import { VIDEOS } from '../data/videos';
 import { ASSIGNMENTS } from '../data/assignments';
@@ -7,7 +7,6 @@ import { api } from '../services/api';
 import { useAuth } from './AuthContext';
 
 const ProgressContext = createContext(null);
-
 const PATH_IDS = [PATHS.JOB_READY, PATHS.INTERMEDIATE, PATHS.ADVANCED];
 
 function getAssignmentForSubtopic(subtopicId) {
@@ -28,13 +27,8 @@ function getRequiredDocIds(assignment) {
 }
 
 function localDateKey(date = new Date()) {
-  return [
-    date.getFullYear(),
-    String(date.getMonth() + 1).padStart(2, '0'),
-    String(date.getDate()).padStart(2, '0'),
-  ].join('-');
+  return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
 }
-
 
 export function ProgressProvider({ children }) {
   const { user } = useAuth();
@@ -48,68 +42,83 @@ export function ProgressProvider({ children }) {
   const [streak, setStreak] = useState(0);
   const [lastActive, setLastActive] = useState(null);
 
+  const progressRef = useRef({
+    activePath: PATHS.JOB_READY, streak: 0, lastActive: null,
+    completedSubtopics: [], completedTasks: [], completedVideos: [],
+    readResources: [], assignments: {}, projects: {}
+  });
+  const persistQueueRef = useRef(Promise.resolve());
+
   useEffect(() => {
     let mounted = true;
     if (!user) {
-      setCompletedSubtopics([]);
-      setCompletedTasks([]);
-      setCompletedVideos([]);
-      setAssignments({});
-      setProjects({});
-      setReadResources([]);
-      setActivePath(PATHS.JOB_READY);
-      setStreak(0);
-      setLastActive(null);
+      const empty = {
+        activePath: PATHS.JOB_READY, streak: 0, lastActive: null,
+        completedSubtopics: [], completedTasks: [], completedVideos: [],
+        readResources: [], assignments: {}, projects: {}
+      };
+      progressRef.current = empty;
+      setCompletedSubtopics([]); setCompletedTasks([]); setCompletedVideos([]);
+      setAssignments({}); setProjects({}); setReadResources([]);
+      setActivePath(PATHS.JOB_READY); setStreak(0); setLastActive(null);
       return undefined;
     }
 
     api.progress.get().then(p => {
       if (!mounted) return;
-      setActivePath(PATH_IDS.includes(p.activePath) ? p.activePath : PATHS.JOB_READY);
-      setCompletedSubtopics(p.completedSubtopics || []);
-      setCompletedTasks(p.completedTasks || []);
-      setCompletedVideos(p.completedVideos || []);
-      setAssignments(p.assignments || {});
-      setProjects(p.projects || {});
-      setReadResources(p.readResources || []);
-      setStreak(p.streak || 0);
-      setLastActive(p.lastActive || null);
+      const next = {
+        activePath: PATH_IDS.includes(p.activePath) ? p.activePath : PATHS.JOB_READY,
+        streak: p.streak || 0,
+        lastActive: p.lastActive || null,
+        completedSubtopics: p.completedSubtopics || [],
+        completedTasks: p.completedTasks || [],
+        completedVideos: p.completedVideos || [],
+        assignments: p.assignments || {},
+        projects: p.projects || {},
+        readResources: p.readResources || {}
+      };
+      if (!Array.isArray(next.readResources)) next.readResources = [];
+      progressRef.current = next;
+      setActivePath(next.activePath); setStreak(next.streak); setLastActive(next.lastActive);
+      setCompletedSubtopics(next.completedSubtopics); setCompletedTasks(next.completedTasks);
+      setCompletedVideos(next.completedVideos); setAssignments(next.assignments);
+      setProjects(next.projects); setReadResources(next.readResources);
     }).catch(err => console.error('Failed to load progress:', err));
 
     return () => { mounted = false; };
   }, [user]);
 
-  const persist = async (overrides = {}) => {
-    try {
-      await api.progress.update({
-        activePath,
-        streak,
-        lastActive,
-        completedSubtopics,
-        completedTasks,
-        completedVideos,
-        readResources,
-        assignments,
-        projects,
-        ...overrides,
-      });
-    } catch (err) {
-      console.error('Progress sync failed:', err);
-    }
+  const queuePersist = (snapshot) => {
+    if (!user) return Promise.resolve();
+    persistQueueRef.current = persistQueueRef.current
+      .catch(() => {})
+      .then(() => api.progress.update(snapshot))
+      .catch(err => console.error('Progress sync failed:', err));
+    return persistQueueRef.current;
   };
 
-  const activity = () => {
+  const activity = (base) => {
     const todayKey = localDateKey();
-    let nextStreak = streak;
-    if (lastActive !== todayKey) {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayKey = localDateKey(yesterday);
-      nextStreak = lastActive === yesterdayKey ? streak + 1 : 1;
-      setStreak(nextStreak);
-      setLastActive(todayKey);
-    }
-    return { streak: nextStreak, lastActive: todayKey };
+    if (base.lastActive === todayKey) return { streak: base.streak, lastActive: todayKey };
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayKey = localDateKey(yesterday);
+    return {
+      streak: base.lastActive === yesterdayKey ? base.streak + 1 : 1,
+      lastActive: todayKey
+    };
+  };
+
+  const commit = (patch, markActivity = false) => {
+    const base = progressRef.current;
+    const activityPatch = markActivity ? activity(base) : {};
+    const next = { ...base, ...patch, ...activityPatch };
+    progressRef.current = next;
+    setActivePath(next.activePath); setStreak(next.streak); setLastActive(next.lastActive);
+    setCompletedSubtopics(next.completedSubtopics); setCompletedTasks(next.completedTasks);
+    setCompletedVideos(next.completedVideos); setAssignments(next.assignments);
+    setProjects(next.projects); setReadResources(next.readResources);
+    return queuePersist(next);
   };
 
   const derivedCompletedSubtopics = useMemo(() => {
@@ -120,135 +129,86 @@ export function ProgressProvider({ children }) {
       (topic.subtopicIds || []).forEach(subId => {
         const assignment = getAssignmentForSubtopic(subId);
         const assignmentRequired = Boolean(
-          assignment &&
-          (!assignment.requiredPaths || assignment.requiredPaths.includes(activePath))
+          assignment && (!assignment.requiredPaths || assignment.requiredPaths.includes(activePath))
         );
-
         const requiredVideoIds = getRequiredVideoIds(subId, assignment);
         const requiredDocIds = getRequiredDocIds(assignment);
         const videosDone = requiredVideoIds.every(id => completedVideos.includes(id));
-        const docsDone = requiredDocIds.every(id => readResources.includes(
-          DOCUMENTATION.find(doc => doc.id === id)?.url
-        ));
-        const assignmentDone = !assignmentRequired ||
-          assignment.githubRequired === false ||
-          assignments[assignment.id]?.status === 'Submitted';
+        const docsDone = requiredDocIds.every(id => readResources.includes(DOCUMENTATION.find(doc => doc.id === id)?.url));
+        const assignmentDone = !assignmentRequired || assignment.githubRequired === false || assignments[assignment.id]?.status === 'Submitted';
+        const hasRequirements = requiredVideoIds.length > 0 || requiredDocIds.length > 0 || assignmentRequired;
 
-        const hasRequirements =
-          requiredVideoIds.length > 0 ||
-          requiredDocIds.length > 0 ||
-          assignmentRequired;
-
-        // Manual completion is allowed only when there are no tracked
-        // requirements. Required videos/docs/assignments cannot be bypassed.
-        if (!hasRequirements) {
-          if (manualSubs.has(subId)) derived.add(subId);
-        } else if (videosDone && docsDone && assignmentDone) {
-          derived.add(subId);
-        }
+        if (!hasRequirements && manualSubs.has(subId)) derived.add(subId);
+        else if (hasRequirements && videosDone && docsDone && assignmentDone) derived.add(subId);
       });
     });
-
     return Array.from(derived);
   }, [completedSubtopics, completedVideos, assignments, readResources, activePath]);
 
   const completedTopics = useMemo(
-    () => TOPICS
-      .filter(t => (t.subtopicIds || []).length > 0 && t.subtopicIds.every(id => derivedCompletedSubtopics.includes(id)))
-      .map(t => t.id),
+    () => TOPICS.filter(t => (t.subtopicIds || []).length > 0 && t.subtopicIds.every(id => derivedCompletedSubtopics.includes(id))).map(t => t.id),
     [derivedCompletedSubtopics]
   );
 
-  const toggleSubtopic = (id) => {
-    const next = completedSubtopics.includes(id)
-      ? completedSubtopics.filter(x => x !== id)
-      : [...completedSubtopics, id];
-    setCompletedSubtopics(next);
-    persist({ completedSubtopics: next, ...activity() });
-  };
+  const toggleSubtopic = id => commit({
+    completedSubtopics: progressRef.current.completedSubtopics.includes(id)
+      ? progressRef.current.completedSubtopics.filter(x => x !== id)
+      : [...progressRef.current.completedSubtopics, id]
+  }, true);
 
-  const toggleTask = (id) => {
-    const next = completedTasks.includes(id)
-      ? completedTasks.filter(x => x !== id)
-      : [...completedTasks, id];
-    setCompletedTasks(next);
-    persist({ completedTasks: next, ...activity() });
-  };
+  const toggleTask = id => commit({
+    completedTasks: progressRef.current.completedTasks.includes(id)
+      ? progressRef.current.completedTasks.filter(x => x !== id)
+      : [...progressRef.current.completedTasks, id]
+  }, true);
 
   const submitAssignment = async (id, url) => {
-    try {
-      await api.assignments.submit(id, url);
-      const next = { ...assignments, [id]: { status: 'Submitted', url, updatedAt: new Date().toISOString() } };
-      setAssignments(next);
-    } catch (err) {
-      console.error('Assignment submission failed:', err);
-      throw err;
-    }
+    await api.assignments.submit(id, url);
+    const next = { ...progressRef.current.assignments, [id]: { status: 'Submitted', url, updatedAt: new Date().toISOString() } };
+    progressRef.current = { ...progressRef.current, assignments: next };
+    setAssignments(next);
   };
 
   const submitProject = async (id, githubUrl, liveUrl) => {
-    try {
-      await api.projects.submit(id, githubUrl, liveUrl);
-      const next = { ...projects, [id]: { githubUrl, liveUrl, status: 'Submitted', updatedAt: new Date().toISOString() } };
-      setProjects(next);
-    } catch (err) {
-      console.error('Project submission failed:', err);
-      throw err;
-    }
+    await api.projects.submit(id, githubUrl, liveUrl);
+    const next = { ...progressRef.current.projects, [id]: { githubUrl, liveUrl, status: 'Submitted', updatedAt: new Date().toISOString() } };
+    progressRef.current = { ...progressRef.current, projects: next };
+    setProjects(next);
   };
 
-  const markVideoComplete = (id, done) => {
-    const next = done
-      ? (completedVideos.includes(id) ? completedVideos : [...completedVideos, id])
-      : completedVideos.filter(x => x !== id);
-    setCompletedVideos(next);
-    persist({ completedVideos: next, ...activity() });
-  };
+  const markVideoComplete = (id, done) => commit({
+    completedVideos: done
+      ? (progressRef.current.completedVideos.includes(id) ? progressRef.current.completedVideos : [...progressRef.current.completedVideos, id])
+      : progressRef.current.completedVideos.filter(x => x !== id)
+  }, true);
 
-  const markResourceRead = (id, read) => {
-    const next = read
-      ? (readResources.includes(id) ? readResources : [...readResources, id])
-      : readResources.filter(x => x !== id);
-    setReadResources(next);
-    persist({ readResources: next, ...activity() });
-  };
+  const markResourceRead = (id, read) => commit({
+    readResources: read
+      ? (progressRef.current.readResources.includes(id) ? progressRef.current.readResources : [...progressRef.current.readResources, id])
+      : progressRef.current.readResources.filter(x => x !== id)
+  }, true);
 
-  const setPath = (path) => {
+  const setPath = path => {
     if (!PATH_IDS.includes(path)) return;
-    setActivePath(path);
-    persist({ activePath: path, ...activity() });
+    commit({ activePath: path }, true);
   };
 
   const getPathTopics = pathId => TOPICS.filter(t => t.paths.includes(pathId));
-
   const getPhaseProgress = (phaseId, pathId) => {
     const topics = TOPICS.filter(t => t.phaseId === phaseId && t.paths.includes(pathId));
-    if (!topics.length) return 0;
-    return Math.round(topics.filter(t => completedTopics.includes(t.id)).length / topics.length * 100);
+    return topics.length ? Math.round(topics.filter(t => completedTopics.includes(t.id)).length / topics.length * 100) : 0;
   };
-
   const getNextIncompleteTopic = () => getPathTopics(activePath).find(t => !completedTopics.includes(t.id));
 
   const resetProgress = async () => {
-    const empty = {
-      completedSubtopics: [],
-      completedTasks: [],
-      completedVideos: [],
-      assignments: {},
-      projects: {},
-      readResources: [],
-      streak: 0,
-      lastActive: null,
-    };
-    setCompletedSubtopics([]);
-    setCompletedTasks([]);
-    setCompletedVideos([]);
-    setAssignments({});
-    setProjects({});
-    setReadResources([]);
-    setStreak(0);
-    setLastActive(null);
-    await persist(empty);
+    await queuePersist({
+      ...progressRef.current, completedSubtopics: [], completedTasks: [], completedVideos: [],
+      assignments: {}, projects: {}, readResources: [], streak: 0, lastActive: null
+    });
+    const empty = { ...progressRef.current, completedSubtopics: [], completedTasks: [], completedVideos: [], assignments: {}, projects: {}, readResources: [], streak: 0, lastActive: null };
+    progressRef.current = empty;
+    setCompletedSubtopics([]); setCompletedTasks([]); setCompletedVideos([]);
+    setAssignments({}); setProjects({}); setReadResources([]); setStreak(0); setLastActive(null);
   };
 
   const getTotalLearningTime = () => Math.round(completedTopics.reduce((sum, id) => {
@@ -259,31 +219,13 @@ export function ProgressProvider({ children }) {
 
   return (
     <ProgressContext.Provider value={{
-      completedTopics,
-      completedSubtopics: derivedCompletedSubtopics,
-      toggleSubtopic,
-      completedTasks,
-      toggleTask,
-      completedVideos,
-      markVideoComplete,
-      assignments,
-      submitAssignment,
-      isAssignmentSubmitted: id => assignments[id]?.status === 'Submitted',
-      projects,
-      submitProject,
-      readResources,
-      markResourceRead,
-      isResourceRead: id => readResources.includes(id),
-      activePath,
-      setPath,
-      streak,
-      lastActive,
-      getTotalLearningTime,
-      getPathTopics,
-      getPhaseProgress,
-      getNextIncompleteTopic,
-      resetProgress,
-      loading: false,
+      completedTopics, completedSubtopics: derivedCompletedSubtopics, toggleSubtopic,
+      completedTasks, toggleTask, completedVideos, markVideoComplete,
+      assignments, submitAssignment, isAssignmentSubmitted: id => assignments[id]?.status === 'Submitted',
+      projects, submitProject, readResources, markResourceRead,
+      isResourceRead: id => readResources.includes(id), activePath, setPath, streak, lastActive,
+      getTotalLearningTime, getPathTopics, getPhaseProgress, getNextIncompleteTopic, resetProgress,
+      loading: false
     }}>
       {children}
     </ProgressContext.Provider>
