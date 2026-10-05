@@ -16,7 +16,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import {
-  ArrowLeft, CheckCircle2, Circle, Clock, BookOpen, GitMerge,
+  CheckCircle2, Circle, Clock, BookOpen, GitMerge,
   ExternalLink, PlayCircle, GitBranch, Code, FileText, GraduationCap,
   Filter, ListVideo, ChevronDown, ChevronUp, AlertCircle, ArrowRight
 } from 'lucide-react';
